@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProgramsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//trabaja con todas las rutas de programas menos con la ruta show
+//php artisan route:list
+Route::resource('programs', ProgramsController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
