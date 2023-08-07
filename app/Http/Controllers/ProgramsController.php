@@ -8,9 +8,17 @@ use App\Models\Programs;
 class ProgramsController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
+
+        $search =  $request->search;
+
+        $programs = Programs::where('name', 'LIKE', "%{$search}%")
+        ->latest()->paginate();
+
         return view('programs.index',[
-            'programs' => Programs::latest()->paginate()
+            'programs' => $programs
         ]);
     }
+
+
 }

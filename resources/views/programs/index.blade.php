@@ -1,8 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Programas') }}
-        </h2>
+        <div class="flex items-center flex-grow gap-4">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Programas') }}
+                </h2>
+
+                <form action="{{ route('programs.index') }}" method="GET" class="flex-grow">
+                    <input type="text" name="search" placeholder="Buscar..." value="{{ request('search') }}"
+                    class="border border-gray-200 rounded py-2 px-4 w-1/2"
+                    >
+                </form>
+            </div>
     </x-slot>
 
     <div class="py-12">
