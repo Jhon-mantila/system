@@ -19,6 +19,13 @@ class ProgramsController extends Controller
             'programs' => $programs
         ]);
     }
+    
+    public function destroy(Programs $program){
+        //dd($program);
+        $program->delete();
+
+        return back();
+    }
 
 
 }
