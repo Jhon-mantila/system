@@ -19,6 +19,13 @@ class ProgramsController extends Controller
             'programs' => $programs
         ]);
     }
+
+    public function create(Programs $program){
+        
+        return view ('programs.create',[
+            'program' => $program
+        ]);
+    }
     
     public function destroy(Programs $program){
         //dd($program);
