@@ -12,9 +12,11 @@ class Programs extends Model
     use HasUuids; // para visualizar bien los id creados con uuid
 
     protected $fillable = [
-        'uuid',
-        'name',
-        'code',
+        'id','name','code','credits','hours','active'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     
 }

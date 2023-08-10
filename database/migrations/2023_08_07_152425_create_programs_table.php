@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('code')->unique();
             $table->string('name', 100);
-            $table->integer('credits');
-            $table->integer('hours');
+            $table->integer('credits')->nullable();;
+            $table->integer('hours')->nullable();;
             $table->integer('active');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

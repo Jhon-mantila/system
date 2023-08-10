@@ -3,7 +3,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Programas') }}
+                        {{ __('Programas:') }} {{ $programs->total() }}
                     </h2>
                     <form action="{{ route('programs.index') }}" method="GET" class="flex-grow">
 
@@ -38,6 +38,7 @@
                     <tr class="border-b border-gray-200 text-sm">
                         <td class="px-6 py-4">Nombre Programa</td>
                         <td class="px-6 py-4">Código Programa</td>
+                        <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
                         <td class="px-6 py-4"></td>
                     </tr>
@@ -45,6 +46,7 @@
                         <tr class="border-b border-gray-200 text-sm">
                             <td class="px-6 py-4">{{ $program->name }}</td>
                             <td class="px-6 py-4">{{ $program->code }}</td>
+                            <td class="px-6 py-4">{{ $program->created_at }}</td>
         
                             <td class="px-6 py-4">
                                 <a href="{{ route('programs.edit', $program) }}" class="text-indigo-600">Editar</a> 
@@ -65,6 +67,7 @@
                         </tr>
                     @endforeach
                 </table>
+               
                 {{ $programs->links() }}
             </div>
         </div>
