@@ -12,7 +12,11 @@ class StudentsController extends Controller
 
         $search =  $request->search;
 
-        $students = Students::latest()->paginate();
+        $students = Students::where('first_name', 'LIKE', "%{$search}%")
+        ->orWhere('second_name', 'LIKE', "%{$search}%")
+        ->orWhere('last_name', 'LIKE', "%{$search}%")
+        ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+        ->latest()->paginate();
 
         return view('students.index',[
             'students' => $students
