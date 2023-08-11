@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
+use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +33,6 @@ Route::middleware('auth')->group(function () {
 //trabaja con todas las rutas de programas menos con la ruta show
 //php artisan route:list
 Route::resource('programs', ProgramsController::class)->middleware(['auth', 'verified']);
+Route::resource('students', StudentsController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
