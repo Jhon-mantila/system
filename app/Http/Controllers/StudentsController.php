@@ -22,4 +22,18 @@ class StudentsController extends Controller
             'students' => $students
         ]);
     }
+
+    public function create(Students $student){
+
+        return view('students.create',[
+            'student' => $student
+        ]);
+    }
+    public function destroy(Students $student){
+
+        $student->delete();
+
+        return back();
+
+    }
 }
