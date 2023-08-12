@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\StudentsController;
@@ -34,5 +35,6 @@ Route::middleware('auth')->group(function () {
 //php artisan route:list
 Route::resource('programs', ProgramsController::class)->middleware(['auth', 'verified']);
 Route::resource('students', StudentsController::class)->middleware(['auth', 'verified']);
+Route::resource('employees', EmployeesController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

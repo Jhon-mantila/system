@@ -108,7 +108,8 @@ class StudentsController extends Controller
             'second_last_name' => $request->second_last_name,
             'mobile' => $request->mobile,
             'email' => $request->email,
-            'active' => $request->active
+            'active' => $request->active,
+            'updated_at' => date("Y-m-d H:i:s"),
         ]);
         
        
