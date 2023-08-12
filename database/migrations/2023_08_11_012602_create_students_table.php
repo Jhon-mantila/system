@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->integer('type_document');
+            $table->integer('type_document')->nullable();
             $table->bigInteger('document')->unique();
             $table->string('first_name');
             $table->string('second_name')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('second_last_name')->nullable();
             $table->string('mobile');
             $table->string('email');
-            $table->integer('active');
+            $table->integer('active')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

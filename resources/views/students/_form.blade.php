@@ -42,7 +42,7 @@
             <label for="" class="uppercase text-gray-700 text-xs">Número de Documento</label>
             <span class="text-xs text-red-600">@error('document') {{ $message }}  @enderror</span>
             <input type="number" name="document" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('document', $student->_document) }}">
+            value="{{ old('document', $student->document) }}">
         </div>
 </div>
 
