@@ -5,7 +5,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Empleados:') }} {{ $employees->total() }}
                     </h2>
-                    <form action="{{ route('students.index') }}" method="GET" class="flex-grow">
+                    <form action="{{ route('employees.index') }}" method="GET" class="flex-grow">
 
                         <label class="relative block">
                             <span class="sr-only">Search</span>
@@ -21,7 +21,7 @@
                         </form>
                     </div>
                 <div>
-                    <a href="{{ route('students.create') }}" class="text-ms bg-gray-800 text-white  px-4 py-2">Crear</a>
+                    <a href="{{ route('employees.create') }}" class="text-ms bg-gray-800 text-white  px-4 py-2">Crear</a>
                 </div>
             </div>
             

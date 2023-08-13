@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function students(){
         return $this->hasMany(Students::class);
     }
+
+    public function employees(){
+        return $this->hasMany(Employees::class);
+    }
 }
