@@ -88,6 +88,7 @@
     <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Firma</label>
             <span class="text-xs text-red-600">@error('signature') {{ $message }}  @enderror</span>
+            <img src="{{ asset('storage/' . $employee->signature) }}" alt="" width="200">
             <label class="block">
                 <span class="sr-only">Choose profile photo</span>
                 <input type="file" class="block w-full text-sm text-slate-500

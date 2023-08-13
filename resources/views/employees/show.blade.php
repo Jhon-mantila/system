@@ -15,7 +15,7 @@
                     <div class="flex items-center justify-between">
                         
                         <div class="py-2">
-                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Nombre del Estudiante</label>
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Nombre del Empleado</label>
                             <p class="p-2">{{ $empleado->first_name }} {{ $empleado->second_name }} {{ $empleado->last_name }} {{ $empleado->second_last_name }}</p>
                         </div> 
 
@@ -48,17 +48,29 @@
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Correo Electronico</label>
                             <p class="p-2">{{ $empleado->email }}</p>
                         </div class="py-2">
-                    </div>    
+                    </div>   
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Profesión</label>
+                            <p class="p-2">{{ $empleado->profession }}</p>
+                        </div class="py-2">
+
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Especialidad</label>
+                            <p class="p-2">{{ $empleado->specialty }}</p>
+                        </div class="py-2">
+                    </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="py-2">
-                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Última Actualización</label>
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Descripción</label>
                             <p class="p-2">{{ $empleado->description }}</p>
                         </div> 
 
                         <div class="py-2">
-                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Fecha de Creación</label>
-                            <img src="{{ asset('storage/' . $empleado->signature) }}" alt="imagenes">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Firma</label>
+                            <img src="{{ asset('storage/' . $empleado->signature) }}" alt="imagenes" width="200">
                             
                             
                             <p class="p-2">{{ $empleado->signature }}</p>
