@@ -6,7 +6,7 @@ use App\Models\Employees;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Validation\Rules\File;
 class EmployeesController extends Controller
 {
     //
@@ -50,6 +50,12 @@ class EmployeesController extends Controller
             'last_name'  => 'required',
             'mobile'  => 'required',
             'email'  => 'required',
+            'signature' => [
+                'image', // Asegura que sea una imagen
+                'mimes:png,jpeg', // Asegura que sea un archivo PNG o JPEG
+                File::image()
+                ->max('2mb'), // Tamaño máximo en kilobytes (1 MB en este ejemplo)
+            ],
         ],[
             'first_name.required' => 'El primer nombre es requerido',
             'document.required'  => 'El documento es obligatorio',
@@ -57,6 +63,10 @@ class EmployeesController extends Controller
             'last_name.required'  => 'El primer apellido es requerido',
             'mobile.required'  => 'El celular es requerido',
             'email.required'  => 'El correo electronico es requerido',
+            'signature.image'  => 'El archivo debe ser una imagen',            
+            'signature.mimes'  => 'La imagen debe ser de tipo JPEG o PNG.',
+            'signature.max'  => 'La imagen no debe exceder los 2 megabytes.',
+            
         ]);
 
         if(empty($request->signature)){
@@ -105,6 +115,12 @@ class EmployeesController extends Controller
             'last_name'  => 'required',
             'mobile'  => 'required',
             'email'  => 'required',
+            'signature' => [
+                'image', // Asegura que sea una imagen
+                'mimes:png,jpeg', // Asegura que sea un archivo PNG o JPEG
+                File::image()
+                ->max('2mb'), // Tamaño máximo en kilobytes (1 MB en este ejemplo)
+            ],
         ],[
             'first_name.required' => 'El primer nombre es requerido',
             'document.required'  => 'El documento es obligatorio',
@@ -112,6 +128,9 @@ class EmployeesController extends Controller
             'last_name.required'  => 'El primer apellido es requerido',
             'mobile.required'  => 'El celular es requerido',
             'email.required'  => 'El correo electronico es requerido',
+            'signature.image'  => 'El archivo debe ser una imagen',            
+            'signature.mimes'  => 'La imagen debe ser de tipo JPEG o PNG.',
+            'signature.max'  => 'La imagen no debe exceder los 2 megabytes.',
         ]);
 
         if(empty($request->signature)){
