@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
@@ -36,5 +37,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('programs', ProgramsController::class)->middleware(['auth', 'verified']);
 Route::resource('students', StudentsController::class)->middleware(['auth', 'verified']);
 Route::resource('employees', EmployeesController::class)->middleware(['auth', 'verified']);
+Route::resource('companies', CompanyController::class)->middleware(['auth', 'verified'])->except(['show','create','store','destroy']);
 
 require __DIR__.'/auth.php';
