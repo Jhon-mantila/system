@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 class CompanyController extends Controller
 {
     //
-    public function index(Request $request){
+    public function index(){
 
         $companies = Company::all();
 
         return view('companies.index',[
             'companies' => $companies
+        ]);
+    }
+
+    public function edit(Company $company){
+
+        return view('companies.edit', [
+            'company' => $company
         ]);
     }
 }

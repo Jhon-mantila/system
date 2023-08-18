@@ -7,7 +7,7 @@
                     </h2>
                     </div>
                 <div>
-                    <a href="{{ route('employees.create') }}" class="text-ms bg-gray-800 text-white  px-4 py-2">Editar</a>
+                    <a href="{{ route('companies.edit', '6cbe7498-3b65-49a6-ad46-7ea9f44bf62d') }}" class="text-ms bg-gray-800 text-white  px-4 py-2">Editar</a>
                 </div>
             </div>
             
