@@ -11,7 +11,7 @@
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Nit</label>
         <span class="text-xs text-red-600">@error('nit') {{ $message }}  @enderror</span>
-        <input type="text" name="second_name" class="rounded border-gray-200 w-full mb-4" 
+        <input type="text" name="nit" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('nit', $company->nit) }}">
     </div>
 </div>
