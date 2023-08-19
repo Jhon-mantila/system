@@ -24,6 +24,9 @@ class Company extends Model
         'logo'
     ];
 
+    public function company(){
+        return $this->hasMany(Certificate::class);
+    }
     public function user(){
         return $this->belongsTo(User::class);
     }

@@ -29,6 +29,10 @@ class Employees extends Model
         'active'
     ];
 
+    public function certificate(){
+        return $this->hasMany(Certificate::class);
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }

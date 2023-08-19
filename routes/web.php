@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ProfileController;
@@ -38,5 +39,6 @@ Route::resource('programs', ProgramsController::class)->middleware(['auth', 'ver
 Route::resource('students', StudentsController::class)->middleware(['auth', 'verified']);
 Route::resource('employees', EmployeesController::class)->middleware(['auth', 'verified']);
 Route::resource('companies', CompanyController::class)->middleware(['auth', 'verified'])->except(['show','create','store','destroy']);
+Route::resource('certificates', CertificateController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

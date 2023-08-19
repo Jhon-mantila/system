@@ -15,6 +15,10 @@ class Programs extends Model
         'id','name','code','credits','hours','active'
     ];
 
+    public function certificate(){
+        return $this->hasMany(Certificate::class);
+    }
+    
     public function user(){
         return $this->belongsTo(User::class);
     }
