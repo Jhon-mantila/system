@@ -14,6 +14,8 @@ class CompanyController extends Controller
 
         $companies = Company::all();
 
+        //dd($companies);
+
         return view('companies.index',[
             'companies' => $companies
         ]);
