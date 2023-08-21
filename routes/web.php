@@ -43,5 +43,6 @@ Route::resource('certificates', CertificateController::class)->middleware(['auth
 Route::get('/search-programs', [CertificateController::class, 'searchPrograms']);
 Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
 Route::get('/search-students', [CertificateController::class, 'searchStudents']);
+Route::get('/search-students-id', [CertificateController::class, 'searchStudentsId']);
 
 require __DIR__.'/auth.php';

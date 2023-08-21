@@ -53,7 +53,7 @@ async function searchStudents() {
 
 function selectStudent(student) {
     console.log(student);
-    document.getElementById('studentSearch').value = student.first_name;
+    document.getElementById('studentSearch').value = student.first_name + " " + student.second_name + " " + student.last_name + " " + student.second_last_name;
     document.getElementById('selectedStudentId').value = student.id;
     document.getElementById('studentSearchResults').innerHTML = '';
 }
@@ -71,6 +71,26 @@ async function searchProgramsId(searchInputId) {
 
         if(searchInputId.trim().length != 0){
             document.getElementById('programSearch').value = searchResults[0].name;
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const searchInputStudentId = document.getElementById('selectedStudentId').value;
+//console.log(searchInputStudentId);
+searchStudentId(searchInputStudentId);
+async function searchStudentId(searchInputStudentId) {
+
+    try {
+        const response = await fetch(`http://localhost/system/public/search-students-id?search=${searchInputStudentId}`);
+        const searchResults = await response.json();
+        //console.log("Resultado");
+        //console.log(searchResults[0].first_name);
+
+        if(searchInputStudentId.trim().length != 0){
+            document.getElementById('studentSearch').value = searchResults[0].first_name + " " +searchResults[0].second_name + " " + searchResults[0].last_name + " " + searchResults[0].second_last_name;
         }
 
     } catch (error) {

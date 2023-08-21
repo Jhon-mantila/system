@@ -1,10 +1,4 @@
 @csrf
-        
-    <!-- <label for="programSearch">Buscar Programa:</label>
-    <input type="text" id="programSearch" name="programSearch" oninput="searchPrograms()">
-    <input type="text" id="selectedProgramId" name="selectedProgramId">
-    <div id="programSearchResults"></div> -->
-
 <div class="grid grid-cols-2 gap-4">
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Programa</label>

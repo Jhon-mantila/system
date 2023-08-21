@@ -39,20 +39,15 @@ class CertificateController extends Controller
 
     public function store(Request $request){
         
-       /* $request->validate([
-            'first_name' => 'required',
-            'document'  => 'required|unique:students,document',
-            'last_name'  => 'required',
-            'mobile'  => 'required',
-            'email'  => 'required',
+       $request->validate([
+            'program_id' => 'required',
+            'student_id' => 'required',
+
         ],[
-            'first_name.required' => 'El primer nombre es requerido',
-            'document.required'  => 'El documento es obligatorio',
-            'document.unique'    => 'El documento debe ser único',
-            'last_name.required'  => 'El primer apellido es requerido',
-            'mobile.required'  => 'El celular es requerido',
-            'email.required'  => 'El correo electronico es requerido',
-        ]);*/
+            'program_id.required' => 'El programa es requerido',
+            'student_id.required' => 'El estudiante es requerido',
+
+        ]);
         //dd($request);
         $certificate = $request->user()->certificates()->create([
             'id' => (String) Uuid::uuid4(),
@@ -121,6 +116,17 @@ class CertificateController extends Controller
         ->orWhere('second_name', 'LIKE', "%{$search}%")
         ->orWhere('last_name', 'LIKE', "%{$search}%")
         ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+        ->get();
+        //dd($programs);
+        //dd(response()->json($programs));
+        return response()->json($students);
+    }
+
+    public function searchStudentsId(Request $request)
+    {
+        $search = $request->input('search');
+       
+        $students = Students::where('id', '=', "$search")
         ->get();
         //dd($programs);
         //dd(response()->json($programs));
