@@ -32,6 +32,17 @@ class CertificateController extends Controller
         ]);
     }
 
+    public function show(Certificate $certificate){
+        
+        $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
+        ->get()
+        ->where('id', '=', $certificate->id);
+        //dd($certificate);
+        return view('certificates.show', [
+            'certificate' => $certificate
+        ]);
+    }
+
     public function create(Certificate $certificate){
 
         return view('certificates.create',[
@@ -185,5 +196,13 @@ class CertificateController extends Controller
         //dd($programs);
         //dd(response()->json($programs));
         return response()->json($employees);
+    }
+
+    public function destroy(Certificate $certificate){
+
+        $certificate->delete();
+
+        return back();
+
     }
 }
