@@ -44,5 +44,7 @@ Route::get('/search-programs', [CertificateController::class, 'searchPrograms'])
 Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
 Route::get('/search-students', [CertificateController::class, 'searchStudents']);
 Route::get('/search-students-id', [CertificateController::class, 'searchStudentsId']);
+Route::get('/search-employees', [CertificateController::class, 'searchEmployees']);
+Route::get('/search-employees-id', [CertificateController::class, 'searchEmployeesId']);
 
 require __DIR__.'/auth.php';

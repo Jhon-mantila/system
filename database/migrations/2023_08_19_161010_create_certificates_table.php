@@ -15,13 +15,13 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('program_id');
             $table->foreign('program_id')->references('id')->on('programs');
-            $table->uuid('student_id')->nullable();
+            $table->uuid('student_id');
             $table->foreign('student_id')->references('id')->on('students');
-            $table->uuid('employee_id')->nullable();
+            $table->uuid('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
-            $table->date('date_start')->nullable();
-            $table->date('date_end')->nullable();
-            $table->uuid('company_id')->nullable();
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->uuid('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
             $table->integer('accredited')->nullable();
             $table->integer('notified')->nullable();

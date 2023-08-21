@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificate;
+use App\Models\Company;
+use App\Models\Employees;
 use App\Models\Programs;
 use App\Models\Students;
 use Illuminate\Http\Request;
@@ -42,12 +44,22 @@ class CertificateController extends Controller
        $request->validate([
             'program_id' => 'required',
             'student_id' => 'required',
+            'employee_id' => 'required',
+            'date_start' => 'required',
+            'date_end' => 'required',
 
         ],[
             'program_id.required' => 'El programa es requerido',
             'student_id.required' => 'El estudiante es requerido',
+            'employee_id.required' => 'El empleado es requerido',
+            'date_start.required' => 'La fecha inicial es requerida',
+            'date_end.required' => 'La fecha final es requerida',
 
         ]);
+
+        $company = Company::all();
+        //echo print_r($company, true);
+        //dd($company[0]['id']);
         //dd($request);
         $certificate = $request->user()->certificates()->create([
             'id' => (String) Uuid::uuid4(),
@@ -56,7 +68,7 @@ class CertificateController extends Controller
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
-            'company_id' => $request->company_id,
+            'company_id' => $company[0]['id'],
             'accredited' => $request->accredited,
             'notified' => $request->notified,
         ]);
@@ -73,13 +85,28 @@ class CertificateController extends Controller
 
     public function update(Request $request, Certificate $certificate){
 
+        $request->validate([
+            'program_id' => 'required',
+            'student_id' => 'required',
+            'employee_id' => 'required',
+            'date_start' => 'required',
+            'date_end' => 'required',
+
+        ],[
+            'program_id.required' => 'El programa es requerido',
+            'student_id.required' => 'El estudiante es requerido',
+            'employee_id.required' => 'El empleado es requerido',
+            'date_start.required' => 'La fecha inicial es requerida',
+            'date_end.required' => 'La fecha final es requerida',
+
+        ]);
+
         $certificate->update([
             'program_id' => $request->program_id,
             'student_id' => $request->student_id,
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
-            'company_id' => $request->company_id,
             'accredited' => $request->accredited,
             'notified' => $request->notified,
             'updated_at' => date("Y-m-d H:i:s"),
@@ -112,7 +139,8 @@ class CertificateController extends Controller
     {
         $search = $request->input('search');
        
-        $students = Students::where('first_name', 'LIKE', "%$search%")
+        $students = Students::whereRaw("CONCAT_WS(' ', first_name, second_name, last_name, second_last_name) LIKE ?", ["%$search%"])
+        ->orWhere('first_name', 'LIKE', "%$search%")
         ->orWhere('second_name', 'LIKE', "%{$search}%")
         ->orWhere('last_name', 'LIKE', "%{$search}%")
         ->orWhere('second_last_name', 'LIKE', "%{$search}%")
@@ -131,5 +159,31 @@ class CertificateController extends Controller
         //dd($programs);
         //dd(response()->json($programs));
         return response()->json($students);
+    }
+
+    public function searchEmployees(Request $request)
+    {
+        $search = $request->input('search');
+       
+        $employees = Employees::whereRaw("CONCAT_WS(' ', first_name, second_name, last_name, second_last_name) LIKE ?", ["%$search%"])
+        ->orWhere('first_name', 'LIKE', "%$search%")
+        ->orWhere('second_name', 'LIKE', "%{$search}%")
+        ->orWhere('last_name', 'LIKE', "%{$search}%")
+        ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+        ->get();
+        //dd($programs);
+        //dd(response()->json($programs));
+        return response()->json($employees);
+    }
+
+    public function searchEmployeesId(Request $request)
+    {
+        $search = $request->input('search');
+       
+        $employees = Employees::where('id', '=', "$search")
+        ->get();
+        //dd($programs);
+        //dd(response()->json($programs));
+        return response()->json($employees);
     }
 }

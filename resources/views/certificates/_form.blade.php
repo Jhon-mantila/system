@@ -5,7 +5,7 @@
         <span class="text-xs text-red-600">@error('program_id') {{ $message }}  @enderror</span>
         <input type="text" id="programSearch" name="programSearch" class="rounded border-gray-200 w-full mb-4" 
         oninput="searchPrograms()">
-        <input type="text" id="selectedProgramId" name="program_id" class="rounded border-gray-200 w-full mb-4" 
+        <input type="hidden" id="selectedProgramId" name="program_id" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('program_id', $certificate->program_id) }}">
         <div id="programSearchResults"></div>
     </div>
@@ -15,24 +15,21 @@
         <span class="text-xs text-red-600">@error('student_id') {{ $message }}  @enderror</span>
         <input type="text" id="studentSearch" name="studentSearch" class="rounded border-gray-200 w-full mb-4" 
         oninput="searchStudents()">
-        <input type="text" id="selectedStudentId" name="student_id" class="rounded border-gray-200 w-full mb-4" 
+        <input type="hidden" id="selectedStudentId" name="student_id" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('student_id', $certificate->student_id) }}">
         <div id="studentSearchResults"></div>
     </div>
 </div>
 
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-1 gap-4">
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Empleado</label>
         <span class="text-xs text-red-600">@error('employee_id') {{ $message }}  @enderror</span>
-        <input type="text" name="employee_id" class="rounded border-gray-200 w-full mb-4" 
+        <input type="text" id="employeeSearch" name="employeeSearch" class="rounded border-gray-200 w-full mb-4" 
+        oninput="searchEmployees()">
+        <input type="hidden" id="selectedEmployeeId" name="employee_id" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('employee_id', $certificate->employee_id) }}">
-    </div>
-    <div class="">
-            <label for="" class="uppercase text-gray-700 text-xs">Empresa</label>
-            <span class="text-xs text-red-600">@error('company_id') {{ $message }}  @enderror</span>
-            <input type="text" name="company_id" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('company_id', $certificate->company_id) }}">
+        <div id="employeeSearchResults"></div>
     </div>
 </div>
 
