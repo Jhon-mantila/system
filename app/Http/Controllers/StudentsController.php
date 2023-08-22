@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificate;
 use Illuminate\Http\Request;
 use App\Models\Students;
 use Ramsey\Uuid\Uuid;
@@ -122,5 +123,20 @@ class StudentsController extends Controller
 
         return back();
 
+    }
+
+    public function apiStudents(Request $request)
+    {
+        $perPage = 5; // Cantidad de estudiantes por página
+        $currentPage = $request->query('page', 1); // Página actual
+        $searchById = $request->query('searchById');
+
+        $students = Certificate::with(['user', 'program', 'student'])
+        ->whereHas('student', function ($query) use ($searchById) {
+                    $query->where('id', '=', "{$searchById}");
+                }) 
+        ->paginate($perPage, ['*'], 'page', $currentPage);
+
+        return response()->json($students);
     }
 }

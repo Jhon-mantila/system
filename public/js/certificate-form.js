@@ -1,6 +1,7 @@
 async function searchPrograms() {
     const searchInput = document.getElementById('programSearch').value;
     const resultsDiv = document.getElementById('programSearchResults');
+    const idPrograms = document.getElementById('selectedProgramId').value;
     console.log(searchInput);
     try {
         const response = await fetch(`http://localhost/system/public/search-programs?search=${searchInput}`);
@@ -9,7 +10,7 @@ async function searchPrograms() {
         console.log(searchResults);
         resultsDiv.innerHTML = '';
         
-        if(searchInput.trim().length != 0){
+        if(searchInput.trim().length != 0 && idPrograms.trim().length == 0){
             searchResults.forEach(result => {
                     selectProgram(result);
             });
@@ -37,6 +38,7 @@ function selectProgram(program) {
 async function searchStudents() {
     const searchInput = document.getElementById('studentSearch').value;
     const resultsDiv = document.getElementById('studentSearchResults');
+    const idStudents = document.getElementById('selectedStudentId').value;
     console.log(searchInput);
     try {
         const response = await fetch(`http://localhost/system/public/search-students?search=${searchInput}`);
@@ -45,7 +47,7 @@ async function searchStudents() {
         console.log(searchResults);
         resultsDiv.innerHTML = '';
 
-        if(searchInput.trim().length != 0){
+        if(searchInput.trim().length != 0 && idStudents.trim().length == 0){
             searchResults.forEach(result => {
                     selectStudent(result);
             });
@@ -73,6 +75,7 @@ function selectStudent(student) {
 async function searchEmployees() {
     const searchInput = document.getElementById('employeeSearch').value;
     const resultsDiv = document.getElementById('employeeSearchResults');
+    const idEmployee = document.getElementById('selectedEmployeeId').value
     //console.log(searchInput);
     try {
         const response = await fetch(`http://localhost/system/public/search-employees?search=${searchInput}`);
@@ -81,7 +84,7 @@ async function searchEmployees() {
         console.log(searchResults);
         resultsDiv.innerHTML = '';
 
-        if(searchInput.trim().length != 0){
+        if(searchInput.trim().length != 0 && idEmployee.trim().length == 0){
             searchResults.forEach(result => {
                     selectEmployee(result);
             });
