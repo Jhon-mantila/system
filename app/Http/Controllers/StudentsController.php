@@ -6,10 +6,19 @@ use App\Models\Certificate;
 use Illuminate\Http\Request;
 use App\Models\Students;
 use Ramsey\Uuid\Uuid;
+use App\Services\DropdownService;
 
 class StudentsController extends Controller
 {
     //
+
+    protected $dropdownService;
+    
+    public function __construct(DropdownService $dropdownService)
+    {
+        $this->dropdownService = $dropdownService;
+    }
+
     public function index(Request $request){
 
         $search =  $request->search;
@@ -27,17 +36,27 @@ class StudentsController extends Controller
 
     public function show(Students $student){
         
+        $activeOptions = $this->dropdownService->getActive();
+        $typeDocument = $this->dropdownService->getTypeDocumento();
+
         $student = Students::with('user')->get()->where('id', '=', $student->id);
         //dd($student);
         return view('students.show', [
-            'student' => $student
+            'student' => $student,
+            'activeOptions' => $activeOptions,
+            'typeDocument' => $typeDocument,
         ]);
     }
 
     public function create(Students $student){
 
+        $activeOptions = $this->dropdownService->getActive();
+        $typeDocument = $this->dropdownService->getTypeDocumento();
+
         return view('students.create',[
-            'student' => $student
+            'student' => $student,
+            'activeOptions' => $activeOptions,
+            'typeDocument' => $typeDocument,
         ]);
     }
 
@@ -78,8 +97,13 @@ class StudentsController extends Controller
 
     public function edit(Students $student){
 
+        $activeOptions = $this->dropdownService->getActive();
+        $typeDocument = $this->dropdownService->getTypeDocumento();
+
         return view('students.edit', [
-            'student' => $student
+            'student' => $student,
+            'activeOptions' => $activeOptions,
+            'typeDocument' => $typeDocument,
         ]);
     }
 

@@ -29,7 +29,7 @@
                         
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Tipo de Documento</label>
-                            <p class="p-2">{{ $empleado->type_document }}</p>
+                            <p class="p-2">{{ $typeDocument[$empleado->type_document] }}</p>
                         </div class="py-2">
 
                         <div class="py-2">
@@ -90,11 +90,17 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
-
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Tipo Empleado</label>
+                            <p class="p-2">{{ $typeEmployee[$empleado->type_employee] }}</p>
+                        </div> 
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Activado</label>
-                            <p class="p-2">{{ $empleado->active }}</p>
+                            <p class="p-2">{{ $activeOptions[$empleado->active] }}</p>
                         </div> 
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4">
 
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">usuario</label>

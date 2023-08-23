@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="grid grid-cols-1 gap-4">
+<div class="grid grid-cols-2 gap-4">
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Empleado</label>
         <span class="text-xs text-red-600">@error('employee_id') {{ $message }}  @enderror</span>
@@ -30,6 +30,19 @@
         <input type="hidden" id="selectedEmployeeId" name="employee_id" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('employee_id', $certificate->employee_id) }}">
         <div id="employeeSearchResults"></div>
+    </div>
+    <div class="">
+        <label for="" class="uppercase text-gray-700 text-xs">Tipo Certificado</label>
+        <span class="text-xs text-red-600">@error('type_certificate') {{ $message }}  @enderror</span>
+        <select name="type_certificate" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($typeCertificate as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('type_certificate', $certificate->type_certificate) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+        </select>
     </div>
 </div>
 

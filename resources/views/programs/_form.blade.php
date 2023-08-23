@@ -34,10 +34,17 @@
         </div>
         
         <div class="">
-            <label for="" class="uppercase text-gray-700 text-xs">Programa Activado</label>
+            <label for="" class="uppercase text-gray-700 text-xs">Activado</label>
             <span class="text-xs text-red-600">@error('active') {{ $message }}  @enderror</span>
-            <input type="number" name="active" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('active', $program->active) }}">
+            <select name="active" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($activeOptions as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('active', $program->active) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+            </select>    
         </div>
 </div>
 

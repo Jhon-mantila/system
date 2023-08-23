@@ -6,10 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Programs;
 use PhpParser\Node\Expr\FuncCall;
 use Ramsey\Uuid\Uuid;
+use App\Services\DropdownService;
 
 class ProgramsController extends Controller
 {
     //
+    protected $dropdownService;
+    
+    public function __construct(DropdownService $dropdownService)
+    {
+        $this->dropdownService = $dropdownService;
+    }
+
     public function index(Request $request){
 
         $search =  $request->search;
@@ -26,20 +34,26 @@ class ProgramsController extends Controller
 
     public function show(Programs $program){
         
+        $activeOptions = $this->dropdownService->getActive();
+
         $program = Programs::with('user')->get()->where('id', '=', $program->id);
         // foreach ($program as $programs) {
         //     echo $programs->name . ' ' . $programs->code . ' ' . $programs->credits . ' ' . $programs->hours . ' ' . $programs->active . ' ' . $programs->user->name;
         // }
         //dd($program);
         return view('programs.show', [
-            'program' => $program
+            'program' => $program,
+            'activeOptions' => $activeOptions
         ]);
     }
 
     public function create(Programs $program){
         
+        $activeOptions = $this->dropdownService->getActive();
+
         return view ('programs.create',[
-            'program' => $program
+            'program' => $program,
+            'activeOptions' => $activeOptions
         ]);
     }
 
@@ -71,8 +85,12 @@ class ProgramsController extends Controller
     }
 
     public function edit(Programs $program){
+
+        $activeOptions = $this->dropdownService->getActive();
+
         return view('programs.edit', [
-            'program' => $program
+            'program' => $program,
+            'activeOptions' => $activeOptions
         ]);
     }
 

@@ -19,8 +19,9 @@ return new class extends Migration
             $table->foreign('student_id')->references('id')->on('students');
             $table->uuid('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
-            $table->date('date_start');
-            $table->date('date_end');
+            $table->date('date_start')->nullable();
+            $table->date('date_end')->nullable();
+            $table->string('type_certificate')->nullable();
             $table->uuid('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
             $table->integer('accredited')->nullable();

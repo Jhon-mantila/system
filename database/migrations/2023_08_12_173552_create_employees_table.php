@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->integer('type_document')->nullable();
-            $table->bigInteger('document')->unique();
+            $table->string('type_document')->nullable();
+            $table->string('document')->unique();
             $table->string('first_name');
             $table->string('second_name')->nullable();
             $table->string('last_name');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('specialty')->nullable();
             $table->text('description')->nullable();
             $table->string('signature')->nullable();
-            $table->integer('type_employee')->nullable();
+            $table->string('type_employee')->nullable();
             $table->integer('active')->nullable();   
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

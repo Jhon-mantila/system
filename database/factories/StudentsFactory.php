@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Ramsey\Uuid\Uuid;
+use App\Services\DropdownService;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Students>
  */
@@ -16,10 +17,12 @@ class StudentsFactory extends Factory
      */
     public function definition(): array
     {
+        $activeOptions = new DropdownService();
+
         return [
             //Datos falsos para la base de datos
             'id' =>  (string) Uuid::uuid4(),
-            'type_document' => $this->faker->numberBetween(1, 10),
+            'type_document' => $this->faker->randomElement(array_keys($activeOptions->getTypeDocumento())),
             'document' => $this->faker->numberBetween(20000, 10000000),
             'first_name' => $this->faker->firstName(),
             'second_name' => $this->faker->firstName(),
@@ -27,7 +30,7 @@ class StudentsFactory extends Factory
             'second_last_name' => $this->faker->lastName(),
             'mobile' => $this->faker->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
-            'active' => $this->faker->numberBetween(0, 1),
+            'active' => $this->faker->numberBetween(1, 2),
             'user_id' => 1,
         ];
     }

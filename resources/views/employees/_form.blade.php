@@ -35,8 +35,15 @@
         <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Tipo de Documento</label>
             <span class="text-xs text-red-600">@error('type_document') {{ $message }}  @enderror</span>
-            <input type="number" name="type_document" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('type_document', $employee->type_document) }}">
+            <select name="type_document" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($typeDocument as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('type_document', $employee->type_document) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+            </select> 
         </div>
         <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Número de Documento</label>
@@ -110,14 +117,28 @@
 <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Tipo empleado</label>
             <span class="text-xs text-red-600">@error('type_employee') {{ $message }}  @enderror</span>
-            <input type="text" name="type_employee" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('type_employee', $employee->type_employee) }}">
+            <select name="type_employee" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($typeEmployee as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('type_employee', $employee->type_employee) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+            </select>
     </div>
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Activo</label>
         <span class="text-xs text-red-600">@error('active') {{ $message }}  @enderror</span>
-        <input type="number" name="active" class="rounded border-gray-200 w-full mb-4" 
-        value="{{ old('active', $employee->active) }}">
+        <select name="active" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($activeOptions as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('active', $employee->active) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+        </select>
     </div>
 </div>
 

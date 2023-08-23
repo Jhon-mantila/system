@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
+use App\Services\DropdownService;
+
 class EmployeesController extends Controller
 {
     //
+    protected $dropdownService;
+    
+    public function __construct(DropdownService $dropdownService)
+    {
+        $this->dropdownService = $dropdownService;
+    }
+
     public function index(Request $request){
 
         $search =  $request->search;
@@ -26,19 +35,33 @@ class EmployeesController extends Controller
     }
 
     public function show(Employees $employee){
-        
+
+        $activeOptions = $this->dropdownService->getActive();
+        $typeDocument = $this->dropdownService->getTypeDocumento();
+        $typeEmployee = $this->dropdownService->getTypeEmployee();
+
         $employee = Employees::with('user')->get()->where('id', '=', $employee->id);
         //$url = Storage::url('signature/Apfdv3uBffxB9lnrcijtFnfJ6XEOEZj3RkOOzmcP.png');
         //dd($url);
         return view('employees.show', [
-            'employee' => $employee
+            'employee' => $employee,
+            'activeOptions' => $activeOptions,
+            'typeDocument' => $typeDocument,
+            'typeEmployee' => $typeEmployee,
         ]);
     }
 
     public function create(Employees $employee){
 
+        $activeOptions = $this->dropdownService->getActive();
+        $typeDocument = $this->dropdownService->getTypeDocumento();
+        $typeEmployee = $this->dropdownService->getTypeEmployee();
+
         return view('employees.create',[
-            'employee' => $employee
+            'employee' => $employee,
+            'activeOptions' => $activeOptions,
+            'typeDocument' => $typeDocument,
+            'typeEmployee' => $typeEmployee,
         ]);
     }
 
@@ -98,8 +121,15 @@ class EmployeesController extends Controller
     }
     public function edit(Employees $employee){
 
+        $activeOptions = $this->dropdownService->getActive();
+        $typeDocument = $this->dropdownService->getTypeDocumento();
+        $typeEmployee = $this->dropdownService->getTypeEmployee();
+
         return view('employees.edit', [
-            'employee' => $employee
+            'employee' => $employee,
+            'activeOptions' => $activeOptions,
+            'typeDocument' => $typeDocument,
+            'typeEmployee' => $typeEmployee,
         ]);
     }
 

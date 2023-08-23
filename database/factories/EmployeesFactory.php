@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use App\Services\DropdownService;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employees>
  */
@@ -19,11 +20,12 @@ class EmployeesFactory extends Factory
     public function definition(): array
     {
       
+        $activeOptions = new DropdownService();
 
         return [
             //Datos falsos para la base de datos
             'id' =>  (string) Uuid::uuid4(),
-            'type_document' => $this->faker->numberBetween(1, 10),
+            'type_document' => $this->faker->randomElement(array_keys($activeOptions->getTypeDocumento())),
             'document' => $this->faker->numberBetween(20000, 10000000),
             'first_name' => $this->faker->firstName(),
             'second_name' => $this->faker->firstName(),
@@ -35,8 +37,8 @@ class EmployeesFactory extends Factory
             'specialty' => $this->faker->text(150),
             'description' => $this->faker->text(2000),
             'signature' => $this->faker->name(),
-            'type_employee' => $this->faker->numberBetween(1, 10),
-            'active' => $this->faker->numberBetween(0, 1),
+            'type_employee' => $this->faker->randomElement(array_keys($activeOptions->getTypeEmployee())),
+            'active' => $this->faker->numberBetween(1, 2),
             'user_id' => 1,
         ];
     }

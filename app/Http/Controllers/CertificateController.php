@@ -9,10 +9,19 @@ use App\Models\Programs;
 use App\Models\Students;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
+use App\Services\DropdownService;
 
 class CertificateController extends Controller
 {
     //
+    
+    protected $dropdownService;
+    
+    public function __construct(DropdownService $dropdownService)
+    {
+        $this->dropdownService = $dropdownService;
+    }
+
     public function index(Request $request){
 
         $search =  $request->search;
@@ -34,19 +43,25 @@ class CertificateController extends Controller
 
     public function show(Certificate $certificate){
         
+        $typeCertificate = $this->dropdownService->getTypeCertificate();
+
         $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
         ->get()
         ->where('id', '=', $certificate->id);
         //dd($certificate);
         return view('certificates.show', [
-            'certificate' => $certificate
+            'certificate' => $certificate,
+            'typeCertificate' => $typeCertificate,
         ]);
     }
 
     public function create(Certificate $certificate){
 
+        $typeCertificate = $this->dropdownService->getTypeCertificate();
+
         return view('certificates.create',[
-            'certificate' => $certificate
+            'certificate' => $certificate,
+            'typeCertificate' => $typeCertificate,
         ]);
     }
 
@@ -89,8 +104,11 @@ class CertificateController extends Controller
 
     public function edit(Certificate $certificate){
 
+        $typeCertificate = $this->dropdownService->getTypeCertificate();
+
         return view('certificates.edit', [
-            'certificate' => $certificate
+            'certificate' => $certificate,
+            'typeCertificate' => $typeCertificate,
         ]);
     }
 
