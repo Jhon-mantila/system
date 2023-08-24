@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Employees::factory(5)->create();
         \App\Models\Company::factory(1)->create();
         \App\Models\Certificate::factory(150)->create();
+        \App\Models\Course::factory(20)->create();
 
 
         // \App\Models\User::factory()->create([
