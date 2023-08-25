@@ -23,8 +23,8 @@ class ProgramsCoursesFactory extends Factory
         
         return [
             //
-            'id' =>  (string) Uuid::uuid4(),
-            'program_id' =>  $this->faker->randomElement($programs_id),
+            'id' => (string) Uuid::uuid4(),
+            'programs_id' =>  $this->faker->randomElement($programs_id),
             'course_id' =>  $this->faker->randomElement($courses_id),
         ];
     }

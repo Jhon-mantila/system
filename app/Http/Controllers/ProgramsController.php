@@ -36,6 +36,10 @@ class ProgramsController extends Controller
         
         $activeOptions = $this->dropdownService->getActive();
 
+        //$p = Programs::find('07184ec6-7f16-477c-aa89-53807f85c6a7')->courses()->orderBy('name')->get();;
+        //dd($p);
+
+
         $program = Programs::with('user')->get()->where('id', '=', $program->id);
         // foreach ($program as $programs) {
         //     echo $programs->name . ' ' . $programs->code . ' ' . $programs->credits . ' ' . $programs->hours . ' ' . $programs->active . ' ' . $programs->user->name;
