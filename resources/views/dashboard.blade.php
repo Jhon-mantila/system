@@ -26,6 +26,12 @@
                 <div class="bg-white shadow-sm sm:rounded-lg">
                     <div class="p-5 text-gray-900">
                         {{ __("You're logged in!") }}
+                        <select name="" id="year-id">
+                            <option value="1986">1986</option>
+                            <option value="1970">1970</option>
+                            <option value="2000">2000</option>
+                            <option value="2019">2019</option>
+                        </select>
                         <div style="width: 550px; margin: auto;">
                             <canvas id="myChart"></canvas>
                         </div>
@@ -39,6 +45,7 @@
                 <div class="bg-white  shadow-sm sm:rounded-lg">
                     <div class="p-5 text-gray-900">
                         {{ __("You're logged in!") }}
+
                         <div style="width: 550px; margin: auto;">
                             <canvas id="myChart"></canvas>
                         </div>

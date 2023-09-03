@@ -19,17 +19,36 @@ class DashboardController extends Controller
         return view('dashboard', compact('jsonData'));
     }
 
-    public function certificateForYear(){
+    public function certificateForYear(Request $request){
 
-        //$search = $request->input('search');
+        $search = $request->input('search');
         //dd($search);
+        
+        if(empty($search)){
+            $search = 1986;
+        }
+
         $data = array();
-        $cantidad_certificados = DB::select('SELECT MONTHNAME(date_start) as mes, COUNT(MONTH(date_start)) as cantidad_mes
-        FROM certificates c 
-        INNER JOIN programs p ON p.id = c.program_id
-        WHERE type_certificate = ? AND YEAR(date_start) = ?
-        GROUP by YEAR(c.date_start), MONTH(date_start) 
-        ORDER by date_start', ["c", 1986]);
+        $cantidad_certificados = DB::select("SELECT MONTHNAMES.month_name AS mes, IFNULL(COUNT(c.date_start), 0) AS cantidad_mes
+        FROM (
+            SELECT 1 AS month_num, 'Enero' AS month_name UNION ALL
+            SELECT 2, 'Febrero' UNION ALL
+            SELECT 3, 'Marzo' UNION ALL
+            SELECT 4, 'Abril' UNION ALL
+            SELECT 5, 'Mayo' UNION ALL
+            SELECT 6, 'Junio' UNION ALL
+            SELECT 7, 'Julio' UNION ALL
+            SELECT 8, 'Agosto' UNION ALL
+            SELECT 9, 'Septiembre' UNION ALL
+            SELECT 10, 'Octubre' UNION ALL
+            SELECT 11, 'Noviembre' UNION ALL
+            SELECT 12, 'Diciembre'
+        ) AS MONTHNAMES
+        LEFT JOIN certificates c ON MONTH(c.date_start) = MONTHNAMES.month_num
+            AND YEAR(c.date_start) = ?
+            AND c.type_certificate = ?
+        GROUP BY MONTHNAMES.month_num, MONTHNAMES.month_name
+        ORDER BY MONTHNAMES.month_num", [$search,"c"]);
         //echo "<pre>";
         //echo print_r($cantidad_certificados, true);
         
