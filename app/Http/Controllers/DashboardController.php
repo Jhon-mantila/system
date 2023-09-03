@@ -62,4 +62,34 @@ class DashboardController extends Controller
         //dd($cantidad_certificados);
         return response()->json($data);
     }
+
+    public function certificatesActivesInactives(){
+        
+        $result = array();
+        $cantidad = 0;
+        $data = DB::select("SELECT 'ACTIVOS', COUNT(*) AS CANTIDAD
+        FROM certificates c
+        WHERE c.date_end > DATE(NOW())
+        UNION
+        SELECT 'INACTIVOS', COUNT(*) AS CANTIDAD
+        FROM certificates c
+        WHERE c.date_end < DATE(NOW())");
+
+        //echo "<pre>";
+        //echo print_r($data, true);
+        foreach($data as $value){
+            $cantidad += $value->CANTIDAD;
+        }
+        //echo $cantidad;
+        
+        foreach($data as $value){
+            //$result['mes'][] = $value->mes;
+            
+            $result[] = number_format(($value->CANTIDAD/$cantidad)*100, 2, '.', '');
+            
+        }
+
+        //echo print_r($result, true);
+        return response()->json($result);
+    }
 }

@@ -6,11 +6,11 @@ let chart = null;
 
 function cargarGrafico(year){
 
-  console.log("año:"+year);
+  //console.log("año:"+year);
     fetch("http://localhost/system/public/api/quantity-certificates?search=" + year)
     .then(response => response.json())
     .then (data =>{
-      console.log(data);
+      //console.log(data);
           // Actualiza el gráfico con los nuevos datos
           if (chart) {
               chart.destroy(); // Destruye el gráfico existente si hay uno
@@ -18,7 +18,7 @@ function cargarGrafico(year){
 
           let cantidad = data["cantidad"];
           
-          console.log("cantidad"+cantidad);
+          //console.log("cantidad"+cantidad);
           const info = {
               labels: data["mes"],
               datasets: [{
@@ -58,11 +58,11 @@ function cargarGrafico(year){
           );
     })
     .catch(error => {
-                          console.error('Error al cargar datos:', error);
+          console.error('Error al cargar datos:', error);
     });
 
 }
-console.log(yearSelect);
+//console.log(yearSelect);
 //control cuando cambia de pestaña y es null el objeto de yearSelct
 if(yearSelect != null){
 

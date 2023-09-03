@@ -30,3 +30,4 @@ Route::get('/search-employees', [CertificateController::class, 'searchEmployees'
 Route::get('/search-employees-id', [CertificateController::class, 'searchEmployeesId']);
 
 Route::get('/quantity-certificates', [DashboardController::class, 'certificateForYear']);
+Route::get('/certificates-actives', [DashboardController::class, 'certificatesActivesInactives']);
