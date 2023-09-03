@@ -9,14 +9,31 @@ class DashboardController extends Controller
 {
     //
     public function index(){
-        $data = [
-            'labels' => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-            'data' => [10, 20, 15, 25, 30],
-        ];
-
+        $data = array();
+        
         $jsonData = json_encode($data);
 
-        return view('dashboard', compact('jsonData'));
+        $cant_students = DB::table('students')->where('active', 1)->count();
+        $cantidad_certificados = DB::table('certificates')->where('accredited', 1)->count();
+        $anos_certificates = DB::table('certificates')
+                                    ->select(DB::raw('YEAR(date_start) as year'))
+                                    ->where('type_certificate', '=', 'c')
+                                    ->groupBy('year')
+                                    ->orderBy('year')->get();
+        // echo '<pre>';
+        // echo print_r($anos_certificates, true);
+        //  foreach($anos_certificates as $value){
+        //     echo $value->year;
+        // }
+        // dd($anos_certificates);
+
+        $data['students'] = $cant_students;
+        $data['certificate'] = $cantidad_certificados;
+        $data['year'] = $anos_certificates;
+
+        //dd($data);
+
+        return view('dashboard', compact('data'));
     }
 
     public function certificateForYear(Request $request){
