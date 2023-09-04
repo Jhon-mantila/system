@@ -87,7 +87,7 @@ class EmployeesController extends Controller
             'mobile.required'  => 'El celular es requerido',
             'email.required'  => 'El correo electronico es requerido',
             'signature.image'  => 'El archivo debe ser una imagen',            
-            'signature.mimes'  => 'La imagen debe ser de tipo JPEG o PNG.',
+            'signature.mimes'  => 'La imagen debe s er de tipoJPEG o PNG.',
             'signature.max'  => 'La imagen no debe exceder los 2 megabytes.',
             
         ]);
