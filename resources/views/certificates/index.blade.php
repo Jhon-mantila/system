@@ -42,6 +42,7 @@
                         <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
                         <td class="px-6 py-4"></td>
+                        <td class="px-6 py-4"></td>
                     </tr>
                     @foreach ($certificates as $certificate)
                         <tr class="border-b border-gray-200 text-sm">
@@ -49,10 +50,15 @@
                             <td class="px-6 py-4">{{ $certificate->program->name }}</td>
                             <td class="px-6 py-4">{{ $certificate->updated_at }}</td>
                             <td class="px-6 py-4">{{ $certificate->created_at }}</td>
-        
+                            
+                            <td class="px-6 py-4">
+                                <a href="{{ route('pdf.generate', ['certificate' => $certificate]) }}" class="text-indigo-600">Pdf</a> 
+                            </td>
+
                             <td class="px-6 py-4">
                                 <a href="{{ route('certificates.edit', $certificate) }}" class="text-indigo-600">Editar</a> 
                             </td>
+
                             <td class="px-6 py-4">
                                 <form action="{{ route('certificates.destroy', $certificate) }}" method="POST">
                                     <!-- Crea una encriptación un token en value -->

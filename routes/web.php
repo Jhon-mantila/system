@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,5 +42,5 @@ Route::resource('employees', EmployeesController::class)->middleware(['auth', 'v
 Route::resource('companies', CompanyController::class)->middleware(['auth', 'verified'])->except(['show','create','store','destroy']);
 Route::resource('certificates', CertificateController::class)->middleware(['auth', 'verified']);
 Route::resource('courses', CourseController::class)->middleware(['auth', 'verified']);
-
+Route::get('/pdf/{certificate}', [PdfController::class, 'generarPDF'])->name('pdf.generate');;
 require __DIR__.'/auth.php';
