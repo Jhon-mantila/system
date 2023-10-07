@@ -47,7 +47,7 @@ class PdfController extends Controller
             if($certificates->type_certificate == 'cm'){
                 $this->certificateConstancia($certificates);
             }else{
-                $this->certificateDiploma();
+                $this->certificateDiploma($certificates);
             }
             //
             
@@ -55,99 +55,152 @@ class PdfController extends Controller
     
     }
 
-    public function certificateDiploma(){
+    public function certificateDiploma($certificates){
+
         // create new PDF document
-            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-            // set document information
-            $pdf->SetCreator(PDF_CREATOR);
-            $pdf->SetAuthor('Nicola Asuni');
-            $pdf->SetTitle('TCPDF Example 004');
-            $pdf->SetSubject('TCPDF Tutorial');
-            $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
-            $pdf->SetPageOrientation('L');
-            // set default header data
-            $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 004', PDF_HEADER_STRING);
+        // set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('Jhon Mantilla');
+        $pdf->SetTitle('Certificado');
+        $pdf->SetSubject('TCPDF Tutorial');
+        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
-            // set header and footer fonts
-            $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-            $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        $pdf->SetPageOrientation('L');
+        // remove default header/footer
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
 
-            // set default monospaced font
-            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        // set default monospaced font
+        //$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-            // set margins
-            $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-            $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-            $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        // set margins
+        //$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 
-            // set auto page breaks
-            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        // set auto page breaks
+        $pdf->SetAutoPageBreak(TRUE, 0);
+        //Maregenes
+        $pdf->SetMargins(0, 0, 0);
+        // set image scale factor
+        //$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-            // set image scale factor
-            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        // set some language-dependent strings (optional)
+        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+            require_once(dirname(__FILE__).'/lang/eng.php');
+            $pdf->setLanguageArray($l);
+        }
 
-            // set some language-dependent strings (optional)
-            if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-                require_once(dirname(__FILE__).'/lang/eng.php');
-                $pdf->setLanguageArray($l);
-            }
+        // ---------------------------------------------------------
+        
+        // set font
+        $pdf->SetFont('times', 'BI', 20);
 
-            // ---------------------------------------------------------
+        // add a page
+        $pdf->AddPage();
 
-            // set font
-            $pdf->SetFont('times', '', 11);
+        $pageHeight = $pdf->getPageHeight();
+        $pageWidth = $pdf->getPageWidth();
+        $image_file = K_PATH_IMAGES.'borde_colombia.png';
+        
+        $pdf->Image($image_file, -0.6, 0, '', $pageHeight, 'PNG', '', 'C', false, 500, '', false, false, 0, false, false, false);
 
-            // add a page
-            $pdf->AddPage();
+        $mitadAnchoPagina = $pageWidth/2;
+        $image_file_logo = K_PATH_IMAGES.'logo.png';
+        $pdf->Image($image_file_logo, $mitadAnchoPagina-15, 5, 35, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
 
-            //Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=0, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M')
+        $pdf->ln(40);
+        // set some text to print
+        $pdf->SetFont('helvetica', 'B', 18);
+        $pdf->Cell(0, 0, 'LA REPUBLICA DE COLOMBIA', 0, 1, 'C', 0, '', 3);
+        $pdf->ln(2);
+        $pdf->SetFont('helvetica', 'N', 16);
+        $pdf->Cell(0, 0, 'EN SU NOMBRE', 0, 1, 'C', 0, '', 3);
+        $pdf->ln(2);
+        $pdf->SetFont('helvetica', 'B', 16);
+        $pdf->Cell(0, 0, "EL INSTITUTO TÉCNICO DE FORMACIÓN PARA EL TRABAJO NIT: {$certificates->company->nit}", 0, 1, 'C', 0, '', 3);
+        $pdf->ln(4);
+        $pdf->SetFont('helvetica', 'N', 9);
+        $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, 'la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: ASTM, AWS, API', 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, "{$certificates->company->name} forma, evalúa y certifica el talento humano.", 0, 1, 'C', 0, '', 3);
+        $pdf->ln(5);
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->Cell(0, 0, 'HACE CONSTAR QUE', 0, 1, 'C', 0, '', 3);
+        $pdf->ln(5);
+        $pdf->SetFont('helvetica', 'B', 16);
+        $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
+        $pdf->Cell(0, 0, $name_student, 0, 1, 'C', 0, '', 3);
+        $pdf->ln(2);
+        $document = $certificates->student->document;
+        $pdf->Cell(0, 0, "CC {$document} DE CIMITARRA", 0, 1, 'C', 0, '', 3);
+        $pdf->ln(5);
+        $pdf->SetFont('helvetica', 'N', 9);
+        $pdf->Cell(0, 0, 'Asistió y supero el proceso de: Evaluación, calificación, certificación con nivel avanzado en la norma:', 0, 1, 'C', 0, '', 3);
+        $pdf->SetFont('helvetica', 'B', 16);
+        $pdf->ln(5);
+        $program = strtoupper($certificates->program->name);
+        //$txt = 'ARMAR ANDAMIOS SEGÚN ESPECIFICACIONES TÉCNICAS Y NORMATIVA DE TRABAJO EN ALTURAS (ANDAMIERO)';
+        $pdf->MultiCell(250, 0, ''.$program, 0, 'C', 0, 0, 25, '', true);
+        $pdf->ln(15);
+        $norma = $certificates->program->code;
+        $pdf->Cell(0, 0, "CÓDIGO DE LA NORMA SENA {$norma}", 0, 1, 'C', 0, '', 3);
 
-            // test Cell stretching
-            $pdf->Cell(0, 0, 'TEST CELL STRETCH: no stretch', 1, 1, 'C', 0, '', 0);
-            $pdf->Cell(0, 0, 'TEST CELL STRETCH: scaling', 1, 1, 'C', 0, '', 1);
-            $pdf->Cell(0, 0, 'TEST CELL STRETCH: force scaling', 1, 1, 'C', 0, '', 2);
-            $pdf->Cell(0, 0, 'TEST CELL STRETCH: spacing', 1, 1, 'C', 0, '', 3);
-            $pdf->Cell(0, 0, 'TEST CELL STRETCH: force spacing', 1, 1, 'C', 0, '', 4);
+        $pdf->ln(4);
+        $pdf->SetFont('helvetica', 'N', 9);
+        $pdf->Cell(0, 0, 'Cumpliendo con los requisitos exigidos por el INSTITUTO CONSOLMECI, en las pruebas de Conocimiento, Desempeño y Producto, este certificado es', 0, 1, 'C', 0, '', 3);
+        $horas = $certificates->program->hours;
+        $pdf->Cell(0, 0, "equivalente a {$horas} horas de formación para acceder al título de técnico laboral en construcción de edificaciones.", 0, 1, 'C', 0, '', 3);
+        //----- Fecha Inicial-----------
+        $dia = date('d', strtotime($certificates->date_start));
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        $mes = date('M', strtotime($certificates->date_start));
+        $mes_espanol = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes);
+        $year = date('Y', strtotime($certificates->date_start));
+        //----- Fecha Final-----------
+        $dia_final = date('d', strtotime($certificates->date_end));
+        setlocale(LC_TIME, 'es_ES.UTF-8');
+        $mes_final = date('M', strtotime($certificates->date_end));
+        $mes_espanol_final = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_final);
+        $year_final = date('Y', strtotime($certificates->date_end));
+        $pdf->Cell(0, 0, "FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.", 0, 1, 'C', 0, '', 3);
+        
+        
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->ln(15);
+        $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
+        $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);
+        $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
+        // Logo
+        //$image_file = public_path('storage/' . $certificates->employee->signature);
+        $pdf->Image($image_file_logo, $mitadAnchoPagina-5, 170, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+        
+        $pdf->ln(3);
+        $pdf->SetFont('helvetica', 'N', 9);
+        $pdf->Cell(0, 0, "{$certificates->company->direction} Tel:{$certificates->company->phone} – Cel: {$certificates->company->mobile} Barrancabermeja", 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, "E-Mail: Agobardo.01@hotmail.com – Validación de Certificados {$certificates->company->web}", 0, 1, 'C', 0, '', 3);
+        
+        // set style for barcode
+        $style = array(
+            'border' => 0,
+            'vpadding' => 'auto',
+            'hpadding' => 'auto',
+            'fgcolor' => array(0,0,0),
+            'bgcolor' => false, //array(255,255,255)
+            'module_width' => 1, // width of a single module in points
+            'module_height' => 1 // height of a single module in points
+        );
+        // QRCODE,L : QR-CODE Low error correction
+        $pdf->write2DBarcode('www.tcpdf.org', 'QRCODE,L', 235, 160, 40, 40, $style, 'N');
+        
+        // ---------------------------------------------------------
+        $salida = $certificates->student->first_name . '_' . $certificates->student->second_name . '_' . $certificates->student->last_name . '_' . $certificates->student->second_last_name;
+        //Close and output PDF document
+        $pdf->Output("{$salida}.pdf", 'I');
 
-            $pdf->Ln(5);
-
-            $pdf->Cell(45, 0, 'TEST CELL STRETCH: scaling', 1, 1, 'C', 0, '', 1);
-            $pdf->Cell(45, 0, 'TEST CELL STRETCH: force scaling', 1, 1, 'C', 0, '', 2);
-            $pdf->Cell(45, 0, 'TEST CELL STRETCH: spacing', 1, 1, 'C', 0, '', 3);
-            $pdf->Cell(45, 0, 'TEST CELL STRETCH: force spacing', 1, 1, 'C', 0, '', 4);
-
-            $pdf->AddPage();
-
-            // example using general stretching and spacing
-
-            for ($stretching = 90; $stretching <= 110; $stretching += 10) {
-                for ($spacing = -0.254; $spacing <= 0.254; $spacing += 0.254) {
-
-                    // set general stretching (scaling) value
-                    $pdf->setFontStretching($stretching);
-
-                    // set general spacing value
-                    $pdf->setFontSpacing($spacing);
-
-                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, no stretch', 1, 1, 'C', 0, '', 0);
-                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, scaling', 1, 1, 'C', 0, '', 1);
-                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, force scaling', 1, 1, 'C', 0, '', 2);
-                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, spacing', 1, 1, 'C', 0, '', 3);
-                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, force spacing', 1, 1, 'C', 0, '', 4);
-
-                    $pdf->Ln(2);
-                }
-            }
-
-            // ---------------------------------------------------------
-
-            //Close and output PDF document
-            $pdf->Output('example_004.pdf', 'I');
-
-            //============================================================+
-            // END OF FILE
-            //============================================================+
+        //============================================================+
+        // END OF FILE
+        //============================================================+
     }
     public function certificateConstancia($certificates){
                     // create new PDF document

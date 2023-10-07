@@ -42,5 +42,5 @@ Route::resource('employees', EmployeesController::class)->middleware(['auth', 'v
 Route::resource('companies', CompanyController::class)->middleware(['auth', 'verified'])->except(['show','create','store','destroy']);
 Route::resource('certificates', CertificateController::class)->middleware(['auth', 'verified']);
 Route::resource('courses', CourseController::class)->middleware(['auth', 'verified']);
-Route::get('/pdf/{certificate}', [PdfController::class, 'generarPDF'])->name('pdf.generate');;
+Route::get('/pdf/{certificate}', [PdfController::class, 'generarPDF'])->middleware(['auth', 'verified'])->name('pdf.generate');
 require __DIR__.'/auth.php';
