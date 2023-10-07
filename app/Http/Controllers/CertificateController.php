@@ -73,6 +73,7 @@ class CertificateController extends Controller
             'employee_id' => 'required',
             'date_start' => 'required',
             'date_end' => 'required',
+            'type_certificate' => 'required'
 
         ],[
             'program_id.required' => 'El programa es requerido',
@@ -80,6 +81,7 @@ class CertificateController extends Controller
             'employee_id.required' => 'El empleado es requerido',
             'date_start.required' => 'La fecha inicial es requerida',
             'date_end.required' => 'La fecha final es requerida',
+            'type_certificate.required' => 'Es requerido',
 
         ]);
 
@@ -94,6 +96,7 @@ class CertificateController extends Controller
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
+            'type_certificate' => $request->type_certificate,
             'company_id' => $company[0]['id'],
             'accredited' => $request->accredited,
             'notified' => $request->notified,
@@ -129,13 +132,14 @@ class CertificateController extends Controller
             'date_end.required' => 'La fecha final es requerida',
 
         ]);
-
+        //dd($request->type_certificate);
         $certificate->update([
             'program_id' => $request->program_id,
             'student_id' => $request->student_id,
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
+            'type_certificate' => $request->type_certificate,
             'accredited' => $request->accredited,
             'notified' => $request->notified,
             'updated_at' => date("Y-m-d H:i:s"),

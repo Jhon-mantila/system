@@ -17,6 +17,7 @@ class Certificate extends Model
         'employee_id',
         'date_start',
         'date_end',
+        'type_certificate',
         'company_id',
         'accredited',
         'notified',

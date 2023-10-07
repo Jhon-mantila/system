@@ -36,119 +36,223 @@ class PdfController extends Controller
     //
     public function generarPDF(Certificate $certificate){
     
-    $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
-    ->get()
-    ->where('id', '=', $certificate->id);
+        $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
+        ->get()
+        ->where('id', '=', $certificate->id);
 
-    //dd($certificate);
-     foreach ($certificate as $certificates) {
-         //echo $certificates->company->name . ' ' . $certificates->company->nit . ' ' . $certificates->company->web . ' ' . $certificates->company->direction . ' ' . $certificates->active . ' ' . $certificates->user->name;
-       
-        // create new PDF document
-        $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-        // set document information
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('CONSOLMECI');
-        $pdf->SetTitle('TCPDF Example 003');
-        $pdf->SetSubject('TCPDF Tutorial');
-        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
-
-        // set default header data
-        //$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
-
-        // set header and footer fonts
-        // $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        // $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
-        // set default monospaced font
-        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-        // set margins
-        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
-        // set auto page breaks
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-        // set image scale factor
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-        // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-            require_once(dirname(__FILE__).'/lang/eng.php');
-            $pdf->setLanguageArray($l);
+        //dd($certificate);
+        foreach ($certificate as $certificates) {
+            //echo $certificates->company->name . ' ' . $certificates->company->nit . ' ' . $certificates->company->web . ' ' . $certificates->company->direction . ' ' . $certificates->type_certificate . ' ' . $certificates->user->name;
+            
+            if($certificates->type_certificate == 'cm'){
+                $this->certificateConstancia($certificates);
+            }else{
+                $this->certificateDiploma();
+            }
+            //
+            
         }
-
-        // ---------------------------------------------------------
-
-        // set font
-        $pdf->SetFont('times', 'BI', 12);
-
-        // add a page
-        $pdf->AddPage();
-
-        // set some text to print
-        $pdf->SetY(80);
-
-        // Set font
-        $pdf->SetFont('helvetica', 'B', 12);
-        // Title
-        $pdf->Cell(0, 0, 'Instituto técnico "'.$certificates->company->name.'" NIT '.$certificates->company->nit.' Barrancabermeja', 0, 1, 'C', 0, '', 0);
-        $pdf->Cell(0, 0, 'RESOLUCION 0721 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
-        $pdf->Cell(0, 0, 'Cra 44 # 52-17 Barrio el progreso Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 2);
-        $pdf->ln(15);
-
-        $pdf->SetFont('helvetica', 'B', 20);
-        $pdf->Cell(0, 0, 'CONSTANCIA DE MATRICULA', 0, 1, 'C', 0, '', 3);
-
-        // Set font
-        $pdf->SetFont('helvetica', '', 12);
-        $tecnico = "Prueba";
-        $pdf->ln(15);
-
-        $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
-        $document = $certificates->student->document;
-        $program = $certificates->program->name;
-        $dia = date('d', strtotime($certificates->date_start));
-        setlocale(LC_TIME, 'es_ES.UTF-8');
-        $mes = date('M', strtotime($certificates->date_start));
-        $mes_espanol = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes);
-        $year = date('Y', strtotime($certificates->date_start));
-
-        // set some text to print
-        $txt = <<<EOD
-        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que el estudiante, $name_student CC $document DE BUCARAMANGA, se encuentra actualmente matriculado en nuestra institución en el programa de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
-
-        EOD;
-
-        // print a block of text using Write()
-        $pdf->MultiCell(0, 0, $txt, 0, 'J', false);
-        //$pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
-        $pdf->ln(15);
-        $pdf->Cell(0, 0, 'En constancia se firma en Barrancabermeja el día 01 de julio del año 2022.', 0, 1, 'L', 0, '', 0);
-        
-        $pdf->ln(40);
-
-        $pdf->SetFont('helvetica', 'B', 12);
-
-        // Logo
-        $image_file = public_path('storage/' . $certificates->employee->signature);
-        $pdf->Image($image_file, 100, 230, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
-        //$pdf->ln(2);
-        $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
-        $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);
-        $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
-        // ---------------------------------------------------------
-
-        //Close and output PDF document
-        $pdf->Output('example_003.pdf', 'I');
-
-        //============================================================+
-        // END OF FILE
-        //============================================================+
-    }
     
+    }
+
+    public function certificateDiploma(){
+        // create new PDF document
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+            // set document information
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('Nicola Asuni');
+            $pdf->SetTitle('TCPDF Example 004');
+            $pdf->SetSubject('TCPDF Tutorial');
+            $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+            $pdf->SetPageOrientation('L');
+            // set default header data
+            $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 004', PDF_HEADER_STRING);
+
+            // set header and footer fonts
+            $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+            $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+            // set default monospaced font
+            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+            // set margins
+            $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+            $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+            $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+            // set auto page breaks
+            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+            // set image scale factor
+            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+            // set some language-dependent strings (optional)
+            if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+                require_once(dirname(__FILE__).'/lang/eng.php');
+                $pdf->setLanguageArray($l);
+            }
+
+            // ---------------------------------------------------------
+
+            // set font
+            $pdf->SetFont('times', '', 11);
+
+            // add a page
+            $pdf->AddPage();
+
+            //Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=0, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M')
+
+            // test Cell stretching
+            $pdf->Cell(0, 0, 'TEST CELL STRETCH: no stretch', 1, 1, 'C', 0, '', 0);
+            $pdf->Cell(0, 0, 'TEST CELL STRETCH: scaling', 1, 1, 'C', 0, '', 1);
+            $pdf->Cell(0, 0, 'TEST CELL STRETCH: force scaling', 1, 1, 'C', 0, '', 2);
+            $pdf->Cell(0, 0, 'TEST CELL STRETCH: spacing', 1, 1, 'C', 0, '', 3);
+            $pdf->Cell(0, 0, 'TEST CELL STRETCH: force spacing', 1, 1, 'C', 0, '', 4);
+
+            $pdf->Ln(5);
+
+            $pdf->Cell(45, 0, 'TEST CELL STRETCH: scaling', 1, 1, 'C', 0, '', 1);
+            $pdf->Cell(45, 0, 'TEST CELL STRETCH: force scaling', 1, 1, 'C', 0, '', 2);
+            $pdf->Cell(45, 0, 'TEST CELL STRETCH: spacing', 1, 1, 'C', 0, '', 3);
+            $pdf->Cell(45, 0, 'TEST CELL STRETCH: force spacing', 1, 1, 'C', 0, '', 4);
+
+            $pdf->AddPage();
+
+            // example using general stretching and spacing
+
+            for ($stretching = 90; $stretching <= 110; $stretching += 10) {
+                for ($spacing = -0.254; $spacing <= 0.254; $spacing += 0.254) {
+
+                    // set general stretching (scaling) value
+                    $pdf->setFontStretching($stretching);
+
+                    // set general spacing value
+                    $pdf->setFontSpacing($spacing);
+
+                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, no stretch', 1, 1, 'C', 0, '', 0);
+                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, scaling', 1, 1, 'C', 0, '', 1);
+                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, force scaling', 1, 1, 'C', 0, '', 2);
+                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, spacing', 1, 1, 'C', 0, '', 3);
+                    $pdf->Cell(0, 0, 'Stretching '.$stretching.'%, Spacing '.sprintf('%+.3F', $spacing).'mm, force spacing', 1, 1, 'C', 0, '', 4);
+
+                    $pdf->Ln(2);
+                }
+            }
+
+            // ---------------------------------------------------------
+
+            //Close and output PDF document
+            $pdf->Output('example_004.pdf', 'I');
+
+            //============================================================+
+            // END OF FILE
+            //============================================================+
+    }
+    public function certificateConstancia($certificates){
+                    // create new PDF document
+                    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+                    // set document information
+                    $pdf->SetCreator(PDF_CREATOR);
+                    $pdf->SetAuthor('CONSOLMECI');
+                    $pdf->SetTitle('TCPDF Example 003');
+                    $pdf->SetSubject('TCPDF Tutorial');
+                    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+        
+                    // set default header data
+                    //$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+        
+                    // set header and footer fonts
+                    // $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+                    // $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        
+                    // set default monospaced font
+                    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        
+                    // set margins
+                    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+                    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+                    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        
+                    // set auto page breaks
+                    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        
+                    // set image scale factor
+                    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        
+                    // set some language-dependent strings (optional)
+                    if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+                        require_once(dirname(__FILE__).'/lang/eng.php');
+                        $pdf->setLanguageArray($l);
+                    }
+        
+                    // ---------------------------------------------------------
+        
+                    // set font
+                    $pdf->SetFont('times', 'BI', 12);
+        
+                    // add a page
+                    $pdf->AddPage();
+        
+                    // set some text to print
+                    $pdf->SetY(80);
+        
+                    // Set font
+                    $pdf->SetFont('helvetica', 'B', 12);
+                    // Title
+                    $pdf->Cell(0, 0, 'Instituto técnico "'.$certificates->company->name.'" NIT '.$certificates->company->nit.' Barrancabermeja', 0, 1, 'C', 0, '', 0);
+                    $pdf->Cell(0, 0, 'RESOLUCION 0721 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
+                    $pdf->Cell(0, 0, 'Cra 44 # 52-17 Barrio el progreso Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 2);
+                    $pdf->ln(15);
+        
+                    $pdf->SetFont('helvetica', 'B', 20);
+                    $pdf->Cell(0, 0, 'CONSTANCIA DE MATRICULA', 0, 1, 'C', 0, '', 3);
+        
+                    // Set font
+                    $pdf->SetFont('helvetica', '', 12);
+                    $tecnico = "Prueba";
+                    $pdf->ln(15);
+        
+                    $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
+                    $document = $certificates->student->document;
+                    $program = $certificates->program->name;
+                    $dia = date('d', strtotime($certificates->date_start));
+                    setlocale(LC_TIME, 'es_ES.UTF-8');
+                    $mes = date('M', strtotime($certificates->date_start));
+                    $mes_espanol = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes);
+                    $year = date('Y', strtotime($certificates->date_start));
+        
+                    // set some text to print
+                    $txt = <<<EOD
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que el estudiante, $name_student CC $document DE BUCARAMANGA, se encuentra actualmente matriculado en nuestra institución en el programa de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+        
+                    EOD;
+        
+                    // print a block of text using Write()
+                    $pdf->MultiCell(0, 0, $txt, 0, 'J', false);
+                    //$pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
+                    $pdf->ln(15);
+                    $pdf->Cell(0, 0, 'En constancia se firma en Barrancabermeja el día 01 de julio del año 2022.', 0, 1, 'L', 0, '', 0);
+                    
+                    $pdf->ln(40);
+        
+                    $pdf->SetFont('helvetica', 'B', 12);
+        
+                    // Logo
+                    $image_file = public_path('storage/' . $certificates->employee->signature);
+                    $pdf->Image($image_file, 100, 230, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+                    //$pdf->ln(2);
+                    $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
+                    $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);
+                    $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
+                    // ---------------------------------------------------------
+        
+                    //Close and output PDF document
+                    $pdf->Output('example_003.pdf', 'I');
+        
+                    //============================================================+
+                    // END OF FILE
+                    //============================================================+
     }
 }
