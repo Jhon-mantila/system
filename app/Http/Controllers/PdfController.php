@@ -133,7 +133,8 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, $name_student, 0, 1, 'C', 0, '', 3);
         $pdf->ln(2);
         $document = $certificates->student->document;
-        $pdf->Cell(0, 0, "CC {$document} DE CIMITARRA", 0, 1, 'C', 0, '', 3);
+        $city = $certificates->student->city;
+        $pdf->Cell(0, 0, "CC {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
         $pdf->ln(5);
         $pdf->SetFont('helvetica', 'N', 9);
         $pdf->Cell(0, 0, 'Asistió y supero el proceso de: Evaluación, calificación, certificación con nivel avanzado en la norma:', 0, 1, 'C', 0, '', 3);
@@ -269,6 +270,7 @@ class PdfController extends Controller
         
                     $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
                     $document = $certificates->student->document;
+                    $city = $certificates->student->city;
                     $program = $certificates->program->name;
                     $dia = date('d', strtotime($certificates->date_start));
                     setlocale(LC_TIME, 'es_ES.UTF-8');
@@ -278,7 +280,7 @@ class PdfController extends Controller
         
                     // set some text to print
                     $txt = <<<EOD
-                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que el estudiante, $name_student CC $document DE BUCARAMANGA, se encuentra actualmente matriculado en nuestra institución en el programa de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que el estudiante, $name_student CC $document de $city, se encuentra actualmente matriculado en nuestra institución en el programa de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
         
