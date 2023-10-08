@@ -21,6 +21,7 @@ class Students extends Model
         'second_last_name',
         'mobile',
         'email',
+        'city',
         'active'
     ];
 

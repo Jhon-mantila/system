@@ -55,30 +55,38 @@
 
 <div class="grid grid-cols-2 gap-4">
     <div class="">
+            <label for="" class="uppercase text-gray-700 text-xs">Ciudad</label>
+            <span class="text-xs text-red-600">@error('city') {{ $message }}  @enderror</span>
+            <input type="text" name="city" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('city', $student->city) }}">
+    </div>
+    <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Mobil</label>
         <span class="text-xs text-red-600">@error('mobile') {{ $message }}  @enderror</span>
         <input type="text" name="mobile" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('mobile', $student->mobile) }}">
     </div>
+</div>
+<div class="grid grid-cols-2 gap-4">
     <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Email</label>
             <span class="text-xs text-red-600">@error('email') {{ $message }}  @enderror</span>
             <input type="email" name="email" class="rounded border-gray-200 w-full mb-4" 
             value="{{ old('email', $student->email) }}">
     </div>
-</div>
-<div class="">
-    <label for="" class="uppercase text-gray-700 text-xs">Activo</label>
-    <span class="text-xs text-red-600">@error('active') {{ $message }}  @enderror</span>
-    <select name="active" id="" class="rounded border-gray-200 w-full mb-4">
-                    @foreach ($activeOptions as $key => $value)
-                        <option value="{{ $key }}"
-                        @if (old('active', $student->active) === $key)
-                            selected
-                        @endif
-                        >{{ $value }}</option>
-                    @endforeach
-    </select> 
+    <div class="">
+        <label for="" class="uppercase text-gray-700 text-xs">Activo</label>
+        <span class="text-xs text-red-600">@error('active') {{ $message }}  @enderror</span>
+        <select name="active" id="" class="rounded border-gray-200 w-full mb-4">
+                        @foreach ($activeOptions as $key => $value)
+                            <option value="{{ $key }}"
+                            @if (old('active', $student->active) === $key)
+                                selected
+                            @endif
+                            >{{ $value }}</option>
+                        @endforeach
+        </select> 
+    </div>
 </div>
 
 

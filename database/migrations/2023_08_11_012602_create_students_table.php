@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('second_last_name')->nullable();
             $table->string('mobile');
             $table->string('email');
+            $table->string('city')->nullable();
             $table->integer('active')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

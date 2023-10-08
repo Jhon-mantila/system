@@ -30,24 +30,36 @@
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Tipo de Documento</label>
                             <p class="p-2">{{ $typeDocument[$estudiante->type_document] }}</p>
-                        </div class="py-2">
+                        </div>
 
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Número de Documento</label>
                             <p class="p-2">{{ $estudiante->document }}</p>
-                        </div class="py-2">
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Ciudad</label>
+                            <p class="p-2">{{ $estudiante->city }}</p>
+                        </div>
+
+                        <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Mobile</label>
                             <p class="p-2">{{ $estudiante->mobile }}</p>
-                        </div class="py-2">
+                        </div>
+                    </div> 
 
+                    <div class="grid grid-cols-2 gap-4">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Correo Electronico</label>
                             <p class="p-2">{{ $estudiante->email }}</p>
-                        </div class="py-2">
+                        </div>
+
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Activado</label>
+                            <p class="p-2">{{ $activeOptions[$estudiante->active] }}</p>
+                        </div> 
                     </div>    
 
                     <div class="grid grid-cols-2 gap-4">
@@ -63,11 +75,6 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
-
-                        <div class="py-2">
-                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Activado</label>
-                            <p class="p-2">{{ $activeOptions[$estudiante->active] }}</p>
-                        </div> 
 
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">usuario</label>
