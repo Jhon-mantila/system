@@ -30,6 +30,9 @@
                     <x-nav-link :href="route('certificates.index')" :active="request()->routeIs('certificates.index')">
                         {{ __('Certificados') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('certificates-courses.index')" :active="request()->routeIs('certificates-courses.index')">
+                        {{ __('Certificados Cursos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -97,7 +100,10 @@
                 {{ __('Empleados') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('certificates.index')" :active="request()->routeIs('certificates.index')">
-                {{ __('Empleados') }}
+                {{ __('Certificados') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('certificates-courses.index')" :active="request()->routeIs('certificates-courses.index')">
+                {{ __('Certificados Cursos') }}
             </x-responsive-nav-link>
         </div>
 

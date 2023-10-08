@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('certificates_courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('courses_id');
-            $table->foreign('courses_id')->references('id')->on('courses');
+            $table->uuid('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->uuid('student_id');
             $table->foreign('student_id')->references('id')->on('students');
             $table->uuid('employee_id');

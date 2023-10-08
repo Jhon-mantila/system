@@ -12,7 +12,7 @@ class CertificatesCourses extends Model
     use HasUuids; // para visualizar bien los id creados con uuid
     
     protected $fillable = [
-        'courses_id',
+        'course_id',
         'student_id',
         'employee_id',
         'date_start',

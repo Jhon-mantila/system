@@ -25,14 +25,14 @@ class CertificatesCoursesFactory extends Factory
         $student_id = Students::pluck('id');
         $employee_id = Employees::pluck('id');
         $company_id = Company::pluck('id');
-        $courses_id = Course::pluck('id');
+        $course_id = Course::pluck('id');
 
         $activeOptions = new DropdownService();
         
         return [
             //
             'id' =>  (string) Uuid::uuid4(),
-            'courses_id' =>  $this->faker->randomElement($courses_id),
+            'course_id' =>  $this->faker->randomElement($course_id),
             'student_id' =>  $this->faker->randomElement($student_id),
             'employee_id' =>  $this->faker->randomElement($employee_id),
             'date_start' =>  $this->faker->date(),

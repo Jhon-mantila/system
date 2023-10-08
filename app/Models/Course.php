@@ -15,7 +15,9 @@ class Course extends Model
     protected $fillable = [
         'id','name','code','credits','hours','active'
     ];
-
+    public function certificateCourse(){
+        return $this->hasMany(CertificatesCourses::class);
+    }
     
     public function user(){
         return $this->belongsTo(User::class);
