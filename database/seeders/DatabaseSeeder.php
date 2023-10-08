@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Certificate::factory(150)->create();
         \App\Models\Course::factory(50)->create();
         \App\Models\ProgramsCourses::factory(50)->create();
+        \App\Models\CertificatesCourses::factory(150)->create();
 
 
         // \App\Models\User::factory()->create([
