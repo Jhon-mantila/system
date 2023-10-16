@@ -45,4 +45,5 @@ Route::resource('certificates', CertificateController::class)->middleware(['auth
 Route::resource('certificates-courses', CertificatesCoursesController::class)->middleware(['auth', 'verified']);
 Route::resource('courses', CourseController::class)->middleware(['auth', 'verified']);
 Route::get('/pdf/{certificate}', [PdfController::class, 'generarPDF'])->middleware(['auth', 'verified'])->name('pdf.generate');
+Route::get('/pdf-courses/{certificate}', [PdfController::class, 'generarPDFcourses'])->middleware(['auth', 'verified'])->name('pdf.generatecourse');
 require __DIR__.'/auth.php';

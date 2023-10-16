@@ -151,7 +151,7 @@ const searchInputIdValue = document.getElementById('selectedProgramId');
 let searchInputId;
 if(searchInputIdValue !== null){
     searchInputId = searchInputIdValue.value;
-    console.log(searchInputId);
+    //console.log(searchInputId);
     searchProgramsId(searchInputId);
 }else{
     console.log("----Programa id vacio no existe----");
@@ -178,18 +178,19 @@ const searchInputCourseIdValue = document.getElementById('selectedCourseId');
 let searchInputCourseId;
 if(searchInputCourseIdValue !== null){
     searchInputCourseId = searchInputCourseIdValue.value;//'530f9fe2-aa5b-4f60-9e5f-63eba5ef8b6c';
+    //console.log(searchInputCourseId);
+    searchCoursesId(searchInputCourseId);
 }else{
     console.log("----Curso id vacio no existe----");
 }
-console.log(searchInputCourseId);
-searchCoursesId(searchInputCourseId);
+
 async function searchCoursesId(searchInputCourseId) {
 
     try {
         const response = await fetch(`http://localhost/system/public/api/search-courses-id?search=${searchInputCourseId}`);
         const searchResults = await response.json();
-        console.log("Resultado");
-        console.log(searchResults[0].name);
+        //console.log("Resultado");
+        //console.log(searchResults[0].name);
 
         if(searchInputCourseId.trim().length != 0){
             document.getElementById('courseSearch').value = searchResults[0].name;

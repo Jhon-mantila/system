@@ -46,13 +46,13 @@
                     </tr>
                     @foreach ($certificates as $certificate)
                         <tr class="border-b border-gray-200 text-sm">
-                            <td class="px-6 py-4"><a class="text-blue-600" href="{{ route('certificates.show', $certificate) }}">{{ $certificate->student->first_name }} {{ $certificate->student->second_name }} {{ $certificate->student->last_name }} {{ $certificate->student->second_last_name }}</a></td>
+                            <td class="px-6 py-4"><a class="text-blue-600" href="{{ route('certificates-courses.show', $certificate) }}">{{ $certificate->student->first_name }} {{ $certificate->student->second_name }} {{ $certificate->student->last_name }} {{ $certificate->student->second_last_name }}</a></td>
                             <td class="px-6 py-4">{{ $certificate->course->name }}</td>
                             <td class="px-6 py-4">{{ $certificate->updated_at }}</td>
                             <td class="px-6 py-4">{{ $certificate->created_at }}</td>
                             
                             <td class="px-6 py-4">
-                                <a href="{{ route('pdf.generate', ['certificate' => $certificate]) }}" class="text-indigo-600">Pdf</a> 
+                                <a href="{{ route('pdf.generatecourse', ['certificate' => $certificate]) }}" class="text-indigo-600">Pdf</a> 
                             </td>
 
                             <td class="px-6 py-4">

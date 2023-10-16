@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use TCPDF; 
 use App\Models\Certificate;
+use App\Models\CertificatesCourses;
 
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
@@ -35,7 +36,8 @@ class PdfController extends Controller
 {
     //
     public function generarPDF(Certificate $certificate){
-    
+        
+        //dd($certificate);
         $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
         ->get()
         ->where('id', '=', $certificate->id);
@@ -45,9 +47,9 @@ class PdfController extends Controller
             //echo $certificates->company->name . ' ' . $certificates->company->nit . ' ' . $certificates->company->web . ' ' . $certificates->company->direction . ' ' . $certificates->type_certificate . ' ' . $certificates->user->name;
             
             if($certificates->type_certificate == 'cm'){
-                $this->certificateConstancia($certificates);
+                $this->certificateConstancia($certificates, "programa");
             }else{
-                $this->certificateDiploma($certificates);
+                $this->certificateDiploma($certificates, "programa");
             }
             //
             
@@ -55,7 +57,29 @@ class PdfController extends Controller
     
     }
 
-    public function certificateDiploma($certificates){
+    public function generarPDFcourses(CertificatesCourses $certificate){
+        
+        //dd($certificate);
+        $certificate = CertificatesCourses::with(['user', 'course', 'student', 'employee', 'company'])
+        ->get()
+        ->where('id', '=', $certificate->id);
+
+        //dd($certificate);
+        foreach ($certificate as $certificates) {
+            //echo $certificates->company->name . ' ' . $certificates->company->nit . ' ' . $certificates->company->web . ' ' . $certificates->company->direction . ' ' . $certificates->type_certificate . ' ' . $certificates->user->name;
+            
+            if($certificates->type_certificate == 'cm'){
+                $this->certificateConstancia($certificates, "curso");
+            }else{
+                $this->certificateDiploma($certificates, "curso");
+            }
+            //
+            
+        }
+    
+    }
+
+    public function certificateDiploma($certificates, $module){
 
         // create new PDF document
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -140,18 +164,25 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, 'Asistió y supero el proceso de: Evaluación, calificación, certificación con nivel avanzado en la norma:', 0, 1, 'C', 0, '', 3);
         $pdf->SetFont('helvetica', 'B', 16);
         $pdf->ln(5);
-        $program = strtoupper($certificates->program->name);
+
+            if($module == "programa"){
+                $relation = "program";
+            }else{
+                $relation = "course";
+            }
+
+        $program = strtoupper($certificates->{$relation}->name);
         //$txt = 'ARMAR ANDAMIOS SEGÚN ESPECIFICACIONES TÉCNICAS Y NORMATIVA DE TRABAJO EN ALTURAS (ANDAMIERO)';
         $pdf->MultiCell(250, 0, ''.$program, 0, 'C', 0, 0, 25, '', true);
         $pdf->ln(15);
-        $norma = $certificates->program->code;
+        $norma = $certificates->{$relation}->code;
         $pdf->Cell(0, 0, "CÓDIGO DE LA NORMA SENA {$norma}", 0, 1, 'C', 0, '', 3);
 
         $pdf->ln(4);
         $pdf->SetFont('helvetica', 'N', 9);
         $pdf->Cell(0, 0, 'Cumpliendo con los requisitos exigidos por el INSTITUTO CONSOLMECI, en las pruebas de Conocimiento, Desempeño y Producto, este certificado es', 0, 1, 'C', 0, '', 3);
-        $horas = $certificates->program->hours;
-        $pdf->Cell(0, 0, "equivalente a {$horas} horas de formación para acceder al título de técnico laboral en construcción de edificaciones.", 0, 1, 'C', 0, '', 3);
+        $horas = $certificates->{$relation}->hours;
+        $pdf->Cell(0, 0, "equivalente a {$horas} horas de formación para acceder al título de $program.", 0, 1, 'C', 0, '', 3);
         //----- Fecha Inicial-----------
         $dia = date('d', strtotime($certificates->date_start));
         setlocale(LC_TIME, 'es_ES.UTF-8');
@@ -203,7 +234,7 @@ class PdfController extends Controller
         // END OF FILE
         //============================================================+
     }
-    public function certificateConstancia($certificates){
+    public function certificateConstancia($certificates, $module){
                     // create new PDF document
                     $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -271,16 +302,21 @@ class PdfController extends Controller
                     $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
                     $document = $certificates->student->document;
                     $city = $certificates->student->city;
-                    $program = $certificates->program->name;
+                    
                     $dia = date('d', strtotime($certificates->date_start));
                     setlocale(LC_TIME, 'es_ES.UTF-8');
                     $mes = date('M', strtotime($certificates->date_start));
                     $mes_espanol = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes);
                     $year = date('Y', strtotime($certificates->date_start));
-        
+                    
+                        if($module == "programa"){
+                            $program = $certificates->program->name;
+                        }else{
+                            $program = $certificates->course->name;
+                        }
                     // set some text to print
                     $txt = <<<EOD
-                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que el estudiante, $name_student CC $document de $city, se encuentra actualmente matriculado en nuestra institución en el programa de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que el estudiante, $name_student CC $document de $city, se encuentra actualmente matriculado en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
         

@@ -40,6 +40,20 @@ class CertificatesCoursesController extends Controller
         ]);
     }
 
+    public function show(CertificatesCourses $certificates_course){
+        
+        $typeCertificate = $this->dropdownService->getTypeCertificate();
+
+        $certificate = CertificatesCourses::with(['user', 'course', 'student', 'employee', 'company'])
+        ->get()
+        ->where('id', '=', $certificates_course->id);
+        //dd($certificate);
+        return view('certificates-courses.show', [
+            'certificate' => $certificate,
+            'typeCertificate' => $typeCertificate,
+        ]);
+    }
+
     public function create(CertificatesCourses $certificate){
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
