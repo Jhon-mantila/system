@@ -35,6 +35,42 @@ function selectProgram(program) {
     document.getElementById('programSearchResults').innerHTML = '';
 }
 
+async function searchCourse() {
+    const searchInput = document.getElementById('courseSearch').value;
+    const resultsDiv = document.getElementById('courseSearchResults');
+    const idPrograms = document.getElementById('selectedCourseId').value;
+    console.log(searchInput);
+    try {
+        const response = await fetch(`http://localhost/system/public/api/search-courses?search=${searchInput}`);
+        const searchResults = await response.json();
+        console.log(searchResults);
+        resultsDiv.innerHTML = '';
+        
+        if(searchInput.trim().length != 0 && idPrograms.trim().length == 0){
+            searchResults.forEach(result => {
+                selectCourse(result);
+            });
+        }
+
+        searchResults.forEach(result => {
+            const resultItem = document.createElement('div');
+            resultItem.textContent = result.name;
+            resultItem.classList.add('search-result');
+            resultItem.addEventListener('click', () => selectCourse(result));
+            resultsDiv.appendChild(resultItem);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function selectCourse(course) {
+    //console.log(course);
+    document.getElementById('courseSearch').value = course.name;
+    document.getElementById('selectedCourseId').value = course.id;
+    document.getElementById('courseSearchResults').innerHTML = '';
+}
+
 async function searchStudents() {
     const searchInput = document.getElementById('studentSearch').value;
     const resultsDiv = document.getElementById('studentSearchResults');
@@ -109,9 +145,18 @@ function selectEmployee(employee) {
     document.getElementById('employeeSearchResults').innerHTML = '';
 }
 
-const searchInputId = document.getElementById('selectedProgramId').value;
-//console.log(searchInputId);
-searchProgramsId(searchInputId);
+//const searchInputId = document.getElementById('selectedProgramId').value;
+
+const searchInputIdValue = document.getElementById('selectedProgramId');
+let searchInputId;
+if(searchInputIdValue !== null){
+    searchInputId = searchInputIdValue.value;
+    console.log(searchInputId);
+    searchProgramsId(searchInputId);
+}else{
+    console.log("----Programa id vacio no existe----");
+}
+
 async function searchProgramsId(searchInputId) {
 
     try {
@@ -122,6 +167,32 @@ async function searchProgramsId(searchInputId) {
 
         if(searchInputId.trim().length != 0){
             document.getElementById('programSearch').value = searchResults[0].name;
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const searchInputCourseIdValue = document.getElementById('selectedCourseId');
+let searchInputCourseId;
+if(searchInputCourseIdValue !== null){
+    searchInputCourseId = searchInputCourseIdValue.value;//'530f9fe2-aa5b-4f60-9e5f-63eba5ef8b6c';
+}else{
+    console.log("----Curso id vacio no existe----");
+}
+console.log(searchInputCourseId);
+searchCoursesId(searchInputCourseId);
+async function searchCoursesId(searchInputCourseId) {
+
+    try {
+        const response = await fetch(`http://localhost/system/public/api/search-courses-id?search=${searchInputCourseId}`);
+        const searchResults = await response.json();
+        console.log("Resultado");
+        console.log(searchResults[0].name);
+
+        if(searchInputCourseId.trim().length != 0){
+            document.getElementById('courseSearch').value = searchResults[0].name;
         }
 
     } catch (error) {

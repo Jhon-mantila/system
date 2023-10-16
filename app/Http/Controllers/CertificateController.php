@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use App\Models\Company;
+use App\Models\Course;
 use App\Models\Employees;
 use App\Models\Programs;
 use App\Models\Students;
@@ -167,6 +168,8 @@ class CertificateController extends Controller
         //dd(response()->json($programs));
         return response()->json($programs);
     }
+
+    
 
     public function searchStudents(Request $request)
     {

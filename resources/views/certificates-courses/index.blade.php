@@ -21,7 +21,7 @@
                         </form>
                     </div>
                 <div>
-                    <a href="{{ route('certificates.create') }}" class="text-ms bg-gray-800 text-white  px-4 py-2">Crear</a>
+                    <a href="{{ route('certificates-courses.create') }}" class="text-ms bg-gray-800 text-white  px-4 py-2">Crear</a>
                 </div>
             </div>
             
@@ -56,7 +56,7 @@
                             </td>
 
                             <td class="px-6 py-4">
-                                <a href="{{ route('certificates.edit', $certificate) }}" class="text-indigo-600">Editar</a> 
+                                <a href="{{ route('certificates-courses.edit', $certificate) }}" class="text-indigo-600">Editar</a> 
                             </td>
 
                             <td class="px-6 py-4">
