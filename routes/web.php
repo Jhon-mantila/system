@@ -3,6 +3,7 @@
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificatesCoursesController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ConstancyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeesController;
@@ -49,4 +50,7 @@ Route::resource('certificates-courses', CertificatesCoursesController::class)->m
 Route::resource('courses', CourseController::class)->middleware(['auth', 'verified']);
 Route::get('/pdf/{certificate}', [PdfController::class, 'generarPDF'])->middleware(['auth', 'verified'])->name('pdf.generate');
 Route::get('/pdf-courses/{certificate}', [PdfController::class, 'generarPDFcourses'])->middleware(['auth', 'verified'])->name('pdf.generatecourse');
+
+Route::get('/pdf-constancia/{certificate}', [ConstancyController::class, 'generarConstanciaPDF'])->name('pdf.constancy');
+Route::get('/pdf-constancia-curso/{certificate}', [ConstancyController::class, 'generarConstanciaCoursesPDF'])->name('pdf.constancycurso');
 require __DIR__.'/auth.php';
