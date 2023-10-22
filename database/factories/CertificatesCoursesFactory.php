@@ -41,6 +41,7 @@ class CertificatesCoursesFactory extends Factory
             'company_id' =>  $this->faker->randomElement($company_id),
             'accredited' =>  $this->faker->numberBetween(0, 1),
             'notified' =>  $this->faker->numberBetween(0, 1),
+            'module' => "curso",
             'user_id' => 1,
         ];
     }

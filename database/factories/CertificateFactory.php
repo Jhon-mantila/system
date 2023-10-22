@@ -40,6 +40,7 @@ class CertificateFactory extends Factory
             'company_id' =>  $this->faker->randomElement($company_id),
             'accredited' =>  $this->faker->numberBetween(0, 1),
             'notified' =>  $this->faker->numberBetween(0, 1),
+            'module' => "programa",
             'user_id' => 1,
         ];
     }

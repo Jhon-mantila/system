@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             $table->integer('accredited')->nullable();
             $table->integer('notified')->nullable();
+            $table->string('module');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

@@ -21,6 +21,7 @@ class Certificate extends Model
         'company_id',
         'accredited',
         'notified',
+        'module',
         'user_id',
     ];
 
