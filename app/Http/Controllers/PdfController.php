@@ -204,8 +204,8 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);
         $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
         // Logo
-        //$image_file = public_path('storage/' . $certificates->employee->signature);
-        $pdf->Image($image_file_logo, $mitadAnchoPagina-5, 170, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+        $image_file = public_path('storage/' . $certificates->employee->signature);
+        $pdf->Image($image_file, $mitadAnchoPagina-5, 170, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
         
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
@@ -223,7 +223,7 @@ class PdfController extends Controller
             'module_height' => 1 // height of a single module in points
         );
         // QRCODE,L : QR-CODE Low error correction
-        $pdf->write2DBarcode('www.tcpdf.org', 'QRCODE,L', 235, 160, 40, 40, $style, 'N');
+        $pdf->write2DBarcode($_SERVER['DOCUMENT_ROOT']."system/public/?search=$document", 'QRCODE,L', 235, 160, 40, 40, $style, 'N');
         
         // ---------------------------------------------------------
         $salida = $certificates->student->first_name . '_' . $certificates->student->second_name . '_' . $certificates->student->last_name . '_' . $certificates->student->second_last_name;

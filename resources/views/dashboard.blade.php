@@ -20,8 +20,8 @@
                             <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{ $data['certificate'] }}</dd>
                         </div>
                         <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                            <dt class="text-base leading-7 text-gray-600">New users annually</dt>
-                            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">46,000</dd>
+                            <dt class="text-base leading-7 text-gray-600">Cantidad Certificados Cursos</dt>
+                            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{ $data['certificate_course'] }}</dd>
                         </div>
                         </dl>
                     </div>
