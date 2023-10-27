@@ -33,10 +33,12 @@ class CertificatesCoursesController extends Controller
                           ->orWhere('second_last_name', 'LIKE', "%{$search}%");
                 })       
                 ->latest()->paginate();
-
+        
+        $typeCertificate = $this->dropdownService->getTypeCertificate();
         //dd($certificates);
         return view('certificates-courses.index',[
-            'certificates' => $certificates
+            'certificates' => $certificates,
+            'typeCertificate' => $typeCertificate
         ]);
     }
 
@@ -97,6 +99,7 @@ class CertificatesCoursesController extends Controller
              'date_end' => $request->date_end,
              'type_certificate' => $request->type_certificate,
              'company_id' => $company[0]['id'],
+             'module' => 'curso',
              'accredited' => $request->accredited,
              'notified' => $request->notified,
          ]);

@@ -53,7 +53,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                                 </svg>
                             </span>
-                                <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-md" placeholder="Search for anything..." type="text" name="search"value="{{ request('search') }}" style="width: 397px;" />
+                                <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-md" placeholder="Buscar por documento..." type="text" name="search"value="{{ request('search') }}" style="width: 397px;" />
                             </label>
                         </form>
                     </div>
@@ -119,16 +119,18 @@
                                 <a href="{{ route('pdf.constancy', $datos->id_certificado) }}" class="text-indigo-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                    </svg>
+                                    </svg> {{$datos->module}}
                                 </a> 
+                                
                                 </p>
                                 @else
                                 <p class="mt-4 text-gray-500 dark:text-gray-400 text-md leading-relaxed">
                                 <a href="{{ route('pdf.constancycurso', $datos->id_certificado) }}" class="text-indigo-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                    </svg>
+                                    </svg> {{$datos->module}}
                                 </a> 
+                                
                                 </p>
                                 @endif
                                 </div>

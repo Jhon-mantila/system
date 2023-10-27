@@ -35,7 +35,7 @@
         <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Ciudad</label>
             <span class="text-xs text-red-600">@error('city') {{ $message }}  @enderror</span>
-            <input type="text" name="type_document" class="rounded border-gray-200 w-full mb-4" 
+            <input type="text" name="city" class="rounded border-gray-200 w-full mb-4" 
             value="{{ old('city', $company->city) }}">
         </div>
         <div class="">

@@ -27,6 +27,7 @@ class StudentsController extends Controller
         ->orWhere('second_name', 'LIKE', "%{$search}%")
         ->orWhere('last_name', 'LIKE', "%{$search}%")
         ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+        ->orWhere('document', 'LIKE', "%{$search}%")
         ->latest()->paginate();
 
         return view('students.index',[
@@ -71,7 +72,7 @@ class StudentsController extends Controller
         ],[
             'first_name.required' => 'El primer nombre es requerido',
             'document.required'  => 'El documento es obligatorio',
-            'document.unique'    => 'El documento debe ser único',
+            'document.unique'    => 'El documento ya existe',
             'last_name.required'  => 'El primer apellido es requerido',
             'mobile.required'  => 'El celular es requerido',
             'email.required'  => 'El correo electronico es requerido',
