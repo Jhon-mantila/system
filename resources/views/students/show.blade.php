@@ -57,8 +57,8 @@
                         </div>
 
                         <div class="py-2">
-                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Activado</label>
-                            <p class="p-2">{{ $activeOptions[$estudiante->active] }}</p>
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Género</label>
+                            <p class="p-2">{{ $genderOptions[$estudiante->gender] }}</p>
                         </div> 
                     </div>    
 
@@ -79,6 +79,10 @@
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">usuario</label>
                             <p class="p-2">{{ $estudiante->user->name }}</p>
+                        </div> 
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Activado</label>
+                            <p class="p-2">{{ $activeOptions[$estudiante->active] }}</p>
                         </div> 
                     </div>
 

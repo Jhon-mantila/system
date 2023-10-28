@@ -28,6 +28,7 @@ class StudentsFactory extends Factory
             'second_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'second_last_name' => $this->faker->lastName(),
+            'gender' => $this->faker->randomElement(['male', 'female']),
             'mobile' => $this->faker->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
             'city' => $this->faker->city(),

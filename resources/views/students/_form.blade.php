@@ -69,10 +69,17 @@
 </div>
 <div class="grid grid-cols-2 gap-4">
     <div class="">
-            <label for="" class="uppercase text-gray-700 text-xs">Email</label>
-            <span class="text-xs text-red-600">@error('email') {{ $message }}  @enderror</span>
-            <input type="email" name="email" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('email', $student->email) }}">
+        <label for="" class="uppercase text-gray-700 text-xs">Género</label>
+        <span class="text-xs text-red-600">@error('gender') {{ $message }}  @enderror</span>
+        <select name="gender" id="" class="rounded border-gray-200 w-full mb-4">
+                        @foreach ($genderOptions as $key => $value)
+                            <option value="{{ $key }}"
+                            @if (old('gender', $student->gender) === $key)
+                                selected
+                            @endif
+                            >{{ $value }}</option>
+                        @endforeach
+        </select> 
     </div>
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Activo</label>
@@ -89,6 +96,14 @@
     </div>
 </div>
 
+<div class="grid grid-cols-2 gap-4">
+    <div class="">
+            <label for="" class="uppercase text-gray-700 text-xs">Email</label>
+            <span class="text-xs text-red-600">@error('email') {{ $message }}  @enderror</span>
+            <input type="email" name="email" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('email', $student->email) }}">
+    </div>
+</div>
 
 
 

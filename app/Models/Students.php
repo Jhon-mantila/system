@@ -19,6 +19,7 @@ class Students extends Model
         'second_name',
         'last_name',
         'second_last_name',
+        'gender',
         'mobile',
         'email',
         'city',

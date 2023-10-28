@@ -39,6 +39,14 @@ class DropdownService
         ];
     }
 
+    public function getGender()
+    {
+        return [
+            'male' => 'Hombre.',
+            'female' => 'Mujer.',
+        ];
+    }
+
 
     // Agrega más métodos para otras listas desplegables
 }
