@@ -72,7 +72,7 @@
                     @endforeach
                 </table>
                
-                {{ $courses->links() }}
+                {{ $courses->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>
