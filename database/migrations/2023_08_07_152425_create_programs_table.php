@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('code')->unique();
+            $table->string('code_ocupation')->unique();
             $table->string('name');
             $table->integer('credits')->nullable();
             $table->integer('hours')->nullable();;

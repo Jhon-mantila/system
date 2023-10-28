@@ -37,7 +37,8 @@
                 <table class="mb-4">
                     <tr class="border-b border-gray-200 text-sm">
                         <td class="px-6 py-4">Nombre del Curso</td>
-                        <td class="px-6 py-4">Código del Curso</td>
+                        <td class="px-6 py-4">Código norma</td>
+                        <td class="px-6 py-4">Código ocupación</td>
                         <td class="px-6 py-4">Última Actualización</td>
                         <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
@@ -47,6 +48,7 @@
                         <tr class="border-b border-gray-200 text-sm">
                             <td class="px-6 py-4"><a class="text-blue-600" href="{{ route('courses.show', $course) }}">{{ $course->name }}</a></td>
                             <td class="px-6 py-4">{{ $course->code }}</td>
+                            <td class="px-6 py-4">{{ $course->code_ocupation }}</td>
                             <td class="px-6 py-4">{{ $course->updated_at }}</td>
                             <td class="px-6 py-4">{{ $course->created_at }}</td>
         

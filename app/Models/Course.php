@@ -13,7 +13,7 @@ class Course extends Model
     use HasUuids; // para visualizar bien los id creados con uuid
 
     protected $fillable = [
-        'id','name','code','credits','hours','active'
+        'id','name','code','code_ocupation','credits','hours','active'
     ];
     public function certificateCourse(){
         return $this->hasMany(CertificatesCourses::class);

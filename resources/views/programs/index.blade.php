@@ -37,7 +37,8 @@
                 <table class="mb-4">
                     <tr class="border-b border-gray-200 text-sm">
                         <td class="px-6 py-4">Nombre Programa</td>
-                        <td class="px-6 py-4">Código Programa</td>
+                        <td class="px-6 py-4">Código Norma</td>
+                        <td class="px-6 py-4">Código Ocupación</td>
                         <td class="px-6 py-4">Última Actualización</td>
                         <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
@@ -47,6 +48,7 @@
                         <tr class="border-b border-gray-200 text-sm">
                             <td class="px-6 py-4"><a class="text-blue-600" href="{{ route('programs.show', $program) }}">{{ $program->name }}</a></td>
                             <td class="px-6 py-4">{{ $program->code }}</td>
+                            <td class="px-6 py-4">{{ $program->code_ocupation }}</td>
                             <td class="px-6 py-4">{{ $program->updated_at }}</td>
                             <td class="px-6 py-4">{{ $program->created_at }}</td>
         

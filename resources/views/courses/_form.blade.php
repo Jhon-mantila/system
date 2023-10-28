@@ -1,20 +1,26 @@
 @csrf
 
-<div class="grid grid-cols-1 gap-4">
+<div class="grid grid-cols-2 gap-4">
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Nombre</label>
         <span class="text-xs text-red-600">@error('name') {{ $message }}  @enderror</span>
         <input type="text" name="name" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('name', $course->name) }}">
     </div>
+    <div class="">
+        <label for="" class="uppercase text-gray-700 text-xs">Código Norma</label>
+        <span class="text-xs text-red-600">@error('code') {{ $message }}  @enderror</span>
+        <input type="text" name="code" class="rounded border-gray-200 w-full mb-4" 
+        value="{{ old('code', $course->code) }}">
+    </div>
 </div>
 
 <div class="grid grid-cols-2 gap-4">
     <div class="">
-        <label for="" class="uppercase text-gray-700 text-xs">Código</label>
-        <span class="text-xs text-red-600">@error('code') {{ $message }}  @enderror</span>
-        <input type="text" name="code" class="rounded border-gray-200 w-full mb-4" 
-        value="{{ old('code', $course->code) }}">
+        <label for="" class="uppercase text-gray-700 text-xs">Código Ocupación</label>
+        <span class="text-xs text-red-600">@error('code_ocupation') {{ $message }}  @enderror</span>
+        <input type="text" name="code_ocupation" class="rounded border-gray-200 w-full mb-4" 
+        value="{{ old('code_ocupation', $course->code_ocupation) }}">
     </div>
     <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Creditos</label>
