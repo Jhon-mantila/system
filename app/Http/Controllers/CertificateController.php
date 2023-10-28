@@ -36,16 +36,19 @@ class CertificateController extends Controller
                 })       
                 ->latest()->paginate();
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+       
         //dd($certificates);
         return view('certificates.index',[
             'certificates' => $certificates,
-            'typeCertificate' => $typeCertificate
+            'typeCertificate' => $typeCertificate,
+
         ]);
     }
 
     public function show(Certificate $certificate){
         
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
 
         $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
         ->get()
@@ -54,16 +57,18 @@ class CertificateController extends Controller
         return view('certificates.show', [
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions
         ]);
     }
 
     public function create(Certificate $certificate){
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
-
+        $accreditedOptions = $this->dropdownService->getAccredited();
         return view('certificates.create',[
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions
         ]);
     }
 
@@ -111,10 +116,12 @@ class CertificateController extends Controller
     public function edit(Certificate $certificate){
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
 
         return view('certificates.edit', [
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions
         ]);
     }
 

@@ -65,8 +65,15 @@
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Acreditado</label>
         <span class="text-xs text-red-600">@error('accredited') {{ $message }}  @enderror</span>
-        <input type="text" name="accredited" class="rounded border-gray-200 w-full mb-4" 
-        value="{{ old('accredited', $certificate->accredited) }}">
+        <select name="accredited" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($accreditedOptions as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('accredited', $certificate->accredited) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+        </select>
     </div>
     <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Notificado</label>

@@ -47,6 +47,14 @@ class DropdownService
         ];
     }
 
+    public function getAccredited()
+    {
+        return [
+            0 => 'No.',
+            1 => 'Si.',
+        ];
+    }
+
 
     // Agrega más métodos para otras listas desplegables
 }

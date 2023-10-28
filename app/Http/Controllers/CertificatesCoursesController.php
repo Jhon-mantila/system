@@ -45,6 +45,7 @@ class CertificatesCoursesController extends Controller
     public function show(CertificatesCourses $certificates_course){
         
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
 
         $certificate = CertificatesCourses::with(['user', 'course', 'student', 'employee', 'company'])
         ->get()
@@ -53,16 +54,19 @@ class CertificatesCoursesController extends Controller
         return view('certificates-courses.show', [
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions,
         ]);
     }
 
     public function create(CertificatesCourses $certificate){
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
 
         return view('certificates-courses.create',[
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions,
         ]);
     }
 
@@ -110,10 +114,12 @@ class CertificatesCoursesController extends Controller
     public function edit(CertificatesCourses $certificates_course){
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
 
         return view('certificates-courses.edit', [
             'certificate' => $certificates_course,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions,
         ]);
     }
 
