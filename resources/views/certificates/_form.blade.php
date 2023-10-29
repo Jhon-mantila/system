@@ -34,7 +34,7 @@
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Tipo Certificado</label>
         <span class="text-xs text-red-600">@error('type_certificate') {{ $message }}  @enderror</span>
-        <select name="type_certificate" id="" class="rounded border-gray-200 w-full mb-4">
+        <select name="type_certificate" id="type_certificate" class="rounded border-gray-200 w-full mb-4">
                     @foreach ($typeCertificate as $key => $value)
                         <option value="{{ $key }}"
                         @if (old('type_certificate', $certificate->type_certificate) === $key)
@@ -47,13 +47,13 @@
 </div>
 
 <div class="grid grid-cols-2 gap-4">
-    <div class="">
+    <div class="" id="bloque1">
             <label for="" class="uppercase text-gray-700 text-xs">Referencias</label>
             <span class="text-xs text-red-600">@error('references') {{ $message }}  @enderror</span>
             <input type="text" name="references" class="rounded border-gray-200 w-full mb-4" 
             value="{{ old('references', $certificate->references) }}">
     </div>
-    <div class="">
+    <div class="" id="bloque2">
             <label for="" class="uppercase text-gray-700 text-xs">Proceso</label>
             <span class="text-xs text-red-600">@error('process') {{ $message }}  @enderror</span>
             <input type="text" name="process" class="rounded border-gray-200 w-full mb-4" 
@@ -62,13 +62,13 @@
 </div>
 
 <div class="grid grid-cols-2 gap-4">    
-        <div class="">
+        <div class="" id="bloque3">
             <label for="" class="uppercase text-gray-700 text-xs">Fecha Inicial</label>
             <span class="text-xs text-red-600">@error('date_start') {{ $message }}  @enderror</span>
             <input type="date" name="date_start" class="rounded border-gray-200 w-full mb-4" 
             value="{{ old('date_start', $certificate->date_start) }}">
         </div>
-        <div class="">
+        <div class="" id="bloque4">
             <label for="" class="uppercase text-gray-700 text-xs"></label>Fecha Final</label>
             <span class="text-xs text-red-600">@error('date_end') {{ $message }}  @enderror</span>
             <input type="date" name="date_end" class="rounded border-gray-200 w-full mb-4" 
@@ -76,7 +76,7 @@
         </div>
 </div>
 <div class="grid grid-cols-2 gap-4"> 
-    <div class="">
+    <div class="" id="bloque5">
         <label for="" class="uppercase text-gray-700 text-xs">Tipo Código</label>
         <span class="text-xs text-red-600">@error('type_code') {{ $message }}  @enderror</span>
         <select name="type_code" id="" class="rounded border-gray-200 w-full mb-4">
@@ -89,7 +89,7 @@
                     @endforeach
         </select>
     </div>   
-    <div class="">
+    <div class="" id="bloque6">
             <label for="" class="uppercase text-gray-700 text-xs">Título</label>
             <span class="text-xs text-red-600">@error('title') {{ $message }}  @enderror</span>
             <input type="text" name="title" class="rounded border-gray-200 w-full mb-4" 
@@ -98,7 +98,7 @@
 
 </div>
 <div class="grid grid-cols-2 gap-4">
-    <div class="">
+    <div class="" id="bloque7">
         <label for="" class="uppercase text-gray-700 text-xs">Acreditado</label>
         <span class="text-xs text-red-600">@error('accredited') {{ $message }}  @enderror</span>
         <select name="accredited" id="" class="rounded border-gray-200 w-full mb-4">
@@ -110,14 +110,23 @@
                         >{{ $value }}</option>
                     @endforeach
         </select>
-    </div>
-    <div class="">
+    </div>  
+    <div class="" id="bloque8">
             <label for="" class="uppercase text-gray-700 text-xs">Notificado</label>
             <span class="text-xs text-red-600">@error('notified') {{ $message }}  @enderror</span>
             <input type="text" name="notified" class="rounded border-gray-200 w-full mb-4" 
             value="{{ old('notified', $certificate->notified) }}">
     </div>
 </div>
+
+<div class="grid grid-cols-2 gap-4">
+        <div class="" id="bloque9">
+            <label for="" class="uppercase text-gray-700 text-xs">Fecha Constancia</label>
+            <span class="text-xs text-red-600">@error('date_certificate') {{ $message }}  @enderror</span>
+            <input type="date" name="date_certificate" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('date_certificate', $certificate->date_certificate) }}">
+        </div>
+</div>  
 
 <div class="flex justify-between items-center">
     <a href="{{ route('certificates.index') }}" class="text-indigo-600">Volver</a>

@@ -17,6 +17,7 @@ class CertificatesCourses extends Model
         'employee_id',
         'date_start',
         'date_end',
+        'date_certificate',
         'type_certificate',
         'company_id',
         'title',

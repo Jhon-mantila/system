@@ -21,11 +21,12 @@ return new class extends Migration
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
+            $table->date('date_certificate')->nullable();
             $table->string('type_certificate')->nullable();
             $table->uuid('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('title')->nullable();
-            $table->string('type_code');
+            $table->string('type_code')->nullable();
             $table->string('references')->nullable();
             $table->string('process')->nullable();
             $table->integer('accredited')->nullable();

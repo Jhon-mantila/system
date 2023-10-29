@@ -82,12 +82,21 @@ class CertificateController extends Controller
 
     public function store(Request $request){
         
-       $request->validate([
+        if($request->type_certificate == 'c'){
+            $required = 'required';
+            $required_certificate = '';
+        }else if($request->type_certificate == 'cm'){
+            $required_certificate = 'required';
+            $required = '';
+        }
+       
+        $request->validate([
             'program_id' => 'required',
             'student_id' => 'required',
             'employee_id' => 'required',
-            'date_start' => 'required',
-            'date_end' => 'required',
+            'date_start' => $required,
+            'date_end' => $required,
+            'date_certificate' => $required_certificate,
             'type_certificate' => 'required'
 
         ],[
@@ -96,6 +105,7 @@ class CertificateController extends Controller
             'employee_id.required' => 'El empleado es requerido',
             'date_start.required' => 'La fecha inicial es requerida',
             'date_end.required' => 'La fecha final es requerida',
+            'date_certificate.required' => 'La fecha del certificado es requerida',
             'type_certificate.required' => 'Es requerido',
 
         ]);
@@ -111,6 +121,7 @@ class CertificateController extends Controller
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
+            'date_certificate' => $request->date_certificate,
             'type_certificate' => $request->type_certificate,
             'company_id' => $company[0]['id'],
             'module' => 'programa',
@@ -140,13 +151,20 @@ class CertificateController extends Controller
     }
 
     public function update(Request $request, Certificate $certificate){
-
+            if($request->type_certificate == 'c'){
+                $required = 'required';
+                $required_certificate = '';
+            }else if($request->type_certificate == 'cm'){
+                $required_certificate = 'required';
+                $required = '';
+            }
         $request->validate([
             'program_id' => 'required',
             'student_id' => 'required',
             'employee_id' => 'required',
-            'date_start' => 'required',
-            'date_end' => 'required',
+            'date_start' => $required,
+            'date_end' => $required,
+            'date_certificate' => $required_certificate,
 
         ],[
             'program_id.required' => 'El programa es requerido',
@@ -154,6 +172,7 @@ class CertificateController extends Controller
             'employee_id.required' => 'El empleado es requerido',
             'date_start.required' => 'La fecha inicial es requerida',
             'date_end.required' => 'La fecha final es requerida',
+            'date_certificate.required' => 'La fecha del certificado es requerida',
 
         ]);
         //dd($request->type_certificate);
@@ -163,6 +182,7 @@ class CertificateController extends Controller
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
+            'date_certificate' => $request->date_certificate,
             'type_certificate' => $request->type_certificate,
             'title' => $request->title,
             'type_code' => $request->type_code,

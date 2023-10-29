@@ -37,8 +37,19 @@
                             <p class="p-2">{{ $certificado->employee->first_name }} {{ $certificado->employee->second_name }} {{ $certificado->employee->last_name }} {{ $certificado->employee->second_last_name }}</p>
                         </div>
                     </div>
-
-                    <div class="grid grid-cols-2 gap-4">
+                    @if($certificado->type_certificate == 'c')
+                        @php
+                        $hidden_c = "hidden";
+                        $hidden_cm = "";
+                        @endphp
+                     @endif    
+                    @if($certificado->type_certificate == 'cm')
+                        @php
+                            $hidden_cm = "hidden";
+                            $hidden_c = "";
+                        @endphp
+                    @endif
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Fecha Inicial</label>
                             <p class="p-2">{{ $certificado->date_start }}</p>
@@ -49,7 +60,7 @@
                             <p class="p-2">{{ $certificado->date_end }}</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Título</label>
                             <p class="p-2">{{ $certificado->title }}</p>
@@ -61,7 +72,7 @@
                         </div> 
                     </div> 
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Referencias</label>
                             <p class="p-2">{{ $certificado->references }}</p>
@@ -72,7 +83,7 @@
                         </div> 
                     </div>  
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Acreditado</label>
                             <p class="p-2">{{ $accreditedOptions[$certificado->accredited] }}</p>
@@ -82,7 +93,14 @@
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Notificado</label>
                             <p class="p-2">{{ $certificado->notified }}</p>
                         </div> 
-                    </div>    
+                    </div> 
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_c}}">
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Fecha de Constancia</label>
+                            <p class="p-2">{{$certificado->date_certificate }}</p>
+                        </div> 
+
+                    </div>   
                     <div class="grid grid-cols-2 gap-4">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Tipo Certificado</label>
