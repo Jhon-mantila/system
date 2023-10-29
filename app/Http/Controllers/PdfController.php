@@ -56,13 +56,55 @@ class PdfController extends Controller
         }
     
     }
-
     public function generarPDFcourses(CertificatesCourses $certificate){
         
         //dd($certificate);
         $certificate = CertificatesCourses::with(['user', 'course', 'student', 'employee', 'company'])
         ->get()
         ->where('id', '=', $certificate->id);
+
+        //dd($certificate);
+        foreach ($certificate as $certificates) {
+            //echo $certificates->company->name . ' ' . $certificates->company->nit . ' ' . $certificates->company->web . ' ' . $certificates->company->direction . ' ' . $certificates->type_certificate . ' ' . $certificates->user->name;
+            
+            if($certificates->type_certificate == 'cm'){
+                $this->certificateConstancia($certificates, "curso");
+            }else{
+                $this->certificateDiploma($certificates, "curso");
+            }
+            //
+            
+        }
+    
+    }
+
+    public function generarConstanciaPDF(Request $certificate){
+        $search =  $certificate->certificate;
+        //dd($search);
+        $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
+        ->get()
+        ->where('id', '=', $search);
+
+        //dd($certificate);
+        foreach ($certificate as $certificates) {
+            //echo $certificates->company->name . ' ' . $certificates->company->nit . ' ' . $certificates->company->web . ' ' . $certificates->company->direction . ' ' . $certificates->type_certificate . ' ' . $certificates->user->name;
+            
+            if($certificates->type_certificate == 'cm'){
+                $this->certificateConstancia($certificates, "programa");
+            }else{
+                $this->certificateDiploma($certificates, "programa");
+            }
+            //
+            
+        }
+    
+    }
+    public function generarConstanciaCoursesPDF(Request $certificate){
+        $search =  $certificate->certificate;
+        //dd($certificate);
+        $certificate = CertificatesCourses::with(['user', 'course', 'student', 'employee', 'company'])
+        ->get()
+        ->where('id', '=', $search);
 
         //dd($certificate);
         foreach ($certificate as $certificates) {
@@ -143,12 +185,14 @@ class PdfController extends Controller
         $pdf->ln(2);
         $pdf->SetFont('helvetica', 'B', 16);
         $pdf->Cell(0, 0, "EL INSTITUTO TÉCNICO DE FORMACIÓN PARA EL TRABAJO NIT: {$certificates->company->nit}", 0, 1, 'C', 0, '', 3);
-        $pdf->ln(4);
+        $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
         $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
-        $pdf->Cell(0, 0, 'la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: ASTM, AWS, API', 0, 1, 'C', 0, '', 3);
-        $pdf->Cell(0, 0, "{$certificates->company->name} forma, evalúa y certifica el talento humano.", 0, 1, 'C', 0, '', 3);
-        $pdf->ln(5);
+        $textmulticellref = "la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: {$certificates->references}. {$certificates->company->name} forma, evalúa y certifica el talento humano.";
+        $pdf->MultiCell(250, 0, ''.$textmulticellref, 0, 'C', 0, 0, 25, '', true);
+        //$pdf->Cell(0, 0, 'la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: ASTM, AWS, API', 0, 1, 'C', 0, '', 3);
+        //$pdf->Cell(0, 0, "{$certificates->company->name} forma, evalúa y certifica el talento humano.", 0, 1, 'C', 0, '', 3);
+        $pdf->ln(10);
         $pdf->SetFont('helvetica', 'B', 12);
         $pdf->Cell(0, 0, 'HACE CONSTAR QUE', 0, 1, 'C', 0, '', 3);
         $pdf->ln(5);
@@ -159,11 +203,13 @@ class PdfController extends Controller
         $document = $certificates->student->document;
         $city = $certificates->student->city;
         $pdf->Cell(0, 0, "CC {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
-        $pdf->ln(5);
+        $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
-        $pdf->Cell(0, 0, 'Asistió y supero el proceso de: Evaluación, calificación, certificación con nivel avanzado en la norma:', 0, 1, 'C', 0, '', 3);
+        $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}, certificación con nivel avanzado en la norma:";
+        //$pdf->Cell(0, 0, "Asistió y supero el proceso de: {$certificates->process}, certificación con nivel avanzado en la norma:", 0, 1, 'C', 0, '', 3);
+        $pdf->MultiCell(250, 0, ''.$textmulticellproceso, 0, 'C', 0, 0, 25, '', true);
         $pdf->SetFont('helvetica', 'B', 16);
-        $pdf->ln(5);
+        $pdf->ln(7);
 
             if($module == "programa"){
                 $relation = "program";
@@ -175,14 +221,21 @@ class PdfController extends Controller
         //$txt = 'ARMAR ANDAMIOS SEGÚN ESPECIFICACIONES TÉCNICAS Y NORMATIVA DE TRABAJO EN ALTURAS (ANDAMIERO)';
         $pdf->MultiCell(250, 0, ''.$program, 0, 'C', 0, 0, 25, '', true);
         $pdf->ln(15);
-        $norma = $certificates->{$relation}->code;
-        $pdf->Cell(0, 0, "CÓDIGO DE LA NORMA SENA {$norma}", 0, 1, 'C', 0, '', 3);
+        
+        if($certificates->type_code == "norma"){
+            $code = "NORMA SENA ". $certificates->{$relation}->code;
+        }else{
+            $code = "OCUPACIÓN ". $certificates->{$relation}->code_ocupation;
+        }
+        
+        $pdf->Cell(0, 0, "CÓDIGO DE LA {$code}", 0, 1, 'C', 0, '', 3);
 
         $pdf->ln(4);
         $pdf->SetFont('helvetica', 'N', 9);
         $pdf->Cell(0, 0, 'Cumpliendo con los requisitos exigidos por el INSTITUTO CONSOLMECI, en las pruebas de Conocimiento, Desempeño y Producto, este certificado es', 0, 1, 'C', 0, '', 3);
         $horas = $certificates->{$relation}->hours;
-        $pdf->Cell(0, 0, "equivalente a {$horas} horas de formación para acceder al título de $program.", 0, 1, 'C', 0, '', 3);
+        $title = $certificates->title;
+        //$pdf->Cell(0, 0, "equivalente a {$horas} horas de formación para acceder al título de $program.", 0, 1, 'C', 0, '', 3);
         //----- Fecha Inicial-----------
         $dia = date('d', strtotime($certificates->date_start));
         setlocale(LC_TIME, 'es_ES.UTF-8');
@@ -195,11 +248,13 @@ class PdfController extends Controller
         $mes_final = date('M', strtotime($certificates->date_end));
         $mes_espanol_final = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_final);
         $year_final = date('Y', strtotime($certificates->date_end));
-        $pdf->Cell(0, 0, "FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.", 0, 1, 'C', 0, '', 3);
+        //$pdf->Cell(0, 0, "FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.", 0, 1, 'C', 0, '', 3);
         
-        
+        $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}."; 
+        $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
+
         $pdf->SetFont('helvetica', 'B', 12);
-        $pdf->ln(15);
+        $pdf->ln(22);
         $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
         $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);
         $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
@@ -302,6 +357,7 @@ class PdfController extends Controller
                     $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
                     $document = $certificates->student->document;
                     $city = $certificates->student->city;
+                    $gender = $certificates->student->gender;
                     
                     $dia = date('d', strtotime($certificates->date_start));
                     setlocale(LC_TIME, 'es_ES.UTF-8');
@@ -314,9 +370,17 @@ class PdfController extends Controller
                         }else{
                             $program = $certificates->course->name;
                         }
+
+                        if($gender == "male"){
+                            $l = "el";
+                            $a = "o";
+                        }else{
+                            $l = "la";
+                            $a = "a";
+                        }
                     // set some text to print
                     $txt = <<<EOD
-                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que el estudiante, $name_student CC $document de $city, se encuentra actualmente matriculado en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
         

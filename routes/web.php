@@ -51,6 +51,6 @@ Route::resource('courses', CourseController::class)->middleware(['auth', 'verifi
 Route::get('/pdf/{certificate}', [PdfController::class, 'generarPDF'])->middleware(['auth', 'verified'])->name('pdf.generate');
 Route::get('/pdf-courses/{certificate}', [PdfController::class, 'generarPDFcourses'])->middleware(['auth', 'verified'])->name('pdf.generatecourse');
 
-Route::get('/pdf-constancia/{certificate}', [ConstancyController::class, 'generarConstanciaPDF'])->name('pdf.constancy');
-Route::get('/pdf-constancia-curso/{certificate}', [ConstancyController::class, 'generarConstanciaCoursesPDF'])->name('pdf.constancycurso');
+Route::get('/pdf-constancia/{certificate}', [PdfController::class, 'generarConstanciaPDF'])->name('pdf.constancy');
+Route::get('/pdf-constancia-curso/{certificate}', [PdfController::class, 'generarConstanciaCoursesPDF'])->name('pdf.constancycurso');
 require __DIR__.'/auth.php';
