@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('type_certificate')->nullable();
             $table->uuid('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->string('title')->nullable();
+            $table->string('type_code');
+            $table->string('references')->nullable();
+            $table->string('process')->nullable();
             $table->integer('accredited')->nullable();
             $table->integer('notified')->nullable();
             $table->string('module');

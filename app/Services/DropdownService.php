@@ -55,6 +55,14 @@ class DropdownService
         ];
     }
 
+    public function getCode()
+    {
+        return [
+            'norma' => 'Norma',
+            'ocupacion' => 'Ocupación',
+        ];
+    }
+
 
     // Agrega más métodos para otras listas desplegables
 }

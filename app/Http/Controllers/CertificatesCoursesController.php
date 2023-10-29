@@ -46,6 +46,7 @@ class CertificatesCoursesController extends Controller
         
         $typeCertificate = $this->dropdownService->getTypeCertificate();
         $accreditedOptions = $this->dropdownService->getAccredited();
+        $typeCode = $this->dropdownService->getCode();
 
         $certificate = CertificatesCourses::with(['user', 'course', 'student', 'employee', 'company'])
         ->get()
@@ -55,6 +56,7 @@ class CertificatesCoursesController extends Controller
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
             'accreditedOptions' => $accreditedOptions,
+            'typeCode' => $typeCode,
         ]);
     }
 
@@ -62,11 +64,13 @@ class CertificatesCoursesController extends Controller
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
         $accreditedOptions = $this->dropdownService->getAccredited();
+        $typeCode = $this->dropdownService->getCode();
 
         return view('certificates-courses.create',[
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
             'accreditedOptions' => $accreditedOptions,
+            'typeCode' => $typeCode,
         ]);
     }
 
@@ -104,6 +108,10 @@ class CertificatesCoursesController extends Controller
              'type_certificate' => $request->type_certificate,
              'company_id' => $company[0]['id'],
              'module' => 'curso',
+             'title' => $request->title,
+             'type_code' => $request->type_code,
+             'references' => $request->references,
+             'process' => $request->process,
              'accredited' => $request->accredited,
              'notified' => $request->notified,
          ]);
@@ -115,11 +123,13 @@ class CertificatesCoursesController extends Controller
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
         $accreditedOptions = $this->dropdownService->getAccredited();
+        $typeCode = $this->dropdownService->getCode();
 
         return view('certificates-courses.edit', [
             'certificate' => $certificates_course,
             'typeCertificate' => $typeCertificate,
             'accreditedOptions' => $accreditedOptions,
+            'typeCode' => $typeCode,
         ]);
     }
 
@@ -148,6 +158,10 @@ class CertificatesCoursesController extends Controller
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
             'type_certificate' => $request->type_certificate,
+            'title' => $request->title,
+            'type_code' => $request->type_code,
+            'references' => $request->references,
+            'process' => $request->process,
             'accredited' => $request->accredited,
             'notified' => $request->notified,
             'updated_at' => date("Y-m-d H:i:s"),

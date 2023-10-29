@@ -46,6 +46,21 @@
     </div>
 </div>
 
+<div class="grid grid-cols-2 gap-4">
+    <div class="">
+            <label for="" class="uppercase text-gray-700 text-xs">Referencias</label>
+            <span class="text-xs text-red-600">@error('references') {{ $message }}  @enderror</span>
+            <input type="text" name="references" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('references', $certificate->references) }}">
+    </div>
+    <div class="">
+            <label for="" class="uppercase text-gray-700 text-xs">Proceso</label>
+            <span class="text-xs text-red-600">@error('process') {{ $message }}  @enderror</span>
+            <input type="text" name="process" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('process', $certificate->process) }}">
+    </div>
+</div>
+
 <div class="grid grid-cols-2 gap-4">    
         <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Fecha Inicial</label>
@@ -60,7 +75,28 @@
             value="{{ old('date_end', $certificate->date_end) }}">
         </div>
 </div>
+<div class="grid grid-cols-2 gap-4"> 
+    <div class="">
+        <label for="" class="uppercase text-gray-700 text-xs">Tipo Código</label>
+        <span class="text-xs text-red-600">@error('type_code') {{ $message }}  @enderror</span>
+        <select name="type_code" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($typeCode as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('type_code', $certificate->type_code) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+        </select>
+    </div>   
+    <div class="">
+            <label for="" class="uppercase text-gray-700 text-xs">Título</label>
+            <span class="text-xs text-red-600">@error('title') {{ $message }}  @enderror</span>
+            <input type="text" name="title" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('title', $certificate->title) }}">
+    </div>
 
+</div>
 <div class="grid grid-cols-2 gap-4">
     <div class="">
         <label for="" class="uppercase text-gray-700 text-xs">Acreditado</label>
@@ -82,7 +118,6 @@
             value="{{ old('notified', $certificate->notified) }}">
     </div>
 </div>
-
 
 <div class="flex justify-between items-center">
     <a href="{{ route('certificates.index') }}" class="text-indigo-600">Volver</a>
