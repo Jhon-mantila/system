@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\CertificateController;
+
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\DashboardController;

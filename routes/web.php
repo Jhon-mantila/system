@@ -40,11 +40,6 @@ Route::resource('students', StudentsController::class)->middleware(['auth', 'ver
 Route::resource('employees', EmployeesController::class)->middleware(['auth', 'verified']);
 Route::resource('companies', CompanyController::class)->middleware(['auth', 'verified'])->except(['show','create','store','destroy']);
 Route::resource('certificates', CertificateController::class)->middleware(['auth', 'verified']);
-Route::get('/search-programs', [CertificateController::class, 'searchPrograms']);
-Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
-Route::get('/search-students', [CertificateController::class, 'searchStudents']);
-Route::get('/search-students-id', [CertificateController::class, 'searchStudentsId']);
-Route::get('/search-employees', [CertificateController::class, 'searchEmployees']);
-Route::get('/search-employees-id', [CertificateController::class, 'searchEmployeesId']);
+Route::resource('courses', CourseController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
