@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
@@ -23,9 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,11 +40,11 @@ Route::resource('students', StudentsController::class)->middleware(['auth', 'ver
 Route::resource('employees', EmployeesController::class)->middleware(['auth', 'verified']);
 Route::resource('companies', CompanyController::class)->middleware(['auth', 'verified'])->except(['show','create','store','destroy']);
 Route::resource('certificates', CertificateController::class)->middleware(['auth', 'verified']);
-// Route::get('/search-programs', [CertificateController::class, 'searchPrograms']);
-// Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
-// Route::get('/search-students', [CertificateController::class, 'searchStudents']);
-// Route::get('/search-students-id', [CertificateController::class, 'searchStudentsId']);
-// Route::get('/search-employees', [CertificateController::class, 'searchEmployees']);
-// Route::get('/search-employees-id', [CertificateController::class, 'searchEmployeesId']);
+Route::get('/search-programs', [CertificateController::class, 'searchPrograms']);
+Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
+Route::get('/search-students', [CertificateController::class, 'searchStudents']);
+Route::get('/search-students-id', [CertificateController::class, 'searchStudentsId']);
+Route::get('/search-employees', [CertificateController::class, 'searchEmployees']);
+Route::get('/search-employees-id', [CertificateController::class, 'searchEmployeesId']);
 
 require __DIR__.'/auth.php';

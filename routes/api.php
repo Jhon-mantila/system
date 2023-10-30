@@ -1,6 +1,8 @@
 <?php
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +28,6 @@ Route::get('/search-students', [CertificateController::class, 'searchStudents'])
 Route::get('/search-students-id', [CertificateController::class, 'searchStudentsId']);
 Route::get('/search-employees', [CertificateController::class, 'searchEmployees']);
 Route::get('/search-employees-id', [CertificateController::class, 'searchEmployeesId']);
+
+Route::get('/quantity-certificates', [DashboardController::class, 'certificateForYear']);
+Route::get('/certificates-actives', [DashboardController::class, 'certificatesActivesInactives']);

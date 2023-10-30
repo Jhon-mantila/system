@@ -7,27 +7,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Programs extends Model
+class Course extends Model
 {
     use HasFactory;
     use HasUuids; // para visualizar bien los id creados con uuid
-    
 
     protected $fillable = [
         'id','name','code','credits','hours','active'
     ];
 
-    public function certificate(){
-        return $this->hasMany(Certificate::class);
-    }
     
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function courses(): BelongsToMany
+    public function programs(): BelongsToMany
     {
-        return $this->belongsToMany(Course::class, 'programs_courses');
+        return $this->belongsToMany(Programs::class, 'programs_courses');
     }
-    
 }

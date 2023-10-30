@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
-use App\Models\Programs;
-use PhpParser\Node\Expr\FuncCall;
 use Ramsey\Uuid\Uuid;
 use App\Services\DropdownService;
 
-class ProgramsController extends Controller
+class CourseController extends Controller
 {
     //
     protected $dropdownService;
@@ -17,46 +16,41 @@ class ProgramsController extends Controller
     {
         $this->dropdownService = $dropdownService;
     }
-
     public function index(Request $request){
 
         $search =  $request->search;
 
-        $programs = Programs::where([
+        $courses = Course::where([
             ['name', 'LIKE', "%{$search}%"],
             //['active', '<>', 0]
         ])->latest()->paginate();
 
-        return view('programs.index',[
-            'programs' => $programs
+        return view('courses.index',[
+            'courses' => $courses
         ]);
     }
 
-    public function show(Programs $program){
+    public function show(Course $course){
         
         $activeOptions = $this->dropdownService->getActive();
 
-        //$p = Programs::find('07184ec6-7f16-477c-aa89-53807f85c6a7')->courses()->orderBy('name')->get();;
-        //dd($p);
-
-
-        $program = Programs::with('user')->get()->where('id', '=', $program->id);
+        $course = Course::with('user')->get()->where('id', '=', $course->id);
         // foreach ($program as $programs) {
         //     echo $programs->name . ' ' . $programs->code . ' ' . $programs->credits . ' ' . $programs->hours . ' ' . $programs->active . ' ' . $programs->user->name;
         // }
         //dd($program);
-        return view('programs.show', [
-            'program' => $program,
+        return view('courses.show', [
+            'course' => $course,
             'activeOptions' => $activeOptions
         ]);
     }
 
-    public function create(Programs $program){
+    public function create(Course $course){
         
         $activeOptions = $this->dropdownService->getActive();
 
-        return view ('programs.create',[
-            'program' => $program,
+        return view ('courses.create',[
+            'course' => $course,
             'activeOptions' => $activeOptions
         ]);
     }
@@ -65,7 +59,7 @@ class ProgramsController extends Controller
         //dd($request);
 
         $request->validate([
-            'code' => 'required|unique:programs,code',
+            'code' => 'required|unique:courses,code',
             'name'  => 'required',
             'active'  => 'required',
         ],[
@@ -75,7 +69,7 @@ class ProgramsController extends Controller
             'active.required'    => 'Este campo es requerido',
         ]);
 
-        $program = $request->user()->programs()->create([
+        $course = $request->user()->courses()->create([
             'id' => (String) Uuid::uuid4(),
             'code' => $request->code,
             'name' => $request->name,
@@ -85,23 +79,23 @@ class ProgramsController extends Controller
             
         ]);
 
-        return redirect()->route('programs.edit', $program);
+        return redirect()->route('courses.edit', $course);
     }
 
-    public function edit(Programs $program){
+    public function edit(Course $course){
 
         $activeOptions = $this->dropdownService->getActive();
 
-        return view('programs.edit', [
-            'program' => $program,
+        return view('courses.edit', [
+            'course' => $course,
             'activeOptions' => $activeOptions
         ]);
     }
 
-    public function update(Request $request, Programs $program){
+    public function update(Request $request, Course $course){
 
         $request->validate([
-            'code' => 'required|unique:programs,code,' . $program->id,
+            'code' => 'required|unique:courses,code,' . $course->id,
             'name'  => 'required',
             'active'  => 'required',
         ],[
@@ -111,7 +105,7 @@ class ProgramsController extends Controller
             'active.required'    => 'Este campo es requerido',
         ]);
 
-        $program->update([
+        $course->update([
             'code' => $request->code,
             'name' => $request->name,
             'credits' => $request->credits,
@@ -120,15 +114,13 @@ class ProgramsController extends Controller
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
 
-        return redirect()->route('programs.edit', $program);
+        return redirect()->route('courses.edit', $course);
     }
-    
-    public function destroy(Programs $program){
-        //dd($program);
-        $program->delete();
+
+    public function destroy(Course $course){
+        //dd($course);
+        $course->delete();
 
         return back();
     }
-
-
 }
