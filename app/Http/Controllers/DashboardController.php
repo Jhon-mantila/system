@@ -14,7 +14,8 @@ class DashboardController extends Controller
         $jsonData = json_encode($data);
 
         $cant_students = DB::table('students')->where('active', 1)->count();
-        $cantidad_certificados = DB::table('certificates')->where('accredited', 1)->count();
+        $cantidad_certificados = DB::table('certificates')->where('accredited', 1)->where('type_certificate', '=', 'c')->count();
+        $cantidad_certificados_cursos = DB::table('certificates_courses')->where('accredited', 1)->where('type_certificate', '=', 'c')->count();
         $anos_certificates = DB::table('certificates')
                                     ->select(DB::raw('YEAR(date_start) as year'))
                                     ->where('type_certificate', '=', 'c')
@@ -29,6 +30,7 @@ class DashboardController extends Controller
 
         $data['students'] = $cant_students;
         $data['certificate'] = $cantidad_certificados;
+        $data['certificate_course'] = $cantidad_certificados_cursos;
         $data['year'] = $anos_certificates;
 
         //dd($data);

@@ -25,6 +25,7 @@ class ProgramsFactory extends Factory
             //Datos falsos para la base de datos
             'id' =>  (string) Uuid::uuid4(),
             'code' => Str::random(10),
+            'code_ocupation' => Str::random(10),
             'name' => $this->faker->name(),
             'credits' => $this->faker->numberBetween(1, 20),
             'hours' => $this->faker->numberBetween(1, 20),

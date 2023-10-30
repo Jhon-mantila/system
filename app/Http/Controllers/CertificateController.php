@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use App\Models\Company;
+use App\Models\Course;
 use App\Models\Employees;
 use App\Models\Programs;
 use App\Models\Students;
@@ -34,16 +35,21 @@ class CertificateController extends Controller
                           ->orWhere('second_last_name', 'LIKE', "%{$search}%");
                 })       
                 ->latest()->paginate();
-
+        $typeCertificate = $this->dropdownService->getTypeCertificate();
+       
         //dd($certificates);
         return view('certificates.index',[
-            'certificates' => $certificates
+            'certificates' => $certificates,
+            'typeCertificate' => $typeCertificate,
+
         ]);
     }
 
     public function show(Certificate $certificate){
         
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
+        $typeCode = $this->dropdownService->getCode();
 
         $certificate = Certificate::with(['user', 'program', 'student', 'employee', 'company'])
         ->get()
@@ -52,27 +58,46 @@ class CertificateController extends Controller
         return view('certificates.show', [
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions,
+            'typeCode' => $typeCode,
+            
+
         ]);
     }
 
     public function create(Certificate $certificate){
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
+        $typeCode = $this->dropdownService->getCode();
 
         return view('certificates.create',[
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions,
+            'typeCode' => $typeCode,
+
         ]);
     }
 
     public function store(Request $request){
         
-       $request->validate([
+        if($request->type_certificate == 'c'){
+            $required = 'required';
+            $required_certificate = '';
+        }else if($request->type_certificate == 'cm'){
+            $required_certificate = 'required';
+            $required = '';
+        }
+       
+        $request->validate([
             'program_id' => 'required',
             'student_id' => 'required',
             'employee_id' => 'required',
-            'date_start' => 'required',
-            'date_end' => 'required',
+            'date_start' => $required,
+            'date_end' => $required,
+            'date_certificate' => $required_certificate,
+            'type_certificate' => 'required'
 
         ],[
             'program_id.required' => 'El programa es requerido',
@@ -80,6 +105,8 @@ class CertificateController extends Controller
             'employee_id.required' => 'El empleado es requerido',
             'date_start.required' => 'La fecha inicial es requerida',
             'date_end.required' => 'La fecha final es requerida',
+            'date_certificate.required' => 'La fecha del certificado es requerida',
+            'type_certificate.required' => 'Es requerido',
 
         ]);
 
@@ -94,7 +121,14 @@ class CertificateController extends Controller
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
+            'date_certificate' => $request->date_certificate,
+            'type_certificate' => $request->type_certificate,
             'company_id' => $company[0]['id'],
+            'module' => 'programa',
+            'title' => $request->title,
+            'type_code' => $request->type_code,
+            'references' => $request->references,
+            'process' => $request->process,
             'accredited' => $request->accredited,
             'notified' => $request->notified,
         ]);
@@ -105,21 +139,32 @@ class CertificateController extends Controller
     public function edit(Certificate $certificate){
 
         $typeCertificate = $this->dropdownService->getTypeCertificate();
+        $accreditedOptions = $this->dropdownService->getAccredited();
+        $typeCode = $this->dropdownService->getCode();
 
         return view('certificates.edit', [
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
+            'accreditedOptions' => $accreditedOptions,
+            'typeCode' => $typeCode,
         ]);
     }
 
     public function update(Request $request, Certificate $certificate){
-
+            if($request->type_certificate == 'c'){
+                $required = 'required';
+                $required_certificate = '';
+            }else if($request->type_certificate == 'cm'){
+                $required_certificate = 'required';
+                $required = '';
+            }
         $request->validate([
             'program_id' => 'required',
             'student_id' => 'required',
             'employee_id' => 'required',
-            'date_start' => 'required',
-            'date_end' => 'required',
+            'date_start' => $required,
+            'date_end' => $required,
+            'date_certificate' => $required_certificate,
 
         ],[
             'program_id.required' => 'El programa es requerido',
@@ -127,15 +172,22 @@ class CertificateController extends Controller
             'employee_id.required' => 'El empleado es requerido',
             'date_start.required' => 'La fecha inicial es requerida',
             'date_end.required' => 'La fecha final es requerida',
+            'date_certificate.required' => 'La fecha del certificado es requerida',
 
         ]);
-
+        //dd($request->type_certificate);
         $certificate->update([
             'program_id' => $request->program_id,
             'student_id' => $request->student_id,
             'employee_id' => $request->employee_id,
             'date_start' => $request->date_start,
             'date_end' => $request->date_end,
+            'date_certificate' => $request->date_certificate,
+            'type_certificate' => $request->type_certificate,
+            'title' => $request->title,
+            'type_code' => $request->type_code,
+            'references' => $request->references,
+            'process' => $request->process,
             'accredited' => $request->accredited,
             'notified' => $request->notified,
             'updated_at' => date("Y-m-d H:i:s"),
@@ -163,6 +215,8 @@ class CertificateController extends Controller
         //dd(response()->json($programs));
         return response()->json($programs);
     }
+
+    
 
     public function searchStudents(Request $request)
     {

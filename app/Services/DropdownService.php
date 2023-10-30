@@ -39,6 +39,30 @@ class DropdownService
         ];
     }
 
+    public function getGender()
+    {
+        return [
+            'male' => 'Hombre.',
+            'female' => 'Mujer.',
+        ];
+    }
+
+    public function getAccredited()
+    {
+        return [
+            0 => 'No.',
+            1 => 'Si.',
+        ];
+    }
+
+    public function getCode()
+    {
+        return [
+            'norma' => 'Norma',
+            'ocupacion' => 'Ocupación',
+        ];
+    }
+
 
     // Agrega más métodos para otras listas desplegables
 }

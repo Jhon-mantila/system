@@ -71,9 +71,8 @@
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Firma</label>
                             <img src="{{ asset('storage/' . $empleado->signature) }}" alt="imagenes" width="200">
-                            
-                            
-                            <p class="p-2">{{ $empleado->signature }}</p>
+
+                            <!-- <p class="p-2">{{ $empleado->signature }}</p> -->
                         </div> 
                     </div>
 

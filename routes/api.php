@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\CertificatesCoursesController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/students-api', [StudentsController::class, 'apiStudents']);
 Route::get('/search-programs', [CertificateController::class, 'searchPrograms']);
 Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
+Route::get('/search-courses', [CertificatesCoursesController::class, 'searchCourses']);
+Route::get('/search-courses-id', [CertificatesCoursesController::class, 'searchCoursesId']);
 Route::get('/search-students', [CertificateController::class, 'searchStudents']);
 Route::get('/search-students-id', [CertificateController::class, 'searchStudentsId']);
 Route::get('/search-employees', [CertificateController::class, 'searchEmployees']);

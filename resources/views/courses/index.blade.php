@@ -16,7 +16,7 @@
                             </svg>
 
                             </span>
-                            <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Buscar por nombre..." value="{{ request('search') }}"  type="text" name="search"/>
+                            <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-96 border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Buscar por nombre del curso..." value="{{ request('search') }}"  type="text" name="search"/>
                         </label>
                         </form>
                     </div>
@@ -37,7 +37,8 @@
                 <table class="mb-4">
                     <tr class="border-b border-gray-200 text-sm">
                         <td class="px-6 py-4">Nombre del Curso</td>
-                        <td class="px-6 py-4">Código del Curso</td>
+                        <td class="px-6 py-4">Código norma</td>
+                        <td class="px-6 py-4">Código ocupación</td>
                         <td class="px-6 py-4">Última Actualización</td>
                         <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
@@ -47,6 +48,7 @@
                         <tr class="border-b border-gray-200 text-sm">
                             <td class="px-6 py-4"><a class="text-blue-600" href="{{ route('courses.show', $course) }}">{{ $course->name }}</a></td>
                             <td class="px-6 py-4">{{ $course->code }}</td>
+                            <td class="px-6 py-4">{{ $course->code_ocupation }}</td>
                             <td class="px-6 py-4">{{ $course->updated_at }}</td>
                             <td class="px-6 py-4">{{ $course->created_at }}</td>
         
@@ -70,7 +72,7 @@
                     @endforeach
                 </table>
                
-                {{ $courses->links() }}
+                {{ $courses->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>

@@ -60,11 +60,14 @@ class CourseController extends Controller
 
         $request->validate([
             'code' => 'required|unique:courses,code',
+            'code_ocupation' => 'required|unique:courses,code_ocupation',
             'name'  => 'required',
             'active'  => 'required',
         ],[
-            'code.required' => 'El campo código es requerido',
-            'code.unique'    => 'El código debe ser unico (Ya existe este código)',
+            'code.required' => 'El campo código norma es requerido',
+            'code.unique'    => 'El código norma debe ser unico (Ya existe este código)',
+            'code_ocupation.required' => 'El campo ocupación código es requerido',
+            'code_ocupation.unique'    => 'El código ocupación debe ser unico (Ya existe este código)',
             'name.required'  => 'El campo nombre del programa es requerido',
             'active.required'    => 'Este campo es requerido',
         ]);
@@ -72,6 +75,7 @@ class CourseController extends Controller
         $course = $request->user()->courses()->create([
             'id' => (String) Uuid::uuid4(),
             'code' => $request->code,
+            'code_ocupation' => $request->code_ocupation,
             'name' => $request->name,
             'credits' => $request->credits,
             'hours' => $request->hours,
@@ -96,17 +100,21 @@ class CourseController extends Controller
 
         $request->validate([
             'code' => 'required|unique:courses,code,' . $course->id,
+            'code_ocupation' => 'required|unique:courses,code_ocupation,' . $course->id,
             'name'  => 'required',
             'active'  => 'required',
         ],[
             'code.required' => 'El campo código es requerido',
             'code.unique'    => 'El código debe ser unico (Ya existe este código)',
+            'code_ocupation.required' => 'El campo ocupación código es requerido',
+            'code_ocupation.unique'    => 'El código ocupación debe ser unico (Ya existe este código)',
             'name.required'  => 'El campo nombre del programa es requerido',
             'active.required'    => 'Este campo es requerido',
         ]);
 
         $course->update([
             'code' => $request->code,
+            'code_ocupation' => $request->code_ocupation,
             'name' => $request->name,
             'credits' => $request->credits,
             'hours' => $request->hours,

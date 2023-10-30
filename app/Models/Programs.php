@@ -14,7 +14,7 @@ class Programs extends Model
     
 
     protected $fillable = [
-        'id','name','code','credits','hours','active'
+        'id','name','code', 'code_ocupation', 'credits','hours','active'
     ];
 
     public function certificate(){

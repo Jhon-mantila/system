@@ -27,6 +27,7 @@ class StudentsController extends Controller
         ->orWhere('second_name', 'LIKE', "%{$search}%")
         ->orWhere('last_name', 'LIKE', "%{$search}%")
         ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+        ->orWhere('document', 'LIKE', "%{$search}%")
         ->latest()->paginate();
 
         return view('students.index',[
@@ -38,6 +39,7 @@ class StudentsController extends Controller
         
         $activeOptions = $this->dropdownService->getActive();
         $typeDocument = $this->dropdownService->getTypeDocumento();
+        $genderOptions = $this->dropdownService->getGender();
 
         $student = Students::with('user')->get()->where('id', '=', $student->id);
         //dd($student);
@@ -45,6 +47,7 @@ class StudentsController extends Controller
             'student' => $student,
             'activeOptions' => $activeOptions,
             'typeDocument' => $typeDocument,
+            'genderOptions' => $genderOptions,
         ]);
     }
 
@@ -52,11 +55,13 @@ class StudentsController extends Controller
 
         $activeOptions = $this->dropdownService->getActive();
         $typeDocument = $this->dropdownService->getTypeDocumento();
+        $genderOptions = $this->dropdownService->getGender();
 
         return view('students.create',[
             'student' => $student,
             'activeOptions' => $activeOptions,
             'typeDocument' => $typeDocument,
+            'genderOptions' => $genderOptions,
         ]);
     }
 
@@ -66,13 +71,15 @@ class StudentsController extends Controller
             'first_name' => 'required',
             'document'  => 'required|unique:students,document',
             'last_name'  => 'required',
+            'gender'  => 'required',
             'mobile'  => 'required',
             'email'  => 'required',
         ],[
             'first_name.required' => 'El primer nombre es requerido',
             'document.required'  => 'El documento es obligatorio',
-            'document.unique'    => 'El documento debe ser único',
+            'document.unique'    => 'El documento ya existe',
             'last_name.required'  => 'El primer apellido es requerido',
+            'gender.required'  => 'El género es requerido',
             'mobile.required'  => 'El celular es requerido',
             'email.required'  => 'El correo electronico es requerido',
         ]);
@@ -85,8 +92,10 @@ class StudentsController extends Controller
             'second_name' => $request->second_name,
             'last_name' => $request->last_name,
             'second_last_name' => $request->second_last_name,
+            'gender' => $request->gender,
             'mobile' => $request->mobile,
             'email' => $request->email,
+            'city' => $request->city,
             'active' => $request->active
         ]);
         
@@ -99,11 +108,13 @@ class StudentsController extends Controller
 
         $activeOptions = $this->dropdownService->getActive();
         $typeDocument = $this->dropdownService->getTypeDocumento();
+        $genderOptions = $this->dropdownService->getGender();
 
         return view('students.edit', [
             'student' => $student,
             'activeOptions' => $activeOptions,
             'typeDocument' => $typeDocument,
+            'genderOptions' => $genderOptions,
         ]);
     }
 
@@ -113,6 +124,7 @@ class StudentsController extends Controller
             'first_name' => 'required',
             'document'  => 'required|unique:students,document,' . $student->id,
             'last_name'  => 'required',
+            'gender'  => 'required',
             'mobile'  => 'required',
             'email'  => 'required',
         ],[
@@ -120,6 +132,7 @@ class StudentsController extends Controller
             'document.required'  => 'El documento es obligatorio',
             'document.unique'    => 'El documento debe ser único',
             'last_name.required'  => 'El primer apellido es requerido',
+            'gender.required'  => 'El género es requerido',
             'mobile.required'  => 'El celular es requerido',
             'email.required'  => 'El correo electronico es requerido',
         ]);
@@ -131,8 +144,10 @@ class StudentsController extends Controller
             'second_name' => $request->second_name,
             'last_name' => $request->last_name,
             'second_last_name' => $request->second_last_name,
+            'gender' => $request->gender,
             'mobile' => $request->mobile,
             'email' => $request->email,
+            'city' => $request->city,
             'active' => $request->active,
             'updated_at' => date("Y-m-d H:i:s"),
         ]);

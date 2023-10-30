@@ -29,8 +29,11 @@ class EmployeesController extends Controller
         ->orWhere('second_last_name', 'LIKE', "%{$search}%")
         ->latest()->paginate();
 
+        $typeEmployee = $this->dropdownService->getTypeEmployee();
+
         return view('employees.index',[
-            'employees' => $employees
+            'employees' => $employees,
+            'typeEmployee' => $typeEmployee
         ]);
     }
 
@@ -69,7 +72,7 @@ class EmployeesController extends Controller
         
         $request->validate([
             'first_name' => 'required',
-            'document'  => 'required|unique:students,document',
+            'document'  => 'required|unique:employees,document',
             'last_name'  => 'required',
             'mobile'  => 'required',
             'email'  => 'required',
@@ -82,7 +85,7 @@ class EmployeesController extends Controller
         ],[
             'first_name.required' => 'El primer nombre es requerido',
             'document.required'  => 'El documento es obligatorio',
-            'document.unique'    => 'El documento debe ser único',
+            'document.unique'    => 'El documento ya existe',
             'last_name.required'  => 'El primer apellido es requerido',
             'mobile.required'  => 'El celular es requerido',
             'email.required'  => 'El correo electronico es requerido',

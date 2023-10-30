@@ -36,10 +36,16 @@ class CertificateFactory extends Factory
             'employee_id' =>  $this->faker->randomElement($employee_id),
             'date_start' =>  $this->faker->date(),
             'date_end' =>  $this->faker->date(),
+            'date_certificate' =>  $this->faker->date(),
             'type_certificate' =>  $this->faker->randomElement(array_keys($activeOptions->getTypeCertificate())),
             'company_id' =>  $this->faker->randomElement($company_id),
+            'title' => $this->faker->name(),
+            'type_code' =>  $this->faker->randomElement(array_keys($activeOptions->getCode())),
+            'references' =>  $this->faker->firstName(),
+            'process' =>  $this->faker->name(),
             'accredited' =>  $this->faker->numberBetween(0, 1),
             'notified' =>  $this->faker->numberBetween(0, 1),
+            'module' => "programa",
             'user_id' => 1,
         ];
     }

@@ -75,7 +75,7 @@
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Logo</label>
                             <img src="{{ asset('storage/' . $empresa->logo) }}" alt="logo" width="200">
 
-                            <p class="p-2">{{ $empresa->logo }}</p>
+                            <!-- <p class="p-2">{{ $empresa->logo }}</p> -->
                         </div> 
                     </div>
 
