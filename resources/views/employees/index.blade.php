@@ -39,26 +39,28 @@
                         <td class="px-6 py-4">Nombre Empleados</td>
                         <td class="px-6 py-4">No. Documento</td>
                         <td class="px-6 py-4">Tipo Empleado</td>
+                        <td class="px-6 py-4">Celular</td>
                         <td class="px-6 py-4">Última Actualización</td>
                         <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
-                        <td class="px-6 py-4"></td>
+                        <!-- <td class="px-6 py-4"></td> -->
                     </tr>
                     @foreach ($employees as $employee)
                         <tr class="border-b border-gray-200 text-sm">
                             <td class="px-6 py-4"><a class="text-blue-600" href="{{ route('employees.show', $employee) }}">{{ $employee->first_name }} {{ $employee->second_name }} {{ $employee->last_name }} {{ $employee->second_last_name }}</a></td>
                             <td class="px-6 py-4">{{ $employee->document }}</td>
                             <td class="px-6 py-4">{{ $typeEmployee[$employee->type_employee] }}</td>
+                            <td class="px-6 py-4">{{ $employee->mobile }}</td>
                             <td class="px-6 py-4">{{ $employee->updated_at }}</td>
                             <td class="px-6 py-4">{{ $employee->created_at }}</td>
         
                             <td class="px-6 py-4">
                                 <a href="{{ route('employees.edit', $employee) }}" class="text-indigo-600">Editar</a> 
                             </td>
-                            <td class="px-6 py-4">
-                                <form action="{{ route('employees.destroy', $employee) }}" method="POST">
+                            <!-- <td class="px-6 py-4">
+                                <form action="{{ route('employees.destroy', $employee) }}" method="POST"> -->
                                     <!-- Crea una encriptación un token en value -->
-                                    @csrf
+                                    <!-- @csrf
                                     @method('DELETE')
 
                                     <input 
@@ -67,7 +69,7 @@
                                         class="bg-gray-800 text-white px-4 py-2"
                                         onclick="return confirm('Deseas Eliminar?')">
                                 </form>
-                            </td>
+                            </td> -->
                         </tr>
                     @endforeach
                 </table>

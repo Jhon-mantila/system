@@ -260,7 +260,7 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
         // Logo
         $image_file = public_path('storage/' . $certificates->employee->signature);
-        $pdf->Image($image_file, $mitadAnchoPagina-5, 170, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+        $pdf->Image($image_file, $mitadAnchoPagina-25, 160, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
         
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
@@ -390,13 +390,13 @@ class PdfController extends Controller
                     $pdf->ln(15);
                     $pdf->Cell(0, 0, 'En constancia se firma en Barrancabermeja el día 01 de julio del año 2022.', 0, 1, 'L', 0, '', 0);
                     
-                    $pdf->ln(40);
+                    $pdf->ln(35);
         
                     $pdf->SetFont('helvetica', 'B', 12);
         
                     // Logo
                     $image_file = public_path('storage/' . $certificates->employee->signature);
-                    $pdf->Image($image_file, 100, 230, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+                    $pdf->Image($image_file, 80, 220, 50, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
                     //$pdf->ln(2);
                     $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
                     $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);

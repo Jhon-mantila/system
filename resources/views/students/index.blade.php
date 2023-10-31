@@ -38,25 +38,27 @@
                     <tr class="border-b border-gray-200 text-sm">
                         <td class="px-6 py-4">Nombre Estudiante</td>
                         <td class="px-6 py-4">No. Documento</td>
-                        <td class="px-6 py-4">Última Actualización</td>
+                        <td class="px-6 py-4">Correo Electrónico</td>
+                        <td class="px-6 py-4">Celular</td>
                         <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
-                        <td class="px-6 py-4"></td>
+                        <!-- <td class="px-6 py-4"></td> -->
                     </tr>
                     @foreach ($students as $student)
                         <tr class="border-b border-gray-200 text-sm">
                             <td class="px-6 py-4"><a class="text-blue-600" href="{{ route('students.show', $student) }}">{{ $student->first_name }} {{ $student->second_name }} {{ $student->last_name }} {{ $student->second_last_name }}</a></td>
                             <td class="px-6 py-4">{{ $student->document }}</td>
-                            <td class="px-6 py-4">{{ $student->updated_at }}</td>
+                            <td class="px-6 py-4">{{ $student->email }}</td>
+                            <td class="px-6 py-4">{{ $student->mobile }}</td>
                             <td class="px-6 py-4">{{ $student->created_at }}</td>
         
                             <td class="px-6 py-4">
                                 <a href="{{ route('students.edit', $student) }}" class="text-indigo-600">Editar</a> 
                             </td>
-                            <td class="px-6 py-4">
-                                <form action="{{ route('students.destroy', $student) }}" method="POST">
+                            <!-- <td class="px-6 py-4">
+                                <form action="{{ route('students.destroy', $student) }}" method="POST"> -->
                                     <!-- Crea una encriptación un token en value -->
-                                    @csrf
+                                    <!-- @csrf
                                     @method('DELETE')
 
                                     <input 
@@ -65,7 +67,7 @@
                                         class="bg-gray-800 text-white px-4 py-2"
                                         onclick="return confirm('Deseas Eliminar?')">
                                 </form>
-                            </td>
+                            </td> -->
                         </tr>
                     @endforeach
                 </table>
