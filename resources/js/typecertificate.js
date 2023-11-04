@@ -1,4 +1,3 @@
-console.log("Certiticados");
 document.addEventListener('DOMContentLoaded', function () {
     const opcionSelect = document.getElementById('type_certificate');
 
@@ -12,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const bloque8 = document.getElementById('bloque8');
     const bloque9 = document.getElementById('bloque9');
 
-    console.log(opcionSelect);
-    console.log(opcionSelect.value);
     bloque9.style.display = 'none';
 
     if (opcionSelect.value === 'cm') {

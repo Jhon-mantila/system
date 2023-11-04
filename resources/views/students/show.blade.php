@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="py-2">
-                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Mobile</label>
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Teléfono móvil</label>
                             <p class="p-2">{{ $estudiante->mobile }}</p>
                         </div>
                     </div> 
@@ -102,9 +102,9 @@
                 <div class="p-6 text-gray-900">
                     <div class="container mx-auto p-6 relative"> <!-- Agrega la clase "relative" al contenedor -->
                         <h2 class="text-2xl font-semibold mb-4">Programas Certificados</h2>
-                        <div id="content-section">
+                        <table id="content-section">
                             <!-- Aquí se cargará la información relacionada -->
-                        </div>
+                        </table>
                         <div>
                         <div class="flex items-baseline">
                             <div id="pagination" class="mt-4 m-2 flex"> <!-- Agrega la clase "absolute" a la paginación -->
@@ -119,6 +119,42 @@
                                     Previous
                                 </a>
                                 <a href="#" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" id="next-button">
+                                    Next
+                                    <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-5">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <div class="container mx-auto p-6 relative"> <!-- Agrega la clase "relative" al contenedor -->
+                        <h2 class="text-2xl font-semibold mb-4">Cursos Certificados</h2>
+                        <div id="content-section-course">
+                            <!-- Aquí se cargará la información relacionada -->
+                        </div>
+                        <div>
+                        <div class="flex items-baseline">
+                            <div id="pagination-course" class="mt-4 m-2 flex"> <!-- Agrega la clase "absolute" a la paginación -->
+
+                            </div>
+                            <div class="flex m-2">
+                                <!-- Previous Button -->
+                                <a href="#" class="flex items-center justify-center px-3 h-8 mr-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" id="previous-button-course">
+                                    <svg class="w-3.5 h-3.5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
+                                    </svg>
+                                    Previous
+                                </a>
+                                <a href="#" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" id="next-button-course">
                                     Next
                                     <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

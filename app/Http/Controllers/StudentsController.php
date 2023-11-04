@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificate;
+use App\Models\CertificatesCourses;
 use Illuminate\Http\Request;
 use App\Models\Students;
 use Ramsey\Uuid\Uuid;
@@ -171,6 +172,21 @@ class StudentsController extends Controller
         $searchById = $request->query('searchById');
 
         $students = Certificate::with(['user', 'program', 'student'])
+        ->whereHas('student', function ($query) use ($searchById) {
+                    $query->where('id', '=', "{$searchById}");
+                }) 
+        ->paginate($perPage, ['*'], 'page', $currentPage);
+
+        return response()->json($students);
+    }
+
+    public function apiStudentsCourses(Request $request)
+    {
+        $perPage = 5; // Cantidad de estudiantes por página
+        $currentPage = $request->query('page', 1); // Página actual
+        $searchById = $request->query('searchById');
+
+        $students = CertificatesCourses::with(['user', 'course', 'student'])
         ->whereHas('student', function ($query) use ($searchById) {
                     $query->where('id', '=', "{$searchById}");
                 }) 

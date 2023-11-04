@@ -39,7 +39,7 @@
                         <td class="px-6 py-4">Nombre Estudiante</td>
                         <td class="px-6 py-4">No. Documento</td>
                         <td class="px-6 py-4">Correo Electrónico</td>
-                        <td class="px-6 py-4">Celular</td>
+                        <td class="px-6 py-4">Teléfono Móvil</td>
                         <td class="px-6 py-4">Fecha Creación</td>
                         <td class="px-6 py-4"></td>
                         <!-- <td class="px-6 py-4"></td> -->

@@ -4,7 +4,7 @@ async function searchPrograms() {
     const idPrograms = document.getElementById('selectedProgramId').value;
     console.log(searchInput);
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-programs?search=${searchInput}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-programs?search=${searchInput}`);
         const searchResults = await response.json();
         console.log("Resultado");
         console.log(searchResults);
@@ -41,7 +41,7 @@ async function searchCourse() {
     const idPrograms = document.getElementById('selectedCourseId').value;
     console.log(searchInput);
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-courses?search=${searchInput}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-courses?search=${searchInput}`);
         const searchResults = await response.json();
         console.log(searchResults);
         resultsDiv.innerHTML = '';
@@ -77,7 +77,7 @@ async function searchStudents() {
     const idStudents = document.getElementById('selectedStudentId').value;
     console.log(searchInput);
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-students?search=${searchInput}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-students?search=${searchInput}`);
         const searchResults = await response.json();
         console.log("Resultado");
         console.log(searchResults);
@@ -114,7 +114,7 @@ async function searchEmployees() {
     const idEmployee = document.getElementById('selectedEmployeeId').value
     //console.log(searchInput);
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-employees?search=${searchInput}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-employees?search=${searchInput}`);
         const searchResults = await response.json();
         console.log("Resultado");
         console.log(searchResults);
@@ -160,7 +160,7 @@ if(searchInputIdValue !== null){
 async function searchProgramsId(searchInputId) {
 
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-programs-id?search=${searchInputId}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-programs-id?search=${searchInputId}`);
         const searchResults = await response.json();
         //console.log("Resultado");
         //console.log(searchResults[0].name);
@@ -187,7 +187,7 @@ if(searchInputCourseIdValue !== null){
 async function searchCoursesId(searchInputCourseId) {
 
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-courses-id?search=${searchInputCourseId}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-courses-id?search=${searchInputCourseId}`);
         const searchResults = await response.json();
         //console.log("Resultado");
         //console.log(searchResults[0].name);
@@ -207,7 +207,7 @@ searchStudentId(searchInputStudentId);
 async function searchStudentId(searchInputStudentId) {
 
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-students-id?search=${searchInputStudentId}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-students-id?search=${searchInputStudentId}`);
         const searchResults = await response.json();
         //console.log("Resultado");
         //console.log(searchResults[0].first_name);
@@ -227,7 +227,7 @@ searchEmployeeId(searchInputEmployeeId);
 async function searchEmployeeId(searchInputEmployeeId) {
 
     try {
-        const response = await fetch(`http://localhost/system/public/api/search-employees-id?search=${searchInputEmployeeId}`);
+        const response = await fetch(`${window.location.origin}/system/public/api/search-employees-id?search=${searchInputEmployeeId}`);
         const searchResults = await response.json();
         //console.log("Resultado");
         //console.log(searchResults);

@@ -7,7 +7,7 @@ let chart = null;
 function cargarGrafico(year){
 
   //console.log("año:"+year);
-    fetch("http://localhost/system/public/api/quantity-certificates?search=" + year)
+    fetch(window.location.origin+"/system/public/api/quantity-certificates?search=" + year)
     .then(response => response.json())
     .then (data =>{
       //console.log(data);
