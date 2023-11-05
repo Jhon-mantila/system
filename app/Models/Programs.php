@@ -16,6 +16,7 @@ class Programs extends Model
     
 
     protected $fillable = [
+        'id',
         'code',
         'code_ocupation',
         'name', 

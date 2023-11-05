@@ -1,9 +1,7 @@
 <?php
-
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificatesCoursesController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\ConstancyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeesController;

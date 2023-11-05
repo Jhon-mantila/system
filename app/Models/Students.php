@@ -24,7 +24,8 @@ class Students extends Model
         'phone',
         'email',
         'city',
-        'active'
+        'active',
+        'user_id',
     ];
 
     public function certificate(){
