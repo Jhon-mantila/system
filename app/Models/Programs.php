@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Programs extends Model
 {
@@ -14,7 +16,13 @@ class Programs extends Model
     
 
     protected $fillable = [
-        'id','name','code', 'code_ocupation', 'credits','hours','active'
+        'code',
+        'code_ocupation',
+        'name', 
+        'credits',
+        'hours',
+        'active',
+        'user_id'
     ];
 
     public function certificate(){

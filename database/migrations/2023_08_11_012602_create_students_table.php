@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('second_last_name')->nullable();
             $table->string('gender', 100);
-            $table->string('mobile');
-            $table->string('email');
+            $table->string('mobile')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->string('city')->nullable();
             $table->integer('active')->nullable();
             $table->unsignedBigInteger('user_id');
