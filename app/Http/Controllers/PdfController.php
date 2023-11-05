@@ -22,6 +22,8 @@ class MYPDF extends TCPDF {
 
     // Page footer
     public function Footer() {
+        $image_file_logo_machin = K_PATH_IMAGES.'logo_consolmeci.png';
+        $this->Image($image_file_logo_machin, 160, 240, 24, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
         // Position at 15 mm from bottom
         $this->SetY(-15);
         // Set font
@@ -173,11 +175,14 @@ class PdfController extends Controller
 
         $mitadAnchoPagina = $pageWidth/2;
         $image_file_logo = K_PATH_IMAGES.'logo.png';
+        $image_file_logo_machin = K_PATH_IMAGES.'logo_consolmeci.png';
         $pdf->Image($image_file_logo, $mitadAnchoPagina-15, 5, 35, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+        
+        $pdf->Image($image_file_logo_machin, 245, 160, 26, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
 
         $pdf->ln(40);
         // set some text to print
-        $pdf->SetFont('helvetica', 'B', 18);
+        $pdf->SetFont('helvetica', 'B', 15);
         $pdf->Cell(0, 0, 'LA REPUBLICA DE COLOMBIA', 0, 1, 'C', 0, '', 3);
         $pdf->ln(2);
         $pdf->SetFont('helvetica', 'N', 16);
@@ -278,7 +283,7 @@ class PdfController extends Controller
             'module_height' => 1 // height of a single module in points
         );
         // QRCODE,L : QR-CODE Low error correction
-        $pdf->write2DBarcode($_SERVER['DOCUMENT_ROOT']."system/public/?search=$document", 'QRCODE,L', 235, 160, 40, 40, $style, 'N');
+        $pdf->write2DBarcode($_SERVER['DOCUMENT_ROOT']."system/public/?search=$document", 'QRCODE,L', 235, 5, 35, 35, $style, 'N');
         
         // ---------------------------------------------------------
         $salida = $certificates->student->first_name . '_' . $certificates->student->second_name . '_' . $certificates->student->last_name . '_' . $certificates->student->second_last_name;
@@ -393,10 +398,10 @@ class PdfController extends Controller
                     $pdf->ln(35);
         
                     $pdf->SetFont('helvetica', 'B', 12);
-        
+                    
+                    
                     // Logo
-                    $image_file = public_path('storage/' . $certificates->employee->signature);
-                    $pdf->Image($image_file, 80, 220, 50, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+                    
                     //$pdf->ln(2);
                     $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
                     $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);

@@ -95,6 +95,7 @@ class StudentsController extends Controller
             'second_last_name' => $request->second_last_name,
             'gender' => $request->gender,
             'mobile' => $request->mobile,
+            'phone' => $request->phone,
             'email' => $request->email,
             'city' => $request->city,
             'active' => $request->active
@@ -147,6 +148,7 @@ class StudentsController extends Controller
             'second_last_name' => $request->second_last_name,
             'gender' => $request->gender,
             'mobile' => $request->mobile,
+            'phone' => $request->phone,
             'email' => $request->email,
             'city' => $request->city,
             'active' => $request->active,
