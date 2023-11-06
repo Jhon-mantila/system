@@ -212,4 +212,12 @@ class CertificatesCoursesController extends Controller
         //dd(response()->json($courses));
         return response()->json($courses);
     }
+
+    public function destroy(CertificatesCourses $certificates_course){
+        //dd($certificates_course);
+        $certificates_course->delete();
+
+        return back();
+
+    }
 }

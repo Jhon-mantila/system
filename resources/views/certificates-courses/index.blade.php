@@ -66,7 +66,7 @@
                             </td>
 
                             <td class="px-6 py-4">
-                                <form action="{{ route('certificates.destroy', $certificate) }}" method="POST">
+                                <form action="{{ route('certificates-courses.destroy', $certificate) }}" method="POST">
                                     <!-- Crea una encriptación un token en value -->
                                     @csrf
                                     @method('DELETE')
