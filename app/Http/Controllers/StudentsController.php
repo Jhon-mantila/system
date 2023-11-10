@@ -124,7 +124,7 @@ class StudentsController extends Controller
 
         $request->validate([
             'first_name' => 'required',
-            'document'  => 'required|unique:students,document,' . $student->id,
+            'document'  => 'required|unique:employees,document,' . $student->id,
             'last_name'  => 'required',
             'gender'  => 'required',
             'mobile'  => 'required',

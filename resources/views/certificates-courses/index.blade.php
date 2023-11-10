@@ -5,7 +5,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Certificados Cursos:') }} {{ $certificates->total() }}
                     </h2>
-                    <form action="{{ route('certificates.index') }}" method="GET" class="flex-grow">
+                    <form action="{{ route('certificates-courses.index') }}" method="GET" class="flex-grow">
 
                         <label class="relative block">
                             <span class="sr-only">Search</span>
