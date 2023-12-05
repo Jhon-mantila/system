@@ -210,7 +210,7 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, "CC {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
-        $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}, certificación con nivel avanzado en la norma:";
+        $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}";
         //$pdf->Cell(0, 0, "Asistió y supero el proceso de: {$certificates->process}, certificación con nivel avanzado en la norma:", 0, 1, 'C', 0, '', 3);
         $pdf->MultiCell(250, 0, ''.$textmulticellproceso, 0, 'C', 0, 0, 25, '', true);
         $pdf->SetFont('helvetica', 'B', 16);
@@ -265,7 +265,7 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
         // Logo
         $image_file = public_path('storage/' . $certificates->employee->signature);
-        $pdf->Image($image_file, $mitadAnchoPagina-25, 160, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+        $pdf->Image($image_file, $mitadAnchoPagina-20, 155, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
         
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
@@ -410,7 +410,7 @@ class PdfController extends Controller
                     $pageWidth = $pdf->getPageWidth();
                     $mitadAnchoPagina = $pageWidth/2;
                     $image_file = public_path('storage/' . $certificates->employee->signature);
-                    $pdf->Image($image_file, $mitadAnchoPagina-15, 220, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+                    $pdf->Image($image_file, $mitadAnchoPagina-20, 220, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
                     //$pdf->ln(2);
                     $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
                     $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);

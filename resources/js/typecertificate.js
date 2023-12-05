@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (opcionSelect.value === 'cm') {
         bloque1.style.display = 'none';
         bloque2.style.display = 'none';
-        bloque3.style.display = 'none';
-        bloque4.style.display = 'none';
+        bloque3.style.display = 'block';
+        bloque4.style.display = 'block';
         bloque5.style.display = 'none';
         bloque6.style.display = 'none';
         bloque7.style.display = 'none';
@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (opcionSelect.value === 'cm') {
             bloque1.style.display = 'none';
             bloque2.style.display = 'none';
-            bloque3.style.display = 'none';
-            bloque4.style.display = 'none';
+            bloque3.style.display = 'block';
+            bloque4.style.display = 'block';
             bloque5.style.display = 'none';
             bloque6.style.display = 'none';
             bloque7.style.display = 'none';
