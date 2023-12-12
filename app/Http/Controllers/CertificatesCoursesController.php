@@ -30,7 +30,8 @@ class CertificatesCoursesController extends Controller
                     $query->where('first_name', 'LIKE', "%{$search}%")
                           ->orWhere('second_name', 'LIKE', "%{$search}%")
                           ->orWhere('last_name', 'LIKE', "%{$search}%")
-                          ->orWhere('second_last_name', 'LIKE', "%{$search}%");
+                          ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+                          ->orWhere('document', 'LIKE', "%{$search}%");
                 })       
                 ->latest()->paginate();
         

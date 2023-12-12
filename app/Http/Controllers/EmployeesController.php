@@ -27,6 +27,7 @@ class EmployeesController extends Controller
         ->orWhere('second_name', 'LIKE', "%{$search}%")
         ->orWhere('last_name', 'LIKE', "%{$search}%")
         ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+        ->orWhere('document', 'LIKE', "%{$search}%")
         ->latest()->paginate();
 
         $typeEmployee = $this->dropdownService->getTypeEmployee();

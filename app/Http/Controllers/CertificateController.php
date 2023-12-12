@@ -32,7 +32,8 @@ class CertificateController extends Controller
                     $query->where('first_name', 'LIKE', "%{$search}%")
                           ->orWhere('second_name', 'LIKE', "%{$search}%")
                           ->orWhere('last_name', 'LIKE', "%{$search}%")
-                          ->orWhere('second_last_name', 'LIKE', "%{$search}%");
+                          ->orWhere('second_last_name', 'LIKE', "%{$search}%")
+                          ->orWhere('document', 'LIKE', "%{$search}%");
                 })       
                 ->latest()->paginate();
         $typeCertificate = $this->dropdownService->getTypeCertificate();
@@ -226,6 +227,7 @@ class CertificateController extends Controller
         ->orWhere('first_name', 'LIKE', "%$search%")
         ->orWhere('second_name', 'LIKE', "%{$search}%")
         ->orWhere('last_name', 'LIKE', "%{$search}%")
+        ->orWhere('document', 'LIKE', "%{$search}%")
         ->orWhere('second_last_name', 'LIKE', "%{$search}%")
         ->get();
         //dd($programs);
