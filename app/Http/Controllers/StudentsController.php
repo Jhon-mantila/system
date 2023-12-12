@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Certificate;
+use App\Models\CertificatesCourses;
 use Illuminate\Http\Request;
 use App\Models\Students;
 use Ramsey\Uuid\Uuid;
@@ -94,6 +95,7 @@ class StudentsController extends Controller
             'second_last_name' => $request->second_last_name,
             'gender' => $request->gender,
             'mobile' => $request->mobile,
+            'phone' => $request->phone,
             'email' => $request->email,
             'city' => $request->city,
             'active' => $request->active
@@ -122,7 +124,7 @@ class StudentsController extends Controller
 
         $request->validate([
             'first_name' => 'required',
-            'document'  => 'required|unique:students,document,' . $student->id,
+            'document'  => 'required|unique:employees,document,' . $student->id,
             'last_name'  => 'required',
             'gender'  => 'required',
             'mobile'  => 'required',
@@ -146,6 +148,7 @@ class StudentsController extends Controller
             'second_last_name' => $request->second_last_name,
             'gender' => $request->gender,
             'mobile' => $request->mobile,
+            'phone' => $request->phone,
             'email' => $request->email,
             'city' => $request->city,
             'active' => $request->active,
@@ -171,6 +174,21 @@ class StudentsController extends Controller
         $searchById = $request->query('searchById');
 
         $students = Certificate::with(['user', 'program', 'student'])
+        ->whereHas('student', function ($query) use ($searchById) {
+                    $query->where('id', '=', "{$searchById}");
+                }) 
+        ->paginate($perPage, ['*'], 'page', $currentPage);
+
+        return response()->json($students);
+    }
+
+    public function apiStudentsCourses(Request $request)
+    {
+        $perPage = 5; // Cantidad de estudiantes por página
+        $currentPage = $request->query('page', 1); // Página actual
+        $searchById = $request->query('searchById');
+
+        $students = CertificatesCourses::with(['user', 'course', 'student'])
         ->whereHas('student', function ($query) use ($searchById) {
                     $query->where('id', '=', "{$searchById}");
                 }) 

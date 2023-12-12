@@ -1,4 +1,3 @@
-console.log("Certiticados");
 document.addEventListener('DOMContentLoaded', function () {
     const opcionSelect = document.getElementById('type_certificate');
 
@@ -12,15 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const bloque8 = document.getElementById('bloque8');
     const bloque9 = document.getElementById('bloque9');
 
-    console.log(opcionSelect);
-    console.log(opcionSelect.value);
     bloque9.style.display = 'none';
 
     if (opcionSelect.value === 'cm') {
         bloque1.style.display = 'none';
         bloque2.style.display = 'none';
-        bloque3.style.display = 'none';
-        bloque4.style.display = 'none';
+        bloque3.style.display = 'block';
+        bloque4.style.display = 'block';
         bloque5.style.display = 'none';
         bloque6.style.display = 'none';
         bloque7.style.display = 'none';
@@ -41,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (opcionSelect.value === 'cm') {
             bloque1.style.display = 'none';
             bloque2.style.display = 'none';
-            bloque3.style.display = 'none';
-            bloque4.style.display = 'none';
+            bloque3.style.display = 'block';
+            bloque4.style.display = 'block';
             bloque5.style.display = 'none';
             bloque6.style.display = 'none';
             bloque7.style.display = 'none';

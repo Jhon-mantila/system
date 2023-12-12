@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/students-api', [StudentsController::class, 'apiStudents']);
+Route::get('/students-api-courses', [StudentsController::class, 'apiStudentsCourses']);
 Route::get('/search-programs', [CertificateController::class, 'searchPrograms']);
 Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
 Route::get('/search-courses', [CertificatesCoursesController::class, 'searchCourses']);

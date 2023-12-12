@@ -24,7 +24,8 @@ class EmployeesFactory extends Factory
 
         return [
             //Datos falsos para la base de datos
-            'id' =>  (string) Uuid::uuid4(),
+            //'id' =>  (string) Uuid::uuid4(),
+            'id' => 'a64dba72-76e8-489e-9af4-a0791a7e2b08',
             'type_document' => $this->faker->randomElement(array_keys($activeOptions->getTypeDocumento())),
             'document' => $this->faker->numberBetween(20000, 10000000),
             'first_name' => $this->faker->firstName(),

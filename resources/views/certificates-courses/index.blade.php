@@ -5,7 +5,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Certificados Cursos:') }} {{ $certificates->total() }}
                     </h2>
-                    <form action="{{ route('certificates.index') }}" method="GET" class="flex-grow">
+                    <form action="{{ route('certificates-courses.index') }}" method="GET" class="flex-grow">
 
                         <label class="relative block">
                             <span class="sr-only">Search</span>
@@ -54,7 +54,11 @@
                             <td class="px-6 py-4">{{ $certificate->created_at }}</td>
                             
                             <td class="px-6 py-4">
-                                <a href="{{ route('pdf.generatecourse', ['certificate' => $certificate]) }}" class="text-indigo-600">Pdf</a> 
+                                @if($certificate->file == '')
+                                    <a href="{{ route('pdf.generatecourse', ['certificate' => $certificate]) }}" class="text-indigo-600" target="_blank">Pdf</a> 
+                                @else
+                                    <a href="{{ asset('storage/intranet/uploads/' . $certificate->file) }}"class="text-indigo-600" target="_blank">Pdf</a>
+                                @endif
                             </td>
 
                             <td class="px-6 py-4">
@@ -62,7 +66,7 @@
                             </td>
 
                             <td class="px-6 py-4">
-                                <form action="{{ route('certificates.destroy', $certificate) }}" method="POST">
+                                <form action="{{ route('certificates-courses.destroy', $certificate) }}" method="POST">
                                     <!-- Crea una encriptación un token en value -->
                                     @csrf
                                     @method('DELETE')

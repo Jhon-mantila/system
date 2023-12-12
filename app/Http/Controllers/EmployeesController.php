@@ -100,7 +100,7 @@ class EmployeesController extends Controller
         }else{            
             $path = $request->file('signature')->store('signature');  
         }
-
+        
         $employee = $request->user()->employees()->create([
             'id' => (String) Uuid::uuid4(),
             'type_document' => $request->type_document,
@@ -144,7 +144,7 @@ class EmployeesController extends Controller
 
         $request->validate([
             'first_name' => 'required',
-            'document'  => 'required|unique:students,document',
+            'document'  => 'required|unique:employees,document,' . $employee->id,
             'last_name'  => 'required',
             'mobile'  => 'required',
             'email'  => 'required',
@@ -175,7 +175,8 @@ class EmployeesController extends Controller
             
             $path = $request->file('signature')->store('signature');  
         }
-
+        //dd($path);
+        
         $employee->update([
             'type_document' => $request->type_document,
             'document' => $request->document,

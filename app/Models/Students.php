@@ -21,9 +21,11 @@ class Students extends Model
         'second_last_name',
         'gender',
         'mobile',
+        'phone',
         'email',
         'city',
-        'active'
+        'active',
+        'user_id',
     ];
 
     public function certificate(){

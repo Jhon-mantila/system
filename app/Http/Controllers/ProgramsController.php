@@ -33,7 +33,7 @@ class ProgramsController extends Controller
     }
 
     public function show(Programs $program){
-        
+        //dd($program);
         $activeOptions = $this->dropdownService->getActive();
 
         //$p = Programs::find('07184ec6-7f16-477c-aa89-53807f85c6a7')->courses()->orderBy('name')->get();;

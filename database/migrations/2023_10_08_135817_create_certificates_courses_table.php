@@ -32,6 +32,7 @@ return new class extends Migration
             $table->integer('accredited')->nullable();
             $table->integer('notified')->nullable();
             $table->string('module');
+            $table->string('file')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

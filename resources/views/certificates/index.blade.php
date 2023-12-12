@@ -54,7 +54,11 @@
                             <td class="px-6 py-4">{{ $certificate->created_at }}</td>
                             
                             <td class="px-6 py-4">
-                                <a href="{{ route('pdf.generate', ['certificate' => $certificate]) }}" class="text-indigo-600">Pdf</a> 
+                                @if($certificate->file == '')
+                                    <a href="{{ route('pdf.generate', ['certificate' => $certificate]) }}" class="text-indigo-600" target="_blank">Pdf</a> 
+                                @else
+                                    <a href="{{ asset('storage/intranet/uploads/' . $certificate->file) }}"class="text-indigo-600" target="_blank">Pdf</a>
+                                @endif
                             </td>
 
                             <td class="px-6 py-4">

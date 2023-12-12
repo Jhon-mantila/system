@@ -43,14 +43,16 @@ class CertificatesCoursesController extends Controller
     }
 
     public function show(CertificatesCourses $certificates_course){
-        
+       
+        //dd($id);
         $typeCertificate = $this->dropdownService->getTypeCertificate();
         $accreditedOptions = $this->dropdownService->getAccredited();
         $typeCode = $this->dropdownService->getCode();
 
         $certificate = CertificatesCourses::with(['user', 'course', 'student', 'employee', 'company'])
         ->get()
-        ->where('id', '=', $certificates_course->id);
+        ->where('id', $certificates_course->id);
+
         //dd($certificate);
         return view('certificates-courses.show', [
             'certificate' => $certificate,
@@ -209,5 +211,13 @@ class CertificatesCoursesController extends Controller
         //dd($courses);
         //dd(response()->json($courses));
         return response()->json($courses);
+    }
+
+    public function destroy(CertificatesCourses $certificates_course){
+        //dd($certificates_course);
+        $certificates_course->delete();
+
+        return back();
+
     }
 }

@@ -49,7 +49,7 @@
                             $hidden_c = "";
                         @endphp
                     @endif
-                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
+                    <div class="grid grid-cols-2 gap-4">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Fecha Inicial</label>
                             <p class="p-2">{{ $certificado->date_start }}</p>

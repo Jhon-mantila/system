@@ -1,8 +1,8 @@
 import Chart from 'chart.js/auto';
-console.log("PRUEBAAAAA")
+
 async function fetchData() {
     
-    const apiUrl = "http://localhost/system/public/api/certificates-actives";
+    const apiUrl = window.location.origin + "/system/public/api/certificates-actives";
 
     try {
         const response = await fetch(apiUrl);  // Realizar la solicitud a la API
@@ -22,7 +22,7 @@ async function fetchData() {
 (async () => {
     const info = await fetchData();
     if (info) {
-      console.log('datos: ', info);
+      
       // Aquí puedes hacer lo que necesites con los datos de la API
        
         const data = {

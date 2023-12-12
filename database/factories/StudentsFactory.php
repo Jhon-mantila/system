@@ -30,6 +30,7 @@ class StudentsFactory extends Factory
             'second_last_name' => $this->faker->lastName(),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'mobile' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
             'city' => $this->faker->city(),
             'active' => $this->faker->numberBetween(1, 2),

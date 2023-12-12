@@ -26,7 +26,8 @@ class Employees extends Model
         'description',
         'signature',
         'type_employee',
-        'active'
+        'active',
+        'user_id',
     ];
 
     public function certificate(){

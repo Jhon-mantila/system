@@ -55,13 +55,13 @@
 
 <div class="grid grid-cols-2 gap-4">
     <div class="">
-            <label for="" class="uppercase text-gray-700 text-xs">Ciudad</label>
-            <span class="text-xs text-red-600">@error('city') {{ $message }}  @enderror</span>
-            <input type="text" name="city" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('city', $student->city) }}">
+            <label for="" class="uppercase text-gray-700 text-xs">Teléfono</label>
+            <span class="text-xs text-red-600">@error('phone') {{ $message }}  @enderror</span>
+            <input type="text" name="phone" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('phone', $student->phone) }}">
     </div>
     <div class="">
-        <label for="" class="uppercase text-gray-700 text-xs">Mobil</label>
+        <label for="" class="uppercase text-gray-700 text-xs">Teléfono móvil</label>
         <span class="text-xs text-red-600">@error('mobile') {{ $message }}  @enderror</span>
         <input type="text" name="mobile" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('mobile', $student->mobile) }}">
@@ -97,6 +97,12 @@
 </div>
 
 <div class="grid grid-cols-2 gap-4">
+    <div class="">
+            <label for="" class="uppercase text-gray-700 text-xs">Ciudad</label>
+            <span class="text-xs text-red-600">@error('city') {{ $message }}  @enderror</span>
+            <input type="text" name="city" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('city', $student->city) }}">
+    </div>
     <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Email</label>
             <span class="text-xs text-red-600">@error('email') {{ $message }}  @enderror</span>

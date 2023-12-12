@@ -22,6 +22,8 @@ class MYPDF extends TCPDF {
 
     // Page footer
     public function Footer() {
+        $image_file_logo_machin = K_PATH_IMAGES.'logo_consolmeci.png';
+        $this->Image($image_file_logo_machin, 160, 240, 24, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
         // Position at 15 mm from bottom
         $this->SetY(-15);
         // Set font
@@ -173,11 +175,14 @@ class PdfController extends Controller
 
         $mitadAnchoPagina = $pageWidth/2;
         $image_file_logo = K_PATH_IMAGES.'logo.png';
+        $image_file_logo_machin = K_PATH_IMAGES.'logo_consolmeci.png';
         $pdf->Image($image_file_logo, $mitadAnchoPagina-15, 5, 35, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+        
+        $pdf->Image($image_file_logo_machin, 245, 160, 26, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
 
         $pdf->ln(40);
         // set some text to print
-        $pdf->SetFont('helvetica', 'B', 18);
+        $pdf->SetFont('helvetica', 'B', 15);
         $pdf->Cell(0, 0, 'LA REPUBLICA DE COLOMBIA', 0, 1, 'C', 0, '', 3);
         $pdf->ln(2);
         $pdf->SetFont('helvetica', 'N', 16);
@@ -205,7 +210,7 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, "CC {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
-        $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}, certificación con nivel avanzado en la norma:";
+        $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}";
         //$pdf->Cell(0, 0, "Asistió y supero el proceso de: {$certificates->process}, certificación con nivel avanzado en la norma:", 0, 1, 'C', 0, '', 3);
         $pdf->MultiCell(250, 0, ''.$textmulticellproceso, 0, 'C', 0, 0, 25, '', true);
         $pdf->SetFont('helvetica', 'B', 16);
@@ -260,7 +265,7 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, 'Director General', 0, 1, 'C', 0, '', 1);
         // Logo
         $image_file = public_path('storage/' . $certificates->employee->signature);
-        $pdf->Image($image_file, $mitadAnchoPagina-5, 170, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+        $pdf->Image($image_file, $mitadAnchoPagina-20, 155, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
         
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
@@ -278,7 +283,7 @@ class PdfController extends Controller
             'module_height' => 1 // height of a single module in points
         );
         // QRCODE,L : QR-CODE Low error correction
-        $pdf->write2DBarcode($_SERVER['DOCUMENT_ROOT']."system/public/?search=$document", 'QRCODE,L', 235, 160, 40, 40, $style, 'N');
+        $pdf->write2DBarcode("https://consolmeci.com/system/public/?search=$document", 'QRCODE,L', 235, 5, 35, 35, $style, 'N');
         
         // ---------------------------------------------------------
         $salida = $certificates->student->first_name . '_' . $certificates->student->second_name . '_' . $certificates->student->last_name . '_' . $certificates->student->second_last_name;
@@ -383,20 +388,29 @@ class PdfController extends Controller
                     El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
+
+                    $dia_c = date('d', strtotime($certificates->date_certificate));
+                    setlocale(LC_TIME, 'es_ES.UTF-8');
+                    $mes_c = date('M', strtotime($certificates->date_certificate));
+                    $mes_espanol_c = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_c);
+                    $year_c = date('Y', strtotime($certificates->date_certificate));
         
                     // print a block of text using Write()
                     $pdf->MultiCell(0, 0, $txt, 0, 'J', false);
                     //$pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
                     $pdf->ln(15);
-                    $pdf->Cell(0, 0, 'En constancia se firma en Barrancabermeja el día 01 de julio del año 2022.', 0, 1, 'L', 0, '', 0);
+                    $pdf->Cell(0, 0, "En constancia se firma en Barrancabermeja el día $dia_c de $mes_espanol_c del año $year_c.", 0, 1, 'L', 0, '', 0);
                     
-                    $pdf->ln(40);
+                    $pdf->ln(35);
         
                     $pdf->SetFont('helvetica', 'B', 12);
-        
+                    
+                    
                     // Logo
+                    $pageWidth = $pdf->getPageWidth();
+                    $mitadAnchoPagina = $pageWidth/2;
                     $image_file = public_path('storage/' . $certificates->employee->signature);
-                    $pdf->Image($image_file, 100, 230, 15, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+                    $pdf->Image($image_file, $mitadAnchoPagina-20, 220, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
                     //$pdf->ln(2);
                     $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
                     $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);
