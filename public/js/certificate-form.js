@@ -10,11 +10,11 @@ async function searchPrograms() {
         console.log(searchResults);
         resultsDiv.innerHTML = '';
         
-        if(searchInput.trim().length != 0 && idPrograms.trim().length == 0){
-            searchResults.forEach(result => {
-                    selectProgram(result);
-            });
-        }
+        // if(searchInput.trim().length != 0 && idPrograms.trim().length == 0){
+        //     searchResults.forEach(result => {
+        //             selectProgram(result);
+        //     });
+        // }
 
         searchResults.forEach(result => {
             const resultItem = document.createElement('div');
@@ -46,11 +46,11 @@ async function searchCourse() {
         console.log(searchResults);
         resultsDiv.innerHTML = '';
         
-        if(searchInput.trim().length != 0 && idPrograms.trim().length == 0){
-            searchResults.forEach(result => {
-                selectCourse(result);
-            });
-        }
+        // if(searchInput.trim().length != 0 && idPrograms.trim().length == 0){
+        //     searchResults.forEach(result => {
+        //         selectCourse(result);
+        //     });
+        // }
 
         searchResults.forEach(result => {
             const resultItem = document.createElement('div');
@@ -72,6 +72,7 @@ function selectCourse(course) {
 }
 
 async function searchStudents() {
+    let shouldAutoAssign = true; // Bandera para controlar la asignación automática
     const searchInput = document.getElementById('studentSearch').value;
     const resultsDiv = document.getElementById('studentSearchResults');
     const idStudents = document.getElementById('selectedStudentId').value;
@@ -83,11 +84,11 @@ async function searchStudents() {
         console.log(searchResults);
         resultsDiv.innerHTML = '';
 
-        if(searchInput.trim().length != 0 && idStudents.trim().length == 0){
-            searchResults.forEach(result => {
-                    selectStudent(result);
-            });
-        }
+        // if(searchInput.trim().length != 0 && idStudents.trim().length == 0){
+        //     searchResults.forEach(result => {
+        //             selectStudent(result);
+        //     });
+        // }
 
         searchResults.forEach(result => {
             const resultItem = document.createElement('div');
@@ -96,6 +97,7 @@ async function searchStudents() {
             resultItem.addEventListener('click', () => selectStudent(result));
             resultsDiv.appendChild(resultItem);
         });
+
     } catch (error) {
         console.error(error);
     }
@@ -120,11 +122,11 @@ async function searchEmployees() {
         console.log(searchResults);
         resultsDiv.innerHTML = '';
 
-        if(searchInput.trim().length != 0 && idEmployee.trim().length == 0){
-            searchResults.forEach(result => {
-                    selectEmployee(result);
-            });
-        }
+        // if(searchInput.trim().length != 0 && idEmployee.trim().length == 0){
+        //     searchResults.forEach(result => {
+        //             selectEmployee(result);
+        //     });
+        // }
 
         searchResults.forEach(result => {
             const resultItem = document.createElement('div');
