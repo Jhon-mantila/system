@@ -22,6 +22,8 @@ async function searchPrograms() {
             resultItem.classList.add('search-result');
             resultItem.addEventListener('click', () => selectProgram(result));
             resultsDiv.appendChild(resultItem);
+            const separator = document.createElement('hr');
+            resultsDiv.appendChild(separator);
         });
     } catch (error) {
         console.error(error);
@@ -58,6 +60,8 @@ async function searchCourse() {
             resultItem.classList.add('search-result');
             resultItem.addEventListener('click', () => selectCourse(result));
             resultsDiv.appendChild(resultItem);
+            const separator = document.createElement('hr');
+            resultsDiv.appendChild(separator);
         });
     } catch (error) {
         console.error(error);
@@ -96,6 +100,8 @@ async function searchStudents() {
             resultItem.classList.add('search-result');
             resultItem.addEventListener('click', () => selectStudent(result));
             resultsDiv.appendChild(resultItem);
+            const separator = document.createElement('hr');
+            resultsDiv.appendChild(separator);
         });
 
     } catch (error) {
@@ -134,6 +140,8 @@ async function searchEmployees() {
             resultItem.classList.add('search-result');
             resultItem.addEventListener('click', () => selectEmployee(result));
             resultsDiv.appendChild(resultItem);
+            const separator = document.createElement('hr');
+            resultsDiv.appendChild(separator);
         });
     } catch (error) {
         console.error(error);
