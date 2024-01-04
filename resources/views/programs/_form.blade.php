@@ -40,6 +40,23 @@
         </div>
         
         <div class="">
+            <label for="" class="uppercase text-gray-700 text-xs">Programa Certificado</label>
+            <span class="text-xs text-red-600">@error('certificate') {{ $message }}  @enderror</span>
+            <select name="certificate" id="" class="rounded border-gray-200 w-full mb-4">
+                    @foreach ($certificateOptions as $key => $value)
+                        <option value="{{ $key }}"
+                        @if (old('certificate', $program->certificate) === $key)
+                            selected
+                        @endif
+                        >{{ $value }}</option>
+                    @endforeach
+            </select>    
+        </div>
+</div>
+
+<div class="grid grid-cols-2 gap-4">
+        
+        <div class="">
             <label for="" class="uppercase text-gray-700 text-xs">Activado</label>
             <span class="text-xs text-red-600">@error('active') {{ $message }}  @enderror</span>
             <select name="active" id="" class="rounded border-gray-200 w-full mb-4">

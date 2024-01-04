@@ -29,6 +29,7 @@ class ProgramsFactory extends Factory
             'name' => $this->faker->name(),
             'credits' => $this->faker->numberBetween(1, 20),
             'hours' => $this->faker->numberBetween(1, 20),
+            'certificate' => $this->faker->numberBetween(0, 1),
             'active' => $this->faker->numberBetween(1, 2),
             'user_id' => 1,
         ];

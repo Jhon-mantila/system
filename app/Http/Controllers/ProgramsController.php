@@ -35,6 +35,7 @@ class ProgramsController extends Controller
     public function show(Programs $program){
         //dd($program);
         $activeOptions = $this->dropdownService->getActive();
+        $certificateOptions = $this->dropdownService->getAccredited();
 
         //$p = Programs::find('07184ec6-7f16-477c-aa89-53807f85c6a7')->courses()->orderBy('name')->get();;
         //dd($p);
@@ -47,17 +48,20 @@ class ProgramsController extends Controller
         //dd($program);
         return view('programs.show', [
             'program' => $program,
-            'activeOptions' => $activeOptions
+            'activeOptions' => $activeOptions,
+            'certificateOptions' => $certificateOptions
         ]);
     }
 
     public function create(Programs $program){
         
         $activeOptions = $this->dropdownService->getActive();
+        $certificateOptions = $this->dropdownService->getAccredited();
 
         return view ('programs.create',[
             'program' => $program,
-            'activeOptions' => $activeOptions
+            'activeOptions' => $activeOptions,
+            'certificateOptions' => $certificateOptions,
         ]);
     }
 
@@ -84,6 +88,7 @@ class ProgramsController extends Controller
             'name' => $request->name,
             'credits' => $request->credits,
             'hours' => $request->hours,
+            'certificate' => $request->certificate,
             'active' => $request->active,
             
         ]);
@@ -94,10 +99,12 @@ class ProgramsController extends Controller
     public function edit(Programs $program){
 
         $activeOptions = $this->dropdownService->getActive();
+        $certificateOptions = $this->dropdownService->getAccredited();
 
         return view('programs.edit', [
             'program' => $program,
-            'activeOptions' => $activeOptions
+            'activeOptions' => $activeOptions,
+            'certificateOptions' => $certificateOptions,
         ]);
     }
 
@@ -123,6 +130,7 @@ class ProgramsController extends Controller
             'name' => $request->name,
             'credits' => $request->credits,
             'hours' => $request->hours,
+            'certificate' => $request->certificate,
             'active' => $request->active,
             'updated_at' => date("Y-m-d H:i:s"),
         ]);

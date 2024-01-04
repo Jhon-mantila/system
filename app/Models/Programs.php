@@ -22,6 +22,7 @@ class Programs extends Model
         'name', 
         'credits',
         'hours',
+        'certificate',
         'active',
         'user_id'
     ];

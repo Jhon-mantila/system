@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('code_ocupation');
             $table->string('name');
             $table->integer('credits')->nullable();
-            $table->integer('hours')->nullable();;
+            $table->integer('hours')->nullable();
+            $table->integer('certificate')->nullable();
             $table->integer('active');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
