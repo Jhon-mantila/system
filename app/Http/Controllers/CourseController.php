@@ -59,13 +59,12 @@ class CourseController extends Controller
         //dd($request);
 
         $request->validate([
-            'code' => 'required|unique:courses,code',
+            'code' => 'required',
             'code_ocupation' => 'required',
             'name'  => 'required',
             'active'  => 'required',
         ],[
             'code.required' => 'El campo código norma es requerido',
-            'code.unique'    => 'El código norma debe ser unico (Ya existe este código)',
             'code_ocupation.required' => 'El campo ocupación código es requerido',
             'name.required'  => 'El campo nombre del programa es requerido',
             'active.required'    => 'Este campo es requerido',
@@ -98,13 +97,12 @@ class CourseController extends Controller
     public function update(Request $request, Course $course){
 
         $request->validate([
-            'code' => 'required|unique:courses,code,' . $course->id,
+            'code' => 'required',
             'code_ocupation' => 'required',
             'name'  => 'required',
             'active'  => 'required',
         ],[
             'code.required' => 'El campo código es requerido',
-            'code.unique'    => 'El código debe ser unico (Ya existe este código)',
             'code_ocupation.required' => 'El campo ocupación código es requerido',
             'name.required'  => 'El campo nombre del programa es requerido',
             'active.required'    => 'Este campo es requerido',

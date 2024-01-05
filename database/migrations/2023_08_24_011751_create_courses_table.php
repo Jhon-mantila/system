@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('code')->unique();
+            $table->string('code');
             $table->string('code_ocupation');
             $table->string('name');
             $table->integer('credits')->nullable();
