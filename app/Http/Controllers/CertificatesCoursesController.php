@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Employees;
 use App\Models\Course;
+use App\Models\Programs;
 use App\Models\Students;
 use Ramsey\Uuid\Uuid;
 use App\Services\DropdownService;
@@ -54,12 +55,16 @@ class CertificatesCoursesController extends Controller
         ->get()
         ->where('id', $certificates_course->id);
 
+        foreach($certificate as $valor){
+            $programs = Programs::where('id', '=', "$valor->title")->get();
+        }
         //dd($certificate);
         return view('certificates-courses.show', [
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
             'accreditedOptions' => $accreditedOptions,
             'typeCode' => $typeCode,
+            'titulo' => $programs,
         ]);
     }
 
