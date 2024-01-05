@@ -370,6 +370,22 @@ class PdfController extends Controller
                     $mes_espanol = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes);
                     $year = date('Y', strtotime($certificates->date_start));
                     
+                    $fecha_end = "";
+
+                    if(!empty($certificates->date_end)){
+                        $dia_end = date('d', strtotime($certificates->date_end));
+                        setlocale(LC_TIME, 'es_ES.UTF-8');
+                        $mes_end = date('M', strtotime($certificates->date_end));
+                        $mes_espanol_end = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_end);
+                        $year_end = date('Y', strtotime($certificates->date_end));
+                        if($module == "programa"){
+                            $fecha_end = " el día $dia_end de $mes_espanol_end del año $year_end, ";
+                        }else{
+                            $hora = $certificates->course->hours;
+                            $fecha_end = " el día $dia_end de $mes_espanol_end del año $year_end con una duración de $hora horas,";
+                        }
+                    }
+
                         if($module == "programa"){
                             $program = $certificates->program->name;
                         }else{
@@ -385,7 +401,7 @@ class PdfController extends Controller
                         }
                     // set some text to print
                     $txt = <<<EOD
-                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student con CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
 
@@ -674,6 +690,22 @@ class PdfController extends Controller
         $mes = date('M', strtotime($certificates->date_start));
         $mes_espanol = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes);
         $year = date('Y', strtotime($certificates->date_start));
+
+        $fecha_end = "";
+
+        if(!empty($certificates->date_end)){
+            $dia_end = date('d', strtotime($certificates->date_end));
+            setlocale(LC_TIME, 'es_ES.UTF-8');
+            $mes_end = date('M', strtotime($certificates->date_end));
+            $mes_espanol_end = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_end);
+            $year_end = date('Y', strtotime($certificates->date_end));
+            if($module == "programa"){
+                $fecha_end = " el día $dia_end de $mes_espanol_end del año $year_end, ";
+            }else{
+                $hora = $certificates->course->hours;
+                $fecha_end = " el día $dia_end de $mes_espanol_end del año $year_end, con una duración de $hora horas ";
+            }
+        }
         
             if($module == "programa"){
                 $program = $certificates->program->name;
@@ -690,7 +722,7 @@ class PdfController extends Controller
             }
         // set some text to print
         $txt = <<<EOD
-        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
 
         EOD;
 
