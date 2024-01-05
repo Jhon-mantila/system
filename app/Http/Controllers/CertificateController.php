@@ -56,13 +56,17 @@ class CertificateController extends Controller
         ->get()
         ->where('id', '=', $certificate->id);
         //dd($certificate);
+
+        foreach($certificate as $valor){
+            $programs = Programs::where('id', '=', "$valor->title")->get();
+        }
+        //dd($programs);
         return view('certificates.show', [
             'certificate' => $certificate,
             'typeCertificate' => $typeCertificate,
             'accreditedOptions' => $accreditedOptions,
             'typeCode' => $typeCode,
-            
-
+            'titulo' => $programs,
         ]);
     }
 
@@ -217,7 +221,17 @@ class CertificateController extends Controller
         return response()->json($programs);
     }
 
-    
+    public function searchProgramsTitle(Request $request)
+    {
+        $search = $request->input('search');
+       
+        $programs = Programs::where('name', 'LIKE', "%$search%")
+                                    ->where('certificate', 1)
+                                    ->get();
+        //dd($programs);
+        //dd(response()->json($programs));
+        return response()->json($programs);
+    }
 
     public function searchStudents(Request $request)
     {

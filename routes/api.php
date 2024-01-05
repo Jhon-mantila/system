@@ -26,6 +26,7 @@ Route::get('/students-api', [StudentsController::class, 'apiStudents']);
 Route::get('/students-api-courses', [StudentsController::class, 'apiStudentsCourses']);
 Route::get('/search-programs', [CertificateController::class, 'searchPrograms']);
 Route::get('/search-programs-id', [CertificateController::class, 'searchProgramsId']);
+Route::get('/search-programs-title', [CertificateController::class, 'searchProgramsTitle']);
 Route::get('/search-courses', [CertificatesCoursesController::class, 'searchCourses']);
 Route::get('/search-courses-id', [CertificatesCoursesController::class, 'searchCoursesId']);
 Route::get('/search-students', [CertificateController::class, 'searchStudents']);

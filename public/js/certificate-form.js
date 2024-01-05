@@ -155,6 +155,45 @@ function selectEmployee(employee) {
     document.getElementById('employeeSearchResults').innerHTML = '';
 }
 
+async function searchProgramsTitle() {
+    const searchInput = document.getElementById('programSearchTitle').value;
+    const resultsDiv = document.getElementById('programSearchResultsTitle');
+    const idPrograms = document.getElementById('selectedProgramIdTitle').value;
+    console.log(searchInput);
+    try {
+        const response = await fetch(`${window.location.origin}/system/public/api/search-programs-title?search=${searchInput}`);
+        const searchResults = await response.json();
+        console.log("Resultado");
+        console.log(searchResults);
+        resultsDiv.innerHTML = '';
+        
+        // if(searchInput.trim().length != 0 && idPrograms.trim().length == 0){
+        //     searchResults.forEach(result => {
+        //             selectProgram(result);
+        //     });
+        // }
+
+        searchResults.forEach(result => {
+            const resultItem = document.createElement('div');
+            resultItem.textContent = result.name;
+            resultItem.classList.add('search-result');
+            resultItem.addEventListener('click', () => selectProgramTitle(result));
+            resultsDiv.appendChild(resultItem);
+            const separator = document.createElement('hr');
+            resultsDiv.appendChild(separator);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function selectProgramTitle(program) {
+    //console.log(program);
+    document.getElementById('programSearchTitle').value = program.name;
+    document.getElementById('selectedProgramIdTitle').value = program.id;
+    document.getElementById('programSearchResultsTitle').innerHTML = '';
+}
+
 //const searchInputId = document.getElementById('selectedProgramId').value;
 
 const searchInputIdValue = document.getElementById('selectedProgramId');
@@ -177,6 +216,33 @@ async function searchProgramsId(searchInputId) {
 
         if(searchInputId.trim().length != 0){
             document.getElementById('programSearch').value = searchResults[0].name;
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const searchInputIdValueTitle = document.getElementById('selectedProgramIdTitle');
+let searchInputIdTitle;
+if(searchInputIdValueTitle !== null){
+    searchInputIdTitle = searchInputIdValueTitle.value;
+    //console.log(searchInputId);
+    searchProgramsIdTitle(searchInputIdTitle);
+}else{
+    console.log("----Programa id vacio no existe title----");
+}
+
+async function searchProgramsIdTitle(searchInputId) {
+
+    try {
+        const response = await fetch(`${window.location.origin}/system/public/api/search-programs-id?search=${searchInputId}`);
+        const searchResults = await response.json();
+        //console.log("Resultado");
+        //console.log(searchResults[0].name);
+
+        if(searchInputId.trim().length != 0){
+            document.getElementById('programSearchTitle').value = searchResults[0].name;
         }
 
     } catch (error) {

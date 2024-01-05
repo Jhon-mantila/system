@@ -89,11 +89,14 @@
                     @endforeach
         </select>
     </div>   
-    <div class="" id="bloque6">
-            <label for="" class="uppercase text-gray-700 text-xs">Título</label>
-            <span class="text-xs text-red-600">@error('title') {{ $message }}  @enderror</span>
-            <input type="text" name="title" class="rounded border-gray-200 w-full mb-4" 
-            value="{{ old('title', $certificate->title) }}">
+    <div class="" id="bloque6">    
+        <label for="" class="uppercase text-gray-700 text-xs">Título</label>
+        <span class="text-xs text-red-600">@error('title') {{ $message }}  @enderror</span>
+        <input type="text" id="programSearchTitle" name="programSearchTitle" class="rounded border-gray-200 w-full mb-4" 
+        oninput="searchProgramsTitle()">
+        <input type="hidden" id="selectedProgramIdTitle" name="title" class="rounded border-gray-200 w-full mb-4" 
+        value="{{ old('title', $certificate->title) }}">
+        <div id="programSearchResultsTitle"></div>
     </div>
 
 </div>

@@ -64,7 +64,9 @@
 
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Título</label>
-                            <p class="p-2">{{ $certificado->title }}</p>
+                            @foreach ($titulo as $programa)
+                                <p class="p-2">{{ $programa->name }}</p>
+                            @endforeach 
                         </div> 
 
                         <div class="py-2">
