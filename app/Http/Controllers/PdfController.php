@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use TCPDF; 
 use App\Models\Certificate;
 use App\Models\CertificatesCourses;
+use App\Models\Programs;
 
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
@@ -254,6 +255,11 @@ class PdfController extends Controller
         $mes_espanol_final = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_final);
         $year_final = date('Y', strtotime($certificates->date_end));
         //$pdf->Cell(0, 0, "FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.", 0, 1, 'C', 0, '', 3);
+        
+        $programs = Programs::where('id', '=', "$title")->get();
+        foreach ($programs as $program) {
+            $title = $program->name;
+        }
         
         $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}."; 
         $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
@@ -574,6 +580,11 @@ class PdfController extends Controller
             $year_final = date('Y', strtotime($certificates->date_end));
             //$pdf->Cell(0, 0, "FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.", 0, 1, 'C', 0, '', 3);
             
+            $programs = Programs::where('id', '=', "$title")->get();
+            foreach ($programs as $program) {
+                $title = $program->name;
+            }
+
             $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}."; 
             $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
     
