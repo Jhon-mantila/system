@@ -285,6 +285,25 @@ class CertificateController extends Controller
         //dd(response()->json($programs));
         return response()->json($employees);
     }
+    
+    public function duplicate(Certificate $certificate)
+    {
+        // Obtiene el certificado
+        //$certificates = Certificate::find($certificate->id);
+        //dd($certificates);
+        // // Crea una copia del certificado
+        $certificate_duplicate = $certificate->replicate();
+
+        // Asigna un ID UUID al registro duplicado
+        //$certificate_duplicate->assignUuid(Uuid::uuid4());
+        $certificate_duplicate->id = Uuid::uuid4()->toString();
+        // Guarda el registro duplicado
+        //dd($certificate_duplicate);
+        $certificate_duplicate->save();
+        // Redirige a la vista de listado de certificados
+        return back();
+        // //return redirect()->route('certificates.index');
+    }
 
     public function destroy(Certificate $certificate){
 
