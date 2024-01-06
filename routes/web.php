@@ -52,5 +52,6 @@ Route::get('/pdf-courses/{certificate}', [PdfController::class, 'generarPDFcours
 Route::get('/pdf-constancia/{certificate}', [PdfController::class, 'generarConstanciaPDF'])->name('pdf.constancy');
 Route::get('/pdf-constancia-curso/{certificate}', [PdfController::class, 'generarConstanciaCoursesPDF'])->name('pdf.constancycurso');
 Route::get('/certificates/{certificate}/duplicate', [CertificateController::class, 'duplicate'])->name('certificate.duplicate');
+Route::get('/certificates-courses/{certificates_course}/duplicate', [CertificatesCoursesController::class, 'duplicate'])->name('certificates-courses.duplicate');
 
 require __DIR__.'/auth.php';

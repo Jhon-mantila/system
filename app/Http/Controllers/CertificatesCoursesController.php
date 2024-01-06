@@ -219,6 +219,25 @@ class CertificatesCoursesController extends Controller
         return response()->json($courses);
     }
 
+    public function duplicate(CertificatesCourses $certificates_course)
+    {
+        // Obtiene el certificado
+        //$certificates_course = CertificatesCourses::find($certificates_course->id);
+        //dd($certificates_course);
+        // // Crea una copia del certificado
+        $certificate_duplicate = $certificates_course->replicate();
+
+        // Asigna un ID UUID al registro duplicado
+        //$certificate_duplicate->assignUuid(Uuid::uuid4());
+        $certificate_duplicate->id = Uuid::uuid4()->toString();
+        // Guarda el registro duplicado
+        //dd($certificate_duplicate);
+        $certificate_duplicate->save();
+        // Redirige a la vista de listado de certificados
+        return back();
+        // //return redirect()->route('certificates.index');
+    }
+    
     public function destroy(CertificatesCourses $certificates_course){
         //dd($certificates_course);
         $certificates_course->delete();
