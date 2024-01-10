@@ -41,12 +41,21 @@
                         @php
                         $hidden_c = "hidden";
                         $hidden_cm = "";
+                        $hidden_t = "";
                         @endphp
                      @endif    
                     @if($certificado->type_certificate == 'cm')
                         @php
                             $hidden_cm = "hidden";
                             $hidden_c = "";
+                            $hidden_t = "";
+                        @endphp
+                    @endif
+                    @if($certificado->type_certificate == 't')
+                        @php
+                            $hidden_cm = "";
+                            $hidden_c = "";
+                            $hidden_t = "hidden";
                         @endphp
                     @endif
                     <div class="grid grid-cols-2 gap-4">
@@ -60,7 +69,7 @@
                             <p class="p-2">{{ $certificado->date_end }}</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}{{$hidden_t}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Título</label>
                             @foreach ($titulo as $programa)
@@ -74,7 +83,7 @@
                         </div> 
                     </div> 
 
-                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}{{$hidden_t}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Referencias</label>
                             <p class="p-2">{{ $certificado->references }}</p>
@@ -85,7 +94,7 @@
                         </div> 
                     </div>  
 
-                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}{{$hidden_t}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Acreditado</label>
                             <p class="p-2">{{ $accreditedOptions[$certificado->accredited] }}</p>

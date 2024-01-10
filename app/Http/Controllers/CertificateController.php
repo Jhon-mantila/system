@@ -93,6 +93,9 @@ class CertificateController extends Controller
         }else if($request->type_certificate == 'cm'){
             $required_certificate = 'required';
             $required = '';
+        }else if($request->type_certificate == 't'){
+            $required_certificate = '';
+            $required = 'required';
         }
        
         $request->validate([
@@ -162,7 +165,11 @@ class CertificateController extends Controller
             }else if($request->type_certificate == 'cm'){
                 $required_certificate = 'required';
                 $required = '';
+            }else if($request->type_certificate == 't'){
+                $required_certificate = '';
+                $required = 'required';
             }
+            
         $request->validate([
             'program_id' => 'required',
             'student_id' => 'required',

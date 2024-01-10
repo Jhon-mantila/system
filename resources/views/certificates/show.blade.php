@@ -41,14 +41,23 @@
                         @php
                         $hidden_c = "hidden";
                         $hidden_cm = "";
+                        $hidden_t = "";
                         @endphp
                      @endif    
                     @if($certificado->type_certificate == 'cm')
                         @php
                             $hidden_cm = "hidden";
                             $hidden_c = "";
+                            $hidden_t = "";
                         @endphp
                     @endif
+                    @if($certificado->type_certificate == 't')
+                        @php
+                        $hidden_c = "";
+                        $hidden_cm = "";
+                        $hidden_t = "hidden";
+                        @endphp
+                     @endif
                     <div class="grid grid-cols-2 gap-4">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Fecha Inicial</label>
@@ -62,7 +71,7 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
 
-                        <div class="py-2">
+                        <div class="py-2 {{$hidden_t}}">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Título</label>
                             @foreach ($titulo as $programa)
                                 <p class="p-2">{{ $programa->name }}</p>
@@ -75,7 +84,7 @@
                         </div> 
                         </div> 
 
-                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}}">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}} {{$hidden_t}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Referencias</label>
                             <p class="p-2">{{ $certificado->references }}</p>
@@ -97,7 +106,7 @@
 
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-4 {{$hidden_c}}">
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_c}} {{$hidden_t}}">
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Fecha de Constancia</label>
                             <p class="p-2">{{$certificado->date_certificate }}</p>

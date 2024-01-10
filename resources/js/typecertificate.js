@@ -23,6 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
         bloque7.style.display = 'none';
         bloque8.style.display = 'none';
         bloque9.style.display = 'block';
+
+    }else if(opcionSelect.value === 't'){
+        
+        bloque1.style.display = 'none';
+        bloque2.style.display = 'none';
+        bloque3.style.display = 'block';
+        bloque4.style.display = 'block';
+        bloque5.style.display = 'block';
+        bloque6.style.display = 'none';
+        bloque7.style.display = 'block';
+        bloque8.style.display = 'block';
+        bloque9.style.display = 'none';
+
     }
     opcionSelect.addEventListener('change', function () {
         bloque1.style.display = 'block';
