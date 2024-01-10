@@ -36,6 +36,7 @@ class DropdownService
         return [
             'c' => 'Certificado.',
             'cm' => 'Constancia Matrícula.',
+            't' => 'Titulación.',
         ];
     }
 
