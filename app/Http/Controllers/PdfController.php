@@ -439,12 +439,12 @@ class PdfController extends Controller
         
                     $pdf->SetFont('helvetica', 'B', 12);
                     
-                    
+                    $textHeight = $pdf->GetY() - 15;
                     // Logo
                     $pageWidth = $pdf->getPageWidth();
                     $mitadAnchoPagina = $pageWidth/2;
                     $image_file = "https://consolmeci.com/system/storage/app/public/" . $certificates->employee->signature;
-                    $pdf->Image($image_file, $mitadAnchoPagina-20, 220, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
+                    $pdf->Image($image_file, $mitadAnchoPagina-20, $textHeight, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
                     //$pdf->ln(2);
                     $name_employe = $certificates->employee->first_name . ' ' . $certificates->employee->second_name . ' ' . $certificates->employee->last_name . ' ' . $certificates->employee->second_last_name;
                     $pdf->Cell(0, 0, $name_employe, 0, 1, 'C', 0, '', 0);
