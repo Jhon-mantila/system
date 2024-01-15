@@ -919,7 +919,7 @@ class PdfController extends Controller
         
 
         //$pdf->Cell(0, 0, 'Cumpliendo con los requisitos exigidos por el INSTITUTO CONSOLMECI, en las pruebas de Conocimiento, Desempeño y Producto, este certificado es', 0, 1, 'C', 0, '', 3);
-        $textmulticelltitulo = "ESTE CERTIFICADO ES ESQUIVALENTE A {$horas} HORAS DE FORMACIÓN, FECHA DE EXPEDICIÓN: EL DÍA {$dia_final} DE {$mes_espanol_final} DEL AÑO {$year_final}."; 
+        $textmulticelltitulo = "ESTE TÍTULO DE TÉCNICO ES EQUIVALENTE A {$horas} HORAS DE FORMACIÓN, FECHA DE EXPEDICIÓN: EL DÍA {$dia_final} DE {$mes_espanol_final} DEL AÑO {$year_final}."; 
         $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
 
         $pdf->SetFont('helvetica', 'B', 12);
