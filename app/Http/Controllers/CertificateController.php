@@ -305,10 +305,11 @@ class CertificateController extends Controller
         //dd($certificates);
         // // Crea una copia del certificado
         $certificate_duplicate = $certificate->replicate();
-
+        $certificate_max = Certificate::max('code');  
         // Asigna un ID UUID al registro duplicado
         //$certificate_duplicate->assignUuid(Uuid::uuid4());
         $certificate_duplicate->id = Uuid::uuid4()->toString();
+        $certificate_duplicate->code = $certificate_max + 1;
         // Guarda el registro duplicado
         //dd($certificate_duplicate);
         $certificate_duplicate->save();

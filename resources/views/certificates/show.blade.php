@@ -127,10 +127,16 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Código</label>
+                            <p class="p-2">{{ $certificado->code }}</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Última Actualización</label>
                             <p class="p-2">{{ $certificado->updated_at }}</p>
                         </div> 
-
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Fecha de Creación</label>
                             <p class="p-2">{{ $certificado->created_at }}</p>
