@@ -9,6 +9,7 @@ use App\Models\Students;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Ramsey\Uuid\Uuid;
 use App\Services\DropdownService;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Certificate>
  */
@@ -19,6 +20,8 @@ class CertificateFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+
     public function definition(): array
     {
         $programs_id = Programs::pluck('id');
@@ -27,10 +30,11 @@ class CertificateFactory extends Factory
         $company_id = Company::pluck('id');
 
         $activeOptions = new DropdownService();
-        
+
         return [
             //
             'id' =>  (string) Uuid::uuid4(),
+            'code' =>  $this->faker->numberBetween(0, 200),
             'program_id' =>  $this->faker->randomElement($programs_id),
             'student_id' =>  $this->faker->randomElement($student_id),
             'employee_id' =>  $this->faker->randomElement($employee_id),

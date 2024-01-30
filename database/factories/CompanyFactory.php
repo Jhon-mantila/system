@@ -18,8 +18,8 @@ class CompanyFactory extends Factory
     {
         return [
             //
-            'id' =>  (string) Uuid::uuid4(),
-            //'id' => '9a8915a5-371e-4212-ad6a-d77857d442d7',
+            //'id' =>  (string) Uuid::uuid4(),
+            'id' => '9a8915a5-371e-4212-ad6a-d77857d442d7',
             'name' => $this->faker->name(),
             'nit' => $this->faker->numberBetween(20000, 10000000),
             'web' => "https://3ztech.com.co",

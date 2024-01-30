@@ -97,7 +97,11 @@ class CertificateController extends Controller
             $required_certificate = '';
             $required = 'required';
         }
-       
+        //Agregar 1 para el siguiente
+        $certificate = Certificate::max('code');   
+        //$code = $certificate->code; 
+
+        //dd($certificate+1);
         $request->validate([
             'program_id' => 'required',
             'student_id' => 'required',
@@ -124,6 +128,7 @@ class CertificateController extends Controller
         //dd($request);
         $certificate = $request->user()->certificates()->create([
             'id' => (String) Uuid::uuid4(),
+            'code' => $certificate + 1,
             'program_id' => $request->program_id,
             'student_id' => $request->student_id,
             'employee_id' => $request->employee_id,
