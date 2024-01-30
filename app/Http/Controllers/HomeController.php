@@ -35,7 +35,7 @@ class HomeController extends Controller
             INNER JOIN students s ON s.id = cc.student_id
             INNER JOIN employees e ON e.id = cc.employee_id
             INNER JOIN companies co ON co.id = cc.company_id
-            WHERE s.document = ?
+            WHERE s.document = ? AND s.active = 1
             UNION
             SELECT  co.name AS 'nombre_empresa',co.nit,co.web,co.direction,co.city AS 'ciudad_empresa',co.mobile,co.phone,co.logo,
             s.first_name AS 'nombre_estudiante',s.second_name AS 'segundo_nombre_estudiante',s.last_name AS 'primer_apellido_estudiante',s.second_last_name AS 'segundo_apellido_estudiante',s.city AS 'ciudad_estudiante',
@@ -47,8 +47,19 @@ class HomeController extends Controller
             INNER JOIN students s ON s.id = cc.student_id
             INNER JOIN employees e ON e.id = cc.employee_id
             INNER JOIN companies co ON co.id = cc.company_id
-            WHERE s.document = ? ORDER BY updated_at DESC", [$search,$search]);
+            WHERE s.document = ? AND s.active = 1 ORDER BY updated_at DESC", [$search,$search]);
 
+        if(empty($data)){
+            $data = DB::select(
+                "SELECT 
+                s.first_name AS 'nombre_estudiante',
+                s.second_name AS 'segundo_nombre_estudiante',
+                s.last_name AS 'primer_apellido_estudiante',
+                s.second_last_name AS 'segundo_apellido_estudiante',
+                s.active AS activo
+                FROM students s 
+                WHERE s.document = ? AND s.active = 1", [$search]);
+        }
         //dd($data);
         return view('welcome', [
             'data' => $data,

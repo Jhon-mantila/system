@@ -203,7 +203,10 @@
                         @if(isset($data) && count($data) > 0)
                         <div class="mt-6">
                             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $data[0]->nombre_estudiante }} {{ $data[0]->segundo_nombre_estudiante }} {{ $data[0]->primer_apellido_estudiante }} {{ $data[0]->segundo_apellido_estudiante }}</h2>
+                            <h2>Estado: Activo</h2>
                         </div>
+
+                        
                         <div class="mt-6">
                            
                            <div class="grid grid-cols-6 md:grid-cols-12 gap-4 lg:gap-8 scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
@@ -232,7 +235,9 @@
                                 </div>
                            </div>
                         </div>
+                        @if(isset($data[0]->nombre_empresa))
                            @foreach ($data as $datos)
+                           
                            <div class="mt-6">
                            <div class="grid grid-cols-6 md:grid-cols-12 gap-4 lg:gap-8 scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                                 <div class=""> 
@@ -279,8 +284,10 @@
                                 </div>
                            </div>
                         </div>
+                        
                     @endforeach
-                        @else
+                    @endif
+                    @else
                         <div class="mt-6">
                             <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                                 <h2 class="text-md font-semibold text-gray-900 dark:text-white">No se encontraron personas con esa cédula.</h2>
