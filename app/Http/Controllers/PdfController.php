@@ -406,8 +406,10 @@ class PdfController extends Controller
                     
                         if($module == "programa"){
                             $program = $certificates->program->name;
+                            $text_horas_creditos = "con una duración de {$certificates->program->hours} horas equivalentes a {$certificates->program->credits} créditos académicos";
                         }else{
                             $program = $certificates->course->name;
+                            $text_horas_creditos = "";
                         }
 
                         if($gender == "male"){
@@ -419,7 +421,7 @@ class PdfController extends Controller
                         }
                     // set some text to print
                     $txt = <<<EOD
-                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
 
@@ -732,8 +734,10 @@ class PdfController extends Controller
         
             if($module == "programa"){
                 $program = $certificates->program->name;
+                $text_horas_creditos = "con una duración de {$certificates->program->hours} horas equivalentes a {$certificates->program->credits} créditos académicos";
             }else{
                 $program = $certificates->course->name;
+                $text_horas_creditos = "";
             }
 
             if($gender == "male"){
@@ -745,7 +749,7 @@ class PdfController extends Controller
             }
         // set some text to print
         $txt = <<<EOD
-        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
 
         EOD;
 
