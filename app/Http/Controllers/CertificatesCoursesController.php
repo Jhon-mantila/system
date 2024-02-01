@@ -95,6 +95,9 @@ class CertificatesCoursesController extends Controller
             $required = 'required';
         }
 
+        //Agregar 1 para el siguiente
+        $certificate = CertificatesCourses::max('code');   
+
         $request->validate([
              'course_id' => 'required',
              'student_id' => 'required',
@@ -121,6 +124,7 @@ class CertificatesCoursesController extends Controller
          //dd($request);
          $certificate = $request->user()->certificatesCourses()->create([
              'id' => (String) Uuid::uuid4(),
+             'code' => $certificate + 1,
              'course_id' => $request->course_id,
              'student_id' => $request->student_id,
              'employee_id' => $request->employee_id,
@@ -232,10 +236,11 @@ class CertificatesCoursesController extends Controller
         //dd($certificates_course);
         // // Crea una copia del certificado
         $certificate_duplicate = $certificates_course->replicate();
-
+        $certificate_max = CertificatesCourses::max('code');
         // Asigna un ID UUID al registro duplicado
         //$certificate_duplicate->assignUuid(Uuid::uuid4());
         $certificate_duplicate->id = Uuid::uuid4()->toString();
+        $certificate_duplicate->code = $certificate_max + 1;
         // Guarda el registro duplicado
         //dd($certificate_duplicate);
         $certificate_duplicate->save();

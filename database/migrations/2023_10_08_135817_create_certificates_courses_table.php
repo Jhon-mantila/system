@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('certificates_courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->integer('code');
             $table->uuid('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->uuid('student_id');

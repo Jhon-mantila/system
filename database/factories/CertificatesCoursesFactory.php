@@ -32,6 +32,7 @@ class CertificatesCoursesFactory extends Factory
         return [
             //
             'id' =>  (string) Uuid::uuid4(),
+            'code' =>  $this->faker->numberBetween(0, 200),
             'course_id' =>  $this->faker->randomElement($course_id),
             'student_id' =>  $this->faker->randomElement($student_id),
             'employee_id' =>  $this->faker->randomElement($employee_id),
