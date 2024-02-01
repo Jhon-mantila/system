@@ -284,11 +284,11 @@ class PdfController extends Controller
         // Logo
         $image_file = "https://consolmeci.com/system/storage/app/public/" . $certificates->employee->signature;
         $pdf->Image($image_file, $mitadAnchoPagina-20, 155, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
-        
+        $codigo = str_pad($certificates->code, 8, "0", STR_PAD_LEFT);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
         $pdf->Cell(0, 0, "{$certificates->company->direction} Tel:{$certificates->company->phone} – Cel: {$certificates->company->mobile} Barrancabermeja", 0, 1, 'C', 0, '', 3);
-        $pdf->Cell(0, 0, "E-Mail: Agobardo.01@hotmail.com – Validación de Certificados {$certificates->company->web}", 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, "E-Mail: Agobardo.01@hotmail.com – Validación de Certificados {$certificates->company->web} - Código: {$codigo}", 0, 1, 'C', 0, '', 3);
         
         // set style for barcode
         $style = array(
@@ -612,11 +612,11 @@ class PdfController extends Controller
             // Logo
             //$image_file = public_path('storage/' . $certificates->employee->signature);
             //$pdf->Image($image_file, $mitadAnchoPagina-20, 155, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
-            
+            $codigo = str_pad($certificates->code, 8, "0", STR_PAD_LEFT);
             $pdf->ln(3);
             $pdf->SetFont('helvetica', 'N', 9);
             $pdf->Cell(0, 0, "{$certificates->company->direction} Tel:{$certificates->company->phone} – Cel: {$certificates->company->mobile} Barrancabermeja", 0, 1, 'C', 0, '', 3);
-            $pdf->Cell(0, 0, "E-Mail: Agobardo.01@hotmail.com – Validación de Certificados {$certificates->company->web}", 0, 1, 'C', 0, '', 3);
+            $pdf->Cell(0, 0, "E-Mail: Agobardo.01@hotmail.com – Validación de Certificados {$certificates->company->web} - Código: {$codigo}", 0, 1, 'C', 0, '', 3);
             
             // set style for barcode
             $style = array(
@@ -940,11 +940,11 @@ class PdfController extends Controller
             $image_file = "https://consolmeci.com/system/storage/app/public/" . $certificates->employee->signature;
             $pdf->Image($image_file, $mitadAnchoPagina-20, 155, 40, '', '', '', 'C', false, 300, '', false, false, 0, false, false, false);
         }
-
+        $codigo = str_pad($certificates->code, 8, "0", STR_PAD_LEFT);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
         $pdf->Cell(0, 0, "{$certificates->company->direction} Tel:{$certificates->company->phone} – Cel: {$certificates->company->mobile} Barrancabermeja", 0, 1, 'C', 0, '', 3);
-        $pdf->Cell(0, 0, "E-Mail: Agobardo.01@hotmail.com – Validación de Certificados {$certificates->company->web}", 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, "E-Mail: Agobardo.01@hotmail.com – Validación de Certificados {$certificates->company->web} - Código: {$codigo}", 0, 1, 'C', 0, '', 3);
         
         // set style for barcode
         $style = array(
