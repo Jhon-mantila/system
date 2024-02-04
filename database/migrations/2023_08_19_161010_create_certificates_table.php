@@ -31,6 +31,9 @@ return new class extends Migration
             $table->string('type_code')->nullable();
             $table->string('references')->nullable();
             $table->string('process')->nullable();
+            $table->integer('book')->nullable();
+            $table->integer('acta')->nullable();
+            $table->integer('folio')->nullable();
             $table->integer('accredited')->nullable();
             $table->integer('notified')->nullable();
             $table->string('module');

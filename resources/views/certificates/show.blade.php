@@ -125,7 +125,22 @@
                         </div> 
                     </div>
 
+                    <div class="grid grid-cols-2 gap-4 {{$hidden_cm}} {{$hidden_c}}">
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Libro</label>
+                            <p class="p-2">{{ $certificado->book }}</p>
+                        </div>
+                        <div class="py-2">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Folio</label>
+                            <p class="p-2">{{ $certificado->folio }}</p>
+                        </div> 
+                    </div>
+
                     <div class="grid grid-cols-2 gap-4">
+                        <div class="py-2 {{$hidden_cm}} {{$hidden_c}}">
+                            <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Acta</label>
+                            <p class="p-2">{{ $certificado->acta }}</p>
+                        </div>
                         <div class="py-2">
                             <label for="" class="uppercase text-gray-700 text-xm block bg-gray-500/50 p-2">Código</label>
                             <p class="p-2">{{ $certificado->code }}</p>
