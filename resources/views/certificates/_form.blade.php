@@ -75,6 +75,20 @@
             value="{{ old('date_end', $certificate->date_end) }}">
         </div>
 </div>
+<div class="grid grid-cols-2 gap-4">    
+        <div class="" id="bloque10">
+            <label for="" class="uppercase text-gray-700 text-xs">Libro</label>
+            <span class="text-xs text-red-600">@error('book') {{ $message }}  @enderror</span>
+            <input type="number" name="book" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('book', $certificate->book) }}">
+        </div>
+        <div class="" id="bloque11">
+            <label for="" class="uppercase text-gray-700 text-xs"></label>Folio</label>
+            <span class="text-xs text-red-600">@error('folio') {{ $message }}  @enderror</span>
+            <input type="number" name="folio" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('folio', $certificate->folio) }}">
+        </div>
+</div>
 <div class="grid grid-cols-2 gap-4"> 
     <div class="" id="bloque5">
         <label for="" class="uppercase text-gray-700 text-xs">Tipo Código</label>
@@ -97,6 +111,12 @@
         <input type="hidden" id="selectedProgramIdTitle" name="title" class="rounded border-gray-200 w-full mb-4" 
         value="{{ old('title', $certificate->title) }}">
         <div id="programSearchResultsTitle"></div>
+    </div>
+    <div class="" id="bloque12">
+            <label for="" class="uppercase text-gray-700 text-xs"></label>Acta</label>
+            <span class="text-xs text-red-600">@error('acta') {{ $message }}  @enderror</span>
+            <input type="number" name="acta" class="rounded border-gray-200 w-full mb-4" 
+            value="{{ old('acta', $certificate->acta) }}">
     </div>
 
 </div>
