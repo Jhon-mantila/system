@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const bloque12 = document.getElementById('bloque12');
 
     bloque9.style.display = 'none';
+    bloque10.style.display = 'none';
+    bloque11.style.display = 'none';
+    bloque12.style.display = 'none';
 
     if (opcionSelect.value === 'cm') {
         bloque1.style.display = 'none';
