@@ -14,11 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const bloque11 = document.getElementById('bloque11');
     const bloque12 = document.getElementById('bloque12');
 
-    bloque9.style.display = 'none';
-    bloque10.style.display = 'none';
-    bloque11.style.display = 'none';
-    bloque12.style.display = 'none';
 
+    bloque9.style.display = 'none';
+    if(bloque10 != null){
+        bloque10.style.display = 'none';
+        bloque11.style.display = 'none';
+        bloque12.style.display = 'none';
+    }
     if (opcionSelect.value === 'cm') {
         bloque1.style.display = 'none';
         bloque2.style.display = 'none';
@@ -29,9 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
         bloque7.style.display = 'none';
         bloque8.style.display = 'none';
         bloque9.style.display = 'block';
-        bloque10.style.display = 'none';
-        bloque11.style.display = 'none';
-        bloque12.style.display = 'none';
+        if(bloque10 != null){
+            bloque10.style.display = 'none';
+            bloque11.style.display = 'none';
+            bloque12.style.display = 'none';
+        }
 
     }else if(opcionSelect.value === 't'){
         
@@ -44,9 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
         bloque7.style.display = 'block';
         bloque8.style.display = 'block';
         bloque9.style.display = 'none';
-        bloque10.style.display = 'block';
-        bloque11.style.display = 'block';
-        bloque12.style.display = 'block';
+        if(bloque10 != null){
+            bloque10.style.display = 'block';
+            bloque11.style.display = 'block';
+            bloque12.style.display = 'block';
+        }
 
     }
     opcionSelect.addEventListener('change', function () {
@@ -59,9 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
         bloque7.style.display = 'block';
         bloque8.style.display = 'block';
         bloque9.style.display = 'none';
-        bloque10.style.display = 'none';
-        bloque11.style.display = 'none';
-        bloque12.style.display = 'none';
+        if(bloque10 != null){
+            bloque10.style.display = 'none';
+            bloque11.style.display = 'none';
+            bloque12.style.display = 'none';
+        }
 
         if (opcionSelect.value === 'cm') {
             bloque1.style.display = 'none';
@@ -73,9 +81,11 @@ document.addEventListener('DOMContentLoaded', function () {
             bloque7.style.display = 'none';
             bloque8.style.display = 'none';
             bloque9.style.display = 'block';
-            bloque10.style.display = 'none';
-            bloque11.style.display = 'none';
-            bloque12.style.display = 'none';
+            if(bloque10 != null){
+                bloque10.style.display = 'none';
+                bloque11.style.display = 'none';
+                bloque12.style.display = 'none';
+            }  
 
         }else if(opcionSelect.value === 'c'){
             bloque1.style.display = 'block';
@@ -87,9 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
             bloque7.style.display = 'block';
             bloque8.style.display = 'block';
             bloque9.style.display = 'none';
-            bloque10.style.display = 'none';
-            bloque11.style.display = 'none';
-            bloque12.style.display = 'none';
+            if(bloque10 != null){
+                bloque10.style.display = 'none';
+                bloque11.style.display = 'none';
+                bloque12.style.display = 'none';
+            }
             
         }else if(opcionSelect.value === 't'){
             bloque1.style.display = 'none';
@@ -101,9 +113,11 @@ document.addEventListener('DOMContentLoaded', function () {
             bloque7.style.display = 'block';
             bloque8.style.display = 'block';
             bloque9.style.display = 'none';
-            bloque10.style.display = 'block';
-            bloque11.style.display = 'block';
-            bloque12.style.display = 'block';
+            if(bloque10 != null){
+                bloque10.style.display = 'block';
+                bloque11.style.display = 'block';
+                bloque12.style.display = 'block';
+            }
         }
     });
 });
