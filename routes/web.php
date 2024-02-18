@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\PdfAttachmentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,7 @@ Route::resource('companies', CompanyController::class)->middleware(['auth', 'ver
 Route::resource('certificates', CertificateController::class)->middleware(['auth', 'verified']);
 Route::resource('certificates-courses', CertificatesCoursesController::class)->middleware(['auth', 'verified']);
 Route::resource('courses', CourseController::class)->middleware(['auth', 'verified']);
+Route::resource('pdf-attachments', PdfAttachmentsController::class)->middleware(['auth', 'verified']);
 Route::get('/pdf/{certificate}', [PdfController::class, 'generarPDF'])->middleware(['auth', 'verified'])->name('pdf.generate');
 Route::get('/pdf-courses/{certificate}', [PdfController::class, 'generarPDFcourses'])->middleware(['auth', 'verified'])->name('pdf.generatecourse');
 

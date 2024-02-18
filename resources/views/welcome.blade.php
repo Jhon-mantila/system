@@ -269,7 +269,7 @@
                                                 </svg> {{$datos->module}}
                                             </a> 
                                         </p>
-                                    @else
+                                    @elseif($datos->module == 'curso')   
                                         <p class="mt-4 text-gray-500 dark:text-gray-400 text-md leading-relaxed">
                                             <a href="{{ route('pdf.constancycurso', $datos->id_certificado) }}" class="text-indigo-600" target="_blank">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -277,9 +277,12 @@
                                                 </svg> {{$datos->module}}
                                             </a> 
                                         </p>
+                                    @else
+                                    <a href="{{ asset('storage/' . $datos->id_certificado) }}"class="text-indigo-600" target="_blank">Pdf</a>
                                     @endif
                                 @else
-                                <a href="{{ asset('storage/intranet/uploads/' . $datos->file) }}"class="text-indigo-600" target="_blank">Pdf</a>
+                                    <a href="{{ asset('storage/intranet/uploads/' . $datos->file) }}"class="text-indigo-600" target="_blank">  
+                                    Pdf</a>
                                 @endif
                                 </div>
                            </div>

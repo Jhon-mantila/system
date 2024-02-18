@@ -37,6 +37,7 @@ class DropdownService
             'c' => 'Certificado.',
             'cm' => 'Constancia Matrícula.',
             't' => 'Titulación.',
+            'a' => 'Constancia.',
         ];
     }
 

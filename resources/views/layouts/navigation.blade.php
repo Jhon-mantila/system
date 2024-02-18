@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Escritorio') }}
                     </x-nav-link>
                     <x-nav-link :href="route('programs.index')" :active="request()->routeIs('programs.index')">
                         {{ __('Programas') }}
@@ -32,6 +32,9 @@
                     </x-nav-link>
                     <x-nav-link :href="route('certificates-courses.index')" :active="request()->routeIs('certificates-courses.index')">
                         {{ __('Certificados Cursos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('pdf-attachments.index')" :active="request()->routeIs('pdf-attachments.index')">
+                        {{ __('Adjuntos') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -88,7 +91,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Escritorio') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('programs.index')" :active="request()->routeIs('programs.index')">
                 {{ __('Programas') }}
@@ -104,6 +107,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('certificates-courses.index')" :active="request()->routeIs('certificates-courses.index')">
                 {{ __('Certificados Cursos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('pdf-attachments.index')" :active="request()->routeIs('pdf-attachments.index')">
+                {{ __('Adjuntos') }}
             </x-responsive-nav-link>
         </div>
 

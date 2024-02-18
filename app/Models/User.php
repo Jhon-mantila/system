@@ -70,4 +70,8 @@ class User extends Authenticatable
     public function certificatesCourses(){
         return $this->hasMany(CertificatesCourses::class);
     }
+
+    public function pdfAttachments(){
+        return $this->hasMany(PdfAttachments::class);
+    }
 }
