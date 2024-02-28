@@ -205,7 +205,7 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, "EL INSTITUTO TÉCNICO DE FORMACIÓN PARA EL TRABAJO NIT: {$certificates->company->nit}", 0, 1, 'C', 0, '', 3);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
-        $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 y 0896/2023, por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
         $textmulticellref = "la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: {$certificates->references}. {$certificates->company->name} forma, evalúa y certifica el talento humano.";
         $pdf->MultiCell(250, 0, ''.$textmulticellref, 0, 'C', 0, 0, 25, '', true);
         //$pdf->Cell(0, 0, 'la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: ASTM, AWS, API', 0, 1, 'C', 0, '', 3);
@@ -365,7 +365,7 @@ class PdfController extends Controller
                     $pdf->SetFont('helvetica', 'B', 12);
                     // Title
                     $pdf->Cell(0, 0, 'Instituto técnico "'.$certificates->company->name.'" NIT '.$certificates->company->nit.' Barrancabermeja', 0, 1, 'C', 0, '', 0);
-                    $pdf->Cell(0, 0, 'RESOLUCION 0721 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
+                    $pdf->Cell(0, 0, 'RESOLUCION 0721 y 0896 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
                     $pdf->Cell(0, 0, 'Cra 44 # 52-17 Barrio el progreso Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 2);
                     $pdf->ln(15);
         
@@ -531,7 +531,7 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, "EL INSTITUTO TÉCNICO DE FORMACIÓN PARA EL TRABAJO NIT: {$certificates->company->nit}", 0, 1, 'C', 0, '', 3);
             $pdf->ln(3);
             $pdf->SetFont('helvetica', 'N', 9);
-            $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
+            $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 y 0896/2023, por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
             //$textmulticellref = "la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: {$certificates->references}.{$certificates->company->name} forma, evalúa y certifica el talento humano.";
             //$pdf->MultiCell(250, 0, ''.$textmulticellref, 0, 'C', 0, 0, 25, '', true);
             $pdf->Cell(0, 0, "la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: {$certificates->references}.", 0, 1, 'C', 0, '', 3);
@@ -693,7 +693,7 @@ class PdfController extends Controller
         $pdf->SetFont('helvetica', 'B', 12);
         // Title
         $pdf->Cell(0, 0, 'Instituto técnico "'.$certificates->company->name.'" NIT '.$certificates->company->nit.' Barrancabermeja', 0, 1, 'C', 0, '', 0);
-        $pdf->Cell(0, 0, 'RESOLUCION 0721 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
+        $pdf->Cell(0, 0, 'RESOLUCION 0721 y 0896 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
         $pdf->Cell(0, 0, 'Cra 44 # 52-17 Barrio el progreso Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 2);
         $pdf->ln(15);
 
@@ -858,7 +858,7 @@ class PdfController extends Controller
         $pdf->Cell(0, 0, "EL INSTITUTO TÉCNICO DE FORMACIÓN PARA EL TRABAJO NIT: {$certificates->company->nit}", 0, 1, 'C', 0, '', 3);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
-        $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, 'Autorizado según resolución No 0721/2018 y 0896/2023, por la secretaria de educación de Barrancabermeja, En cumplimiento del decreto 1075 del 2015,', 0, 1, 'C', 0, '', 3);
         //$textmulticellref = "la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: {$certificates->references}.{$certificates->company->name} forma, evalúa y certifica el talento humano.";
         //$pdf->MultiCell(250, 0, ''.$textmulticellref, 0, 'C', 0, 0, 25, '', true);
         //$pdf->Cell(0, 0, "la Clasificación Nacional de Ocupaciones Colombiana, las normas de competencia Laboral del SENA, los códigos de referencia: {$certificates->references}.", 0, 1, 'C', 0, '', 3);
