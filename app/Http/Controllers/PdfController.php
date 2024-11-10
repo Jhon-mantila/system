@@ -301,7 +301,7 @@ class PdfController extends Controller
             'module_height' => 1 // height of a single module in points
         );
         // QRCODE,L : QR-CODE Low error correction
-        $pdf->write2DBarcode("https://consolmeci.com/system/public/?search=$document", 'QRCODE,L', 235, 5, 35, 35, $style, 'N');
+        $pdf->write2DBarcode("https://consolmeci.com/system/public/?search=$document", 'QRCODE,L', 237, 5, 35, 35, $style, 'N');
         
         // ---------------------------------------------------------
         $salida = $certificates->student->first_name . '_' . $certificates->student->second_name . '_' . $certificates->student->last_name . '_' . $certificates->student->second_last_name;
@@ -805,7 +805,7 @@ class PdfController extends Controller
             'module_height' => 1 // height of a single module in points
         );
         // QRCODE,L : QR-CODE Low error correction
-        $pdf->write2DBarcode("https://consolmeci.com/system/public/?search=$document", 'QRCODE,L', 10, 230, 35, 35, $style, 'N');
+        $pdf->write2DBarcode("https://consolmeci.com/system/public/?search=$document", 'QRCODE,L', 10, 237, 35, 35, $style, 'N');
 
         //Close and output PDF document
         $pdf->Output('example_003.pdf', 'I');
@@ -986,7 +986,7 @@ class PdfController extends Controller
             'module_height' => 1 // height of a single module in points
         );
         // QRCODE,L : QR-CODE Low error correction
-        $pdf->write2DBarcode("https://consolmeci.com/system/public/?search=$document", 'QRCODE,L', 235, 5, 35, 35, $style, 'N');
+        $pdf->write2DBarcode("https://consolmeci.com/system/public/?search=$document", 'QRCODE,L', 237, 5, 35, 35, $style, 'N');
         
         // ---------------------------------------------------------
         $salida = $certificates->student->first_name . '_' . $certificates->student->second_name . '_' . $certificates->student->last_name . '_' . $certificates->student->second_last_name;
