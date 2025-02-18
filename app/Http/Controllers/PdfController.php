@@ -365,9 +365,10 @@ class PdfController extends Controller
                     $pdf->SetFont('helvetica', 'B', 12);
                     // Title
                     $pdf->Cell(0, 0, 'Instituto técnico "'.$certificates->company->name.'" NIT '.$certificates->company->nit.' Barrancabermeja', 0, 1, 'C', 0, '', 0);
-                    $pdf->Cell(0, 0, 'RESOLUCION 0721 y 0896 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
-                    $pdf->Cell(0, 0, 'Cra 44 # 52-17 Barrio el progreso Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 2);
-                    $pdf->ln(15);
+                    $pdf->Cell(0, 0, 'Licencia de funcionamiento: 0720/2018, resoluciones: 0721/2018, 2005/2019,0896/2023,', 0, 1, 'C', 0, '', 1);
+                    $pdf->Cell(0, 0, '2485/2024, de la secretaria distrital de educación. Cra 44 # 52-17 Barrio el progreso', 0, 1, 'C', 0, '', 2);
+                    $pdf->Cell(0, 0, 'Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 3);
+                    $pdf->ln(14);
         
                     $pdf->SetFont('helvetica', 'B', 20);
                     $pdf->Cell(0, 0, 'CONSTANCIA DE MATRICULA', 0, 1, 'C', 0, '', 3);
@@ -421,7 +422,7 @@ class PdfController extends Controller
                         }
                     // set some text to print
                     $txt = <<<EOD
-                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante la licencia de funcionamiento 0720 del año 2018, de la secretaria distrital de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
 
@@ -706,9 +707,10 @@ class PdfController extends Controller
         $pdf->SetFont('helvetica', 'B', 12);
         // Title
         $pdf->Cell(0, 0, 'Instituto técnico "'.$certificates->company->name.'" NIT '.$certificates->company->nit.' Barrancabermeja', 0, 1, 'C', 0, '', 0);
-        $pdf->Cell(0, 0, 'RESOLUCION 0721 y 0896 LICENCIA 0720 DE LA SECRETARIA DE EDUCACION', 0, 1, 'C', 0, '', 1);
-        $pdf->Cell(0, 0, 'Cra 44 # 52-17 Barrio el progreso Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 2);
-        $pdf->ln(15);
+        $pdf->Cell(0, 0, 'Licencia de funcionamiento: 0720/2018, resoluciones: 0721/2018, 2005/2019, 0896/2023,', 0, 1, 'C', 0, '', 1);
+        $pdf->Cell(0, 0, '2485/2024, de la secretaria distrital de educación. Cra 44 # 52-17 Barrio el progreso', 0, 1, 'C', 0, '', 2);
+        $pdf->Cell(0, 0, 'Cel: '.$certificates->company->mobile.' página: '.$certificates->company->web.'', 0, 1, 'C', 0, '', 3);
+        $pdf->ln(14);
 
         $pdf->SetFont('helvetica', 'B', 20);
         $pdf->Cell(0, 0, 'CONSTANCIA DE MATRICULA', 0, 1, 'C', 0, '', 3);
@@ -762,7 +764,7 @@ class PdfController extends Controller
             }
         // set some text to print
         $txt = <<<EOD
-        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante resolución 0721 de la secretaria de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante la licencia de funcionamiento 0720 del año 2018, de la secretaria distrital de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
 
         EOD;
 
