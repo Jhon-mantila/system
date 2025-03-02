@@ -75,7 +75,7 @@ class PdfController extends Controller
             
             if($certificates->type_certificate == 'cm'){
                 $this->certificateConstanciaAdmin($certificates, "curso");
-            }else if($certificates->type_certificate == 'c'){
+            }else if($certificates->type_certificate == 'c' || $certificates->type_certificate == 'a'){
                 $this->certificateDiplomaAdmin($certificates, "curso");
             }else if($certificates->type_certificate == 't'){
                 $this->certificateDiplomaTitulacionAdmin($certificates, "curso", false);
@@ -124,7 +124,7 @@ class PdfController extends Controller
             
             if($certificates->type_certificate == 'cm'){
                 $this->certificateConstancia($certificates, "curso");
-            }else if($certificates->type_certificate == 'c'){
+            }else if($certificates->type_certificate == 'c' || $certificates->type_certificate == 'a'){
                 $this->certificateDiploma($certificates, "curso");
             }else if($certificates->type_certificate == 't'){
                 $this->certificateDiplomaTitulacionAdmin($certificates, "curso", true);
@@ -267,13 +267,18 @@ class PdfController extends Controller
         $mes_espanol_final = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_final);
         $year_final = date('Y', strtotime($certificates->date_end));
         //$pdf->Cell(0, 0, "FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.", 0, 1, 'C', 0, '', 3);
+        if($certificates->type_certificate == "c"){
+            $fecha_final = ", válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.";
+        }elseif($certificates->type_certificate == "a"){
+            $fecha_final = ".";
+        }
         
         $programs = Programs::where('id', '=', "$title")->get();
         foreach ($programs as $program) {
             $title = $program->name;
         }
         
-        $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}."; 
+        $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}$fecha_final"; 
         $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
 
         $pdf->SetFont('helvetica', 'B', 12);
@@ -607,13 +612,17 @@ class PdfController extends Controller
             $mes_espanol_final = str_replace(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], $mes_final);
             $year_final = date('Y', strtotime($certificates->date_end));
             //$pdf->Cell(0, 0, "FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.", 0, 1, 'C', 0, '', 3);
-            
+            if($certificates->type_certificate == "c"){
+                $fecha_final = ", válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}.";
+            }elseif($certificates->type_certificate == "a"){
+                $fecha_final = ".";
+            }
             $programs = Programs::where('id', '=', "$title")->get();
             foreach ($programs as $program) {
                 $title = $program->name;
             }
             
-            $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}, válido hasta el día {$dia_final} de {$mes_espanol_final} del año {$year_final}."; 
+            $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}$fecha_final"; 
             $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
     
             $pdf->SetFont('helvetica', 'B', 12);

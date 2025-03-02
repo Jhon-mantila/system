@@ -93,6 +93,9 @@ class CertificatesCoursesController extends Controller
         }else if($request->type_certificate == 't'){
             $required_certificate = '';
             $required = 'required';
+        }else if($request->type_certificate == 'a'){
+            $required = 'required';
+            $required_certificate = '';
         }
 
         //Agregar 1 para el siguiente
@@ -169,6 +172,9 @@ class CertificatesCoursesController extends Controller
             }else if($request->type_certificate == 't'){
                 $required_certificate = '';
                 $required = 'required';
+            }else if($request->type_certificate == 'a'){
+                $required = 'required';
+                $required_certificate = '';
             }
         $request->validate([
             'course_id' => 'required',
