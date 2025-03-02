@@ -278,8 +278,9 @@ class PdfController extends Controller
             $title = $program->name;
         }
         
-        $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}$fecha_final"; 
+        $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. \nFECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}$fecha_final"; 
         $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
+        
 
         $pdf->SetFont('helvetica', 'B', 12);
         $pdf->ln(22);
@@ -622,7 +623,7 @@ class PdfController extends Controller
                 $title = $program->name;
             }
             
-            $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title. FECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}$fecha_final"; 
+            $textmulticelltitulo = "equivalente a {$horas} horas de formación para acceder al título de $title.\nFECHA DE EXPEDICIÓN: {$dia} de {$mes_espanol} del año {$year}$fecha_final"; 
             $pdf->MultiCell(230, 0, ''.$textmulticelltitulo, 0, 'C', 0, 0, 35, '', true);
     
             $pdf->SetFont('helvetica', 'B', 12);
