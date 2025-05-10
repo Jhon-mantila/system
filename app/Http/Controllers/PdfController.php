@@ -218,9 +218,10 @@ class PdfController extends Controller
         $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
         $pdf->Cell(0, 0, $name_student, 0, 1, 'C', 0, '', 3);
         $pdf->ln(2);
+        $document_type = strtoupper($certificates->student->type_document);
         $document = $certificates->student->document;
         $city = $certificates->student->city;
-        $pdf->Cell(0, 0, "CC {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, "$document_type {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
         $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}";
@@ -385,6 +386,7 @@ class PdfController extends Controller
                     $pdf->ln(15);
         
                     $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
+                    $document_type = strtoupper($certificates->student->type_document);
                     $document = $certificates->student->document;
                     $city = $certificates->student->city;
                     $gender = $certificates->student->gender;
@@ -428,7 +430,7 @@ class PdfController extends Controller
                         }
                     // set some text to print
                     $txt = <<<EOD
-                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante la licencia de funcionamiento 0720 del año 2018, de la secretaria distrital de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+                    El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante la licencia de funcionamiento 0720 del año 2018, de la secretaria distrital de educación de Barrancabermeja hace constar que $l estudiante, $name_student $document_type $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
         
                     EOD;
 
@@ -564,9 +566,10 @@ class PdfController extends Controller
             $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
             $pdf->Cell(0, 0, $name_student, 0, 1, 'C', 0, '', 3);
             $pdf->ln(2);
+            $document_type = strtoupper($certificates->student->type_document);
             $document = $certificates->student->document;
             $city = $certificates->student->city;
-            $pdf->Cell(0, 0, "CC {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
+            $pdf->Cell(0, 0, "$document_type {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
             $pdf->ln(3);
             $pdf->SetFont('helvetica', 'N', 9);
             $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}";
@@ -731,6 +734,7 @@ class PdfController extends Controller
         $pdf->ln(15);
 
         $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
+        $document_type = strtoupper($certificates->student->type_document);
         $document = $certificates->student->document;
         $city = $certificates->student->city;
         $gender = $certificates->student->gender;
@@ -774,7 +778,7 @@ class PdfController extends Controller
             }
         // set some text to print
         $txt = <<<EOD
-        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante la licencia de funcionamiento 0720 del año 2018, de la secretaria distrital de educación de Barrancabermeja hace constar que $l estudiante, $name_student CC $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
+        El instituto técnico de formación para el trabajo y el desarrollo humano CONSOLMECI aprobado mediante la licencia de funcionamiento 0720 del año 2018, de la secretaria distrital de educación de Barrancabermeja hace constar que $l estudiante, $name_student $document_type $document de $city, se encuentra actualmente matriculad$a en nuestra institución en el $module de: $program, $text_horas_creditos en la jornada de formación los fines de semana, con fecha de inicio el día $dia de $mes_espanol del año $year y fecha de terminación$fecha_end una vez el candidato supere todas las evidencias de aprendizaje exigidas en el programa de formación, y cumpla con su etapa productiva, las jornadas de formación pueden ser presenciales, semi presenciales, o virtuales según la situación lo amerite.
 
         EOD;
 
@@ -910,9 +914,10 @@ class PdfController extends Controller
         $name_student = $certificates->student->first_name . ' ' . $certificates->student->second_name . ' ' . $certificates->student->last_name . ' ' . $certificates->student->second_last_name;
         $pdf->Cell(0, 0, $name_student, 0, 1, 'C', 0, '', 3);
         $pdf->ln(2);
+        $document_type = strtoupper($certificates->student->type_document);
         $document = $certificates->student->document;
         $city = $certificates->student->city;
-        $pdf->Cell(0, 0, "CC {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
+        $pdf->Cell(0, 0, "$document_type {$document} DE {$city}", 0, 1, 'C', 0, '', 3);
         $pdf->ln(3);
         $pdf->SetFont('helvetica', 'N', 9);
         $textmulticellproceso = "Asistió y supero el proceso de: {$certificates->process}";
